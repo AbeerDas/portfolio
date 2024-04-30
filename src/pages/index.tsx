@@ -204,14 +204,14 @@ export default function Home() {
 
   useEffect(() => {
     const CollapsibleTimeline = class {
-      constructor(el) {
+      constructor(el: string | null) {
         this.el = document.querySelector(el);
         this.init();
       }
       init() {
         this.el?.addEventListener("click", this.itemAction.bind(this));
       }
-      animateItemAction(button, ctrld, contentHeight, shouldCollapse) {
+      animateItemAction(button: HTMLElement, ctrld: HTMLElement, contentHeight: number, shouldCollapse: boolean) {
         const expandedClass = "timeline__item-body--expanded";
         const animOptions = {
           duration: 300,
@@ -238,7 +238,7 @@ export default function Home() {
           ], animOptions);
         }
       }
-      itemAction(e) {
+      itemAction(e: MouseEvent) {
         const { target } = e;
         const action = target?.getAttribute("data-action");
         const item = target?.getAttribute("data-item");
@@ -251,7 +251,7 @@ export default function Home() {
           for (let button of buttons) {
             const buttonID = button.getAttribute("data-item");
             const ctrld = this.el?.querySelector(`#item${buttonID}-ctrld`);
-            const contentHeight = ctrld.firstElementChild?.offsetHeight;
+            const contentHeight = ctrld.firstElementChild?.offsetHeight || 0;
 
             this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
           }
