@@ -27,30 +27,31 @@ export default function Footer() {
       <div className="container mx-auto flex flex-row items-center justify-between py-6">
         <span className="flex flex-row items-center space-x-4">
           <p className="text-xs text-muted-foreground">
-            Made with ❤️ by{" "}
+            Made with <Link href='/safiya'>
+              ❤️</Link> by{" "}
             <Link
               href="https://github.com/wendoj"
               target="_blank"
               passHref
               className="text-foreground transition hover:text-primary"
             >
-              wendoj
+              Abeer
             </Link>
           </p>
           <hr className="hidden h-6 border-l border-muted md:flex" />
           <span className="flex hidden flex-row items-center space-x-2 md:flex">
             <p className="text-xs text-muted-foreground">Local time:</p>
-            <p className="text-sm font-semibold">{time} UTC+1</p>
+            <p className="text-sm font-semibold">{time} EST</p>
           </span>
         </span>
         <Link
-          href="mailto:wendoj@proton.me"
+          href="ak5das@uwaterloo.ca"
           passHref
           className="text-xs text-muted-foreground hover:text-foreground"
         >
           <Button variant={"outline"}>
             <MailIcon className="h-4 w-4 md:mr-2" />
-            <span className="hidden md:flex">wendoj@proton.me</span>
+            <span className="hidden md:flex">ak5das@uwaterloo.ca</span>
           </Button>
         </Link>
       </div>

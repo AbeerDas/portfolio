@@ -14,8 +14,11 @@ const config = {
         "2xl": "1400px",
       },
     },
+  
     extend: {
       colors: {
+        borderColour: "#1f2a3c",
+        inputColour: "#0e0e1b", // Define the custom border color
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -65,6 +68,7 @@ const config = {
           to: { height: "0" },
         },
       },
+
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",

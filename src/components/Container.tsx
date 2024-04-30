@@ -37,10 +37,10 @@ const variants = {
 };
 
 const navLinks = [
-  { href: "#home", text: "Home" },
-  { href: "#about", text: "About" },
-  { href: "#projects", text: "Projects" },
-  { href: "#services", text: "Services" },
+  { href: "#about", text: "about" },
+  { href: "#projects", text: "projects" },
+  { href: "#experience", text: "experience" },
+  { href: "#certifications", text: "certifications" },
 ];
 
 function handleClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
@@ -82,9 +82,9 @@ export default function Container(props: ContainerProps) {
   const { children, ...customMeta } = props;
   const router = useRouter();
   const meta = {
-    title: "Wendo",
+    title: "Abeer Das",
     description: `Full-stack website developer and TypeScript enthusiast.`,
-    image: "/assets/logo.webp",
+    image: "/assets/logo.png",
     type: "website",
     ...customMeta,
   };
@@ -127,17 +127,21 @@ export default function Container(props: ContainerProps) {
           href={`https://www.wendoj.codes${router.asPath}`}
         />
         <meta property="og:type" content={meta.type} />
-        <meta property="og:site_name" content="WendoJ" />
+        <meta property="og:site_name" content="Abeer" />
         <meta property="og:description" content={meta.description} />
         <meta property="og:title" content={meta.title} />
         <meta property="og:image" content={meta.image} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="WendoJ" />
+        <meta name="twitter:site" content="Abeer" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icon-192x192.png" />
+        <link rel="shortcut icon" href="/images/favicon.ico" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo.png"/>
+          <link rel="icon" type="image/png" sizes="16x16" href="/assets/logo.png"/>
+        <link rel="apple-touch-icon" href="/assets/logo.png" />
       </Head>
       <nav
         className={cn(
@@ -163,7 +167,7 @@ export default function Container(props: ContainerProps) {
           </button>
         </div>
         <Link href="/">
-          <span className="text-lg font-semibold">wendo</span>
+          <span className="text-xl">abeer das</span>
         </Link>
 
         {/* Desktop menu */}
@@ -220,7 +224,7 @@ export default function Container(props: ContainerProps) {
                 {/* Footer */}
                 <div className="flex min-h-fit w-full flex-col space-y-8 px-[22px] py-10">
                   <span className="text-sm text-muted-foreground">
-                    © {new Date().getFullYear()} wendo. All rights reserved.
+                    © {new Date().getFullYear()} abeer das. All rights reserved.
                   </span>
                 </div>
               </div>

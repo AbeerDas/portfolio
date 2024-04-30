@@ -1,19 +1,49 @@
-
 /* hero */
 .intro {
     @apply flex flex-col items-start space-y-4 w-full;
 }
+
 .pill {
     @apply transition border border-input bg-background flex items-center text-xs px-2.5 py-1.5 rounded-full hover:-translate-y-1 hover:bg-primary hover:text-primary-foreground duration-300;
 }
-.intro h1 {
-    @apply pt-2 leading-tight;
+
+.d_pill_container {
+    @apply inline-flex;
+}
+
+/* Updated .d_pill and .d_pill2 */
+.d_pill, .d_pill2 {
+    @apply inline-block transition border border-input bg-background flex items-center text-base px-4 py-2 rounded-2xl hover:-translate-y-1 hover:bg-accent hover:text-accent-foreground duration-300;
+    margin-right: 24px; /* Default margin-right */
+}
+
+/* Responsive font sizes for .d_pill and .d_pill2 */
+@media (min-width: 640px) {
+    .d_pill, .d_pill2 {
+        @apply mr-3;
+
+    }
+}
+
+@media (min-width: 768px) {
+    .d_pill, .d_pill2 {
+        @apply mr-4;
+
+    }
+}
+
+@media (min-width: 1024px) {
+    .d_pill, .d_pill2 {
+        @apply mr-5;
+
+    }
 }
 
 /* scroll down */
 .scroll {
     @apply transition duration-300 absolute bottom-6 left-1/2 mb-8 hidden -translate-x-1/2 transform-gpu flex-col items-center text-sm text-slate-400 xl:flex tracking-tight;
 }
+
 .scroll--hidden {
     @apply opacity-0 transition duration-300;
 }
@@ -24,8 +54,7 @@
 }
 
 /* spline canvas */
-#canvas-container
-{
+#canvas-container {
     @apply bg-background border rounded-3xl h-[515px] xl:w-[690px] xl:min-w-[690px] overflow-hidden;
 
     /* this fixes the overflow:hidden in Chrome/Opera */
