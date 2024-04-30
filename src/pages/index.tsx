@@ -218,7 +218,7 @@ export default function Home() {
       animateItemAction(button: Element | null | undefined, ctrld: Element | null | undefined, contentHeight: number, shouldCollapse: boolean) {
         
         if (!button || !ctrld) return;
-        
+
         const expandedClass = "timeline__item-body--expanded";
         const animOptions = {
           duration: 300,
@@ -247,18 +247,18 @@ export default function Home() {
       }
       itemAction(e: MouseEvent) {
         const { target } = e;
-        const action = target?.getAttribute("data-action");
-        const item = target?.getAttribute("data-item");
+        const action = (target as HTMLElement)?.getAttribute("data-action");
+        const item = (target as HTMLElement)?.getAttribute("data-item");
 
         if (action) {
           const targetExpanded = action === "expand" ? "false" : "true";
-          const buttons = Array.from(this.el?.querySelectorAll(`[aria-expanded="${targetExpanded}"]`));
+          const buttons = Array.from(this.el?.querySelectorAll(`[aria-expanded="${targetExpanded}"]`) || []);
           const wasExpanded = action === "collapse";
 
           for (let button of buttons) {
             const buttonID = button.getAttribute("data-item");
             const ctrld = this.el?.querySelector(`#item${buttonID}-ctrld`);
-            const contentHeight = ctrld.firstElementChild?.offsetHeight || 0;
+            const contentHeight = ctrld?.firstElementChild?.clientHeight || 0;
 
             this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
           }
@@ -271,7 +271,7 @@ export default function Home() {
 
           const wasExpanded = expanded === "true";
           const ctrld = this.el?.querySelector(`#item${item}-ctrld`);
-          const contentHeight = ctrld.firstElementChild?.offsetHeight;
+          const contentHeight = ctrld?.firstElementChild?.clientHeight || 0;
 
           this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
         }
