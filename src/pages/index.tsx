@@ -204,14 +204,21 @@ export default function Home() {
 
   useEffect(() => {
     const CollapsibleTimeline = class {
-      constructor(el: string | null) {
-        this.el = document.querySelector(el);
+      el: Element | null;
+      animation: Animation | undefined;
+      
+
+      constructor(el: string) {
+        this.el = document.querySelector(el) as HTMLElement;
         this.init();
       }
       init() {
-        this.el?.addEventListener("click", this.itemAction.bind(this));
+        this.el?.addEventListener("click", this.itemAction.bind(this)  as EventListener);
       }
-      animateItemAction(button: HTMLElement, ctrld: HTMLElement, contentHeight: number, shouldCollapse: boolean) {
+      animateItemAction(button: Element | null | undefined, ctrld: Element | null | undefined, contentHeight: number, shouldCollapse: boolean) {
+        
+        if (!button || !ctrld) return;
+        
         const expandedClass = "timeline__item-body--expanded";
         const animOptions = {
           duration: 300,
