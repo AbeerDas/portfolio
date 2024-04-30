@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MailIcon } from "lucide-react";
 
-const Modal = ({ onClose }) => {
+interface ModalProps {
+    onClose: () => void;
+}
+
+
+const Modal: React.FC<ModalProps>  = ({ onClose }) => {
     const [focused, setFocused] = useState({
         name: false,
         email: false,
@@ -10,11 +15,11 @@ const Modal = ({ onClose }) => {
         message: false
     });
 
-    const handleFocus = (field) => {
+    const handleFocus = (field: string) => {
         setFocused({ ...focused, [field]: true });
     };
 
-    const handleBlur = (field, value) => {
+    const handleBlur = (field: string, value: string) => {
         if (!value) {
             setFocused({ ...focused, [field]: false });
         }
@@ -41,7 +46,7 @@ const Modal = ({ onClose }) => {
                                     type="text"
                                     id="name"
                                     name="name"
-                                    required=""
+                                    
                                     className="w-full  bg-inputColour rounded border  focus:border-blue-500 focus: bg-inputColour focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-300 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
                                     onFocus={() => handleFocus("name")}
                                     onBlur={(e) => handleBlur("name", e.target.value)}
@@ -59,7 +64,7 @@ const Modal = ({ onClose }) => {
                                     type="email"
                                     id="email"
                                     name="email"
-                                    required=""
+                                    
                                     className="w-full bg-inputColour rounded border  focus:border-blue-500 focus:bg-inputColour focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-300 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
                                     onFocus={() => handleFocus("email")}
                                     onBlur={(e) => handleBlur("email", e.target.value)}
@@ -77,7 +82,7 @@ const Modal = ({ onClose }) => {
                             <textarea
                                 id="message"
                                 name="message"
-                                required=""
+                              
                                 className="w-full  bg-inputColour rounded border  focus:border-blue-500 focus: bg-inputColour focus:ring-2 focus:ring-blue-200 h-32 text-base outline-none text-gray-300 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
                                 onFocus={() => handleFocus("message")}
                                 onBlur={(e) => handleBlur("message", e.target.value)}
