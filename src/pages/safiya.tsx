@@ -2,49 +2,7 @@ import React from 'react';
 
 
 import Container from "@/components/Container";
-import { useEffect, useRef, Suspense, useState } from "react";
 import styles from "@/styles/Home.module.css";
-import { Button } from "@/components/ui/button";
-import {
-  ChevronRight,
-  Code2,
-  Frame,
-  SearchCheck,
-  Eye,
-  MonitorSmartphone,
-} from "lucide-react";
-
-import Link from "next/link";
-import { cn, scrollTo } from "@/lib/utils";
-import Image from "next/image";
-
-import uwmapsImage from '@/images/uwmaps.png';
-import floorPlan from '@/images/hagey_hall_floor_plan.webp';
-import campus from '@/images/waterloo_campus.jpg';
-
-import identify from '@/images/identify.png';
-import specify from '@/images/specify.png';
-import rank from '@/images/rank.png';
-import convo from '@/images/convo.png';
-import miro from '@/images/miro.png';
-import notes from '@/images/Notes.png';
-import mountain from '@/images/mountain.png';
-import existing from '@/images/existing.png';
-import otherUni from '@/images/otherUni.png';
-import colours from '@/images/colours.png';
-import typography from '@/images/typography.png';
-import logos from '@/images/logo.png';
-import infoarch from '@/images/infoarch.png';
-import wireframes from '@/images/wireframes.png';
-
-import final1 from '@/images/final1.svg';
-import final2 from '@/images/final2.svg';
-import final3 from '@/images/final3.svg';
-import finalMain from '@/images/finalmain.svg';
-
-
-import VanillaTilt from "vanilla-tilt";
-import { motion } from "framer-motion";
 
 
 

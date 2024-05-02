@@ -4,7 +4,6 @@ import styles from "@/styles/Home.module.css";
 import { Button } from "@/components/ui/button";
 
 import Modal from '../components/modal';
-import Cursor from '../components/cursor';
 
 
 import {
@@ -209,7 +208,7 @@ export default function Home() {
       
 
       constructor(el: string) {
-        this.el = document.querySelector(el) as HTMLElement;
+        this.el = document.querySelector(el)! as HTMLElement;
         this.init();
       }
       init() {
@@ -255,10 +254,10 @@ export default function Home() {
           const buttons = Array.from(this.el?.querySelectorAll(`[aria-expanded="${targetExpanded}"]`) || []);
           const wasExpanded = action === "collapse";
 
-          for (let button of buttons) {
+          for (const button of buttons) {
             const buttonID = button.getAttribute("data-item");
             const ctrld = this.el?.querySelector(`#item${buttonID}-ctrld`);
-            const contentHeight = ctrld?.firstElementChild?.clientHeight || 0;
+            const contentHeight = ctrld?.firstElementChild?.clientHeight ?? 0;
 
             this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
           }
@@ -271,7 +270,7 @@ export default function Home() {
 
           const wasExpanded = expanded === "true";
           const ctrld = this.el?.querySelector(`#item${item}-ctrld`);
-          const contentHeight = ctrld?.firstElementChild?.clientHeight || 0;
+          const contentHeight = ctrld?.firstElementChild?.clientHeight ?? 0;
 
           this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
         }
