@@ -61,7 +61,8 @@ const UwMaps = () => {
           <div className="mt-36 ">
             <div className=" mx-auto rounded-2xl w-9/10 border bg-card/10 text-card-foreground shadow-sm">
               <div className='flex flex-col'>
-                <Image src={uwmapsImage} className="rounded-3xl bg-primary object-cover" />
+                <Image alt="header image waterloo campus mobile app"
+                src={uwmapsImage} className="rounded-3xl bg-primary object-cover" />
 
               </div>
             </div>
@@ -140,8 +141,10 @@ const UwMaps = () => {
             </p>
           </div>
           <div className='flex  flex-col md:flex-row justify-center items-center'>
-            <Image src={floorPlan} className="h-[26rem]  md:w-[40rem] mb-12 md:mb-0 mx-4 rounded-md bg-primary object-cover" />
-            <Image src={campus} className="md:w-1/2 h-[26rem] rounded-md bg-primary object-cover" />
+            <Image alt="floor plan of Hagey Hall - a waterloo building"
+            src={floorPlan} className="h-[26rem]  md:w-[40rem] mb-12 md:mb-0 mx-4 rounded-md bg-primary object-cover" />
+            <Image alt="waterloo campus scenary"
+            src={campus} className="md:w-1/2 h-[26rem] rounded-md bg-primary object-cover" />
 
           </div>
 
@@ -180,7 +183,8 @@ const UwMaps = () => {
             <div className='flex flex-col md:flex-row items-center justify-center mt-12'>
               <div className='list1 scale-up-more md:mb-0 mb-24 mx-20'>
                 <div className='flex items-center justify-center flex-col'>
-                  <Image src={identify} className="" />
+                  <Image alt="identify clipart"
+                  src={identify} className="" />
                   <p className='text-center w-4/6 text-2xl font-bold mt-6'>
                     Identifying the Problem
                   </p>
@@ -199,7 +203,8 @@ const UwMaps = () => {
               </div>
               <div className='list2 scale-up-more md:mb-0 mb-24 mx-20'>
                 <div className='flex items-center justify-center flex-col '>
-                  <Image src={specify} className="" />
+                  <Image alt="specify clipart - thought bubble"
+                  src={specify} className="" />
                   <p className='text-center w-5/6 text-2xl font-bold mt-6'>
                     Identifying specific challenges
                   </p>
@@ -218,7 +223,8 @@ const UwMaps = () => {
               </div>
               <div className='list3 scale-up-more mx-20'>
                 <div className='flex items-center justify-center flex-col '>
-                  <Image src={rank} className="" />
+                  <Image alt="rank clipart"
+                  src={rank} className="" />
                   <p className='text-center w-5/6 text-2xl font-bold mt-6'>
                     Ranking the features                  </p>
                 </div>
@@ -238,7 +244,8 @@ const UwMaps = () => {
 
             <div className='mt-40'>
               <div className='flex items-center '>
-                <Image src={identify} className="w-[7rem]" />
+                <Image alt="identify clipart"
+                src={identify} className="w-[7rem]" />
                 <h1 className='font-bold ml-8 text-4xl'>
                   Identifying the Problem
                 </h1>
@@ -315,7 +322,8 @@ const UwMaps = () => {
                 </div>
               </div>
               <div className='flex flex-col md:flex-row justify-center mx-auto items-center mt-16'>
-                <Image src={convo} className="md:mb-0 mb-16 md:mr-72 w-[18rem]" />
+                <Image alt="convo clipart"
+                src={convo} className="md:mb-0 mb-16 md:mr-72 w-[18rem]" />
                 <p className='w-1/2 md:w-1/4 text-2xl text-center'>
                   During their first year, the{" "}
                   <span className="text-gradient font-bold tracking-tighter">
@@ -332,7 +340,8 @@ const UwMaps = () => {
 
             <div className='mt-40'>
               <div className='flex items-center '>
-                <Image src={specify} className="w-[7rem]" />
+                <Image alt="specify clipart - thought bubble"
+                src={specify} className="w-[7rem]" />
                 <h1 className='font-bold ml-8 text-4xl'>
                   Identifying Specific Problems
                 </h1>
@@ -345,7 +354,8 @@ const UwMaps = () => {
                 my persona. I had one simple question...
               </p>
               <div className='flex flex-col lg:flex-row mt-20 mx-auto items-center'>
-                <Image src={miro} className="lg:ml-12 h-[30rem] md:w-[46rem]
+                <Image alt="miro board clipart"
+                src={miro} className="lg:ml-12 h-[30rem] md:w-[46rem]
                  mb-12 md:mb-0 mx-28
               rounded-md flex-col md:flex-row object-cover" />
 
@@ -367,7 +377,8 @@ const UwMaps = () => {
                     affinity map </span> of common themes. Here are all the features participants mentioned at
                   least twice:
                 </p>
-                <Image src={notes} className="mx-auto w-5/6 mt-24 
+                <Image alt="notes of different problems people identified"
+                src={notes} className="mx-auto w-5/6 mt-24 
               rounded-md object-cover" />
 
               </div>
@@ -375,7 +386,8 @@ const UwMaps = () => {
 
             <div className='mt-40'>
               <div className='flex items-end'>
-                <Image src={rank} className="w-[7rem]" />
+                <Image alt="rank clipart"
+                src={rank} className="w-[7rem]" />
                 <h1 className='font-bold ml-8 text-4xl'>
                   Ranking Potential Features
                 </h1>
@@ -459,7 +471,8 @@ const UwMaps = () => {
                   </div>
                 </div>
                 <div className='mt-16 md:mt-0'>
-                  <Image src={mountain} className="w-[20rem]" />
+                  <Image alt="mountain clipart"
+                  src={mountain} className="w-[20rem]" />
                 </div>
               </div>
 

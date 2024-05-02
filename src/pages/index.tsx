@@ -525,7 +525,8 @@ export default function Home() {
                   <div className="mt-14 rounded-xl gray-overlay scale-up">
                     <div className="border bg-card/10 text-card-foreground shadow-sm">
                       <div className='flex'>
-                        <Image src={uwmapsImage} className="aspect-video rounded-2xl w-full h-full bg-primary object-cover" />
+                        <Image alt="waterloo maps main image"
+                        src={uwmapsImage} className="aspect-video rounded-2xl w-full h-full bg-primary object-cover" />
                         <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
                           <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
                             <div className={styles.d_pill_container}>
