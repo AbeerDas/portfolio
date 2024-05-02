@@ -545,7 +545,8 @@ export default function Home() {
                   <div className="hidden mt-14 gray-overlay scale-up">
                     <div className="border rounded-2xl bg-card/10 text-card-foreground shadow-sm">
                       <div className='flex'>
-                        <Image src={rooted} className="aspect-video rounded-2xl h-full w-full  bg-primary object-cover" />
+                        <Image alt="rooted second design case"
+                        src={rooted} className="aspect-video rounded-2xl h-full w-full  bg-primary object-cover" />
                         <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
                           <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
                             <div className={styles.d_pill_container}>
@@ -567,7 +568,8 @@ export default function Home() {
 
                     <div className=" border rounded-2xl bg-card/10 text-card-foreground shadow-sm">
                       <div className='flex flex-col'>
-                        <Image src={bchm} className="aspect-video rounded-2xl w-full h-full  bg-primary object-cover" />
+                        <Image alt="temple design case"
+                        src={bchm} className="aspect-video rounded-2xl w-full h-full  bg-primary object-cover" />
                         <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
                           <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
                             <div className={styles.d_pill_container}>
