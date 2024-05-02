@@ -491,7 +491,8 @@ const UwMaps = () => {
                 </p>
                 <div className='mt-32'>
                   <div className='mx-auto justify-center flex flex-col md:flex-row items-center'>
-                    <Image src={existing} className="w-[24rem]" />
+                    <Image alt="image of existing compeititor apps - google maps, apple maps, waterloo online map"
+                    src={existing} className="w-[24rem]" />
                     <p className='mt-16 md:mt-0 md:ml-32 text-center md:text-right text-xl w-5/12'>
                       The Waterloo online map, the sole
                       option for personalized campus navigation, falls significantly
@@ -506,7 +507,8 @@ const UwMaps = () => {
                       a lot of different USPs to incorporate into our own
                       design (e.g. MacQuest&apos;s floor navigation!)
                     </p>
-                    <Image src={otherUni} className="w-[24rem]" />
+                    <Image alt="apps other universities offer: Mcmaaster, UofT, and Queen's map apps"
+                    src={otherUni} className="w-[24rem]" />
 
                   </div>
                 </div>
@@ -541,9 +543,11 @@ const UwMaps = () => {
             <h1 className="font-bold text-3xl mt-16 mb-6">
               Colours
             </h1>
-            <Image src={colours} className="w-full" />
+            <Image alt="design system colours"
+            src={colours} className="w-full" />
             <div className='my-16 mx-auto'>
-              <Image src={typography} className="w-full" />
+              <Image alt="design system typography"
+              src={typography} className="w-full" />
               <p className='text-2xl mt-10 text-center'>
                 I chose the Blinker font for its modern and clean aesthetic, which gives off a sense of
                 friendliness that aligns well with the overall tone that I am aiming to go for.
@@ -558,7 +562,8 @@ const UwMaps = () => {
               these are what I ended up going with:
             </p>
             <div className='mt-12 mx-auto items-center justify-center'>
-              <Image src={logos} className="w-full" />
+              <Image alt="design system for logos"
+              src={logos} className="w-full" />
             </div>
             <h1 className="font-bold text-4xl mt-32">
               Information Architecture
@@ -579,7 +584,8 @@ const UwMaps = () => {
             <a
               href="https://miro.com/app/board/uXjVKYtlv9E=/?share_link_id=641909903582"
               target="_blank" rel="noopener noreferrer">
-              <Image src={infoarch} className="w-full gray-overlay scale-up mt-16" />
+              <Image alt="information architecture"
+              src={infoarch} className="w-full gray-overlay scale-up mt-16" />
             </a>
 
             <h1 className="font-bold text-4xl mt-32">
@@ -595,7 +601,8 @@ const UwMaps = () => {
               Then, I decided to make slightly higher fidelity wireframes of the saved locations and
               main explore tab. These are much easier to change and reiterate than actual designs.
             </p>
-            <Image src={wireframes} className="w-full mt-16" />
+            <Image alt="low fidelity wireframes"
+            src={wireframes} className="w-full mt-16" />
             <h1 className="font-bold text-5xl mt-32">
             <span className='text-gradient'>✨</span> 004 // Final Designs
             </h1>
@@ -614,7 +621,8 @@ const UwMaps = () => {
               />
             </div>
           </div>
-            <Image src={final1} className="w-full mt-16 opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100" />
+            <Image alt="final images"
+            src={final1} className="w-full mt-16 opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100" />
             <div className="relative isolate -z-10">
             <div
               className="absolute inset-x-0 -top-40 transform-gpu overflow-hidden blur-[100px] sm:-top-80 lg:-top-60"
@@ -629,8 +637,10 @@ const UwMaps = () => {
               />
             </div>
           </div>
-            <Image src={final2} className="w-full mt-16 opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100" />
-            <Image src={final3} className="w-full mt-16 opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100" />
+            <Image alt="final images"
+            src={final2} className="w-full mt-16 opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100" />
+            <Image alt="final images"
+            src={final3} className="w-full mt-16 opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100" />
           </div>
 
           <h1 className='mb-16'>This is Project 1</h1>
