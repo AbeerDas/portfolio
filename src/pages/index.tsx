@@ -208,7 +208,7 @@ export default function Home() {
       
 
       constructor(el: string) {
-        this.el = document.querySelector(el)! as HTMLElement;
+        this.el = document.querySelector(el) as HTMLElement;
         this.init();
       }
       init() {
@@ -251,7 +251,7 @@ export default function Home() {
 
         if (action) {
           const targetExpanded = action === "expand" ? "false" : "true";
-          const buttons = Array.from(this.el?.querySelectorAll(`[aria-expanded="${targetExpanded}"]`) || []);
+          const buttons = Array.from(this.el?.querySelectorAll(`[aria-expanded="${targetExpanded}"]`) ?? []);
           const wasExpanded = action === "collapse";
 
           for (const button of buttons) {
@@ -677,7 +677,7 @@ export default function Home() {
               <Gradient />
 
               <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
-                Experience is the greatest teacher, and I've embraced diverse opportunities to learn and grow.              </p>
+                Experience is the greatest teacher, and I&apos;ve embraced diverse opportunities to learn and grow.              </p>
             </div>
             <svg display="none">
               <symbol id="arrow">

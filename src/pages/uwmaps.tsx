@@ -287,7 +287,7 @@ const UwMaps = () => {
                 <div className='w-full scale-up my-6 items-center flex flex-col md:flex-row border borderColour rounded p-12'>
                   <h1 className='md:mr-48 md:mb-0 mb-16 md:text-left text-center text-xl w-1/2'>
                     During first semester, how many times have you been
-                    late to a class, meeting, or event because you couldn't
+                    late to a class, meeting, or event because you couldn&apos;t
                     find the location on campus?
                   </h1>
                   <p className='w-1/3 text-4xl text-center md:text-right'>
@@ -536,7 +536,7 @@ const UwMaps = () => {
             <p className='text-2xl mt-6'>
               In selecting the primary colors for my app, I opted for white, blue, and red.
               Blue, being a calming and universally recognized color often associated with
-              navigation, aligns perfectly with the app's purpose. During designing, I will make
+              navigation, aligns perfectly with the app&apos;s purpose. During designing, I will make
               sure to adhere to the 60/30/10 rule (60% primary colour, 30% secondary,
               10% tertiary) as this ensures a balanced and visually appealing design.
             </p>
@@ -572,7 +572,7 @@ const UwMaps = () => {
               The next step involved establishing the information
               architecture of the app. In essence, this diagram provides a
               layout of where each page is located, aligning with the primary purposes
-              we've outlined through our user research.
+              we&apos;ve outlined through our user research.
               For a more detailed version of the image displayed below, you
               can access the Miro Board by clicking <a
                 href="https://miro.com/app/board/uXjVKYtlv9E=/?share_link_id=641909903582"
@@ -622,7 +622,7 @@ const UwMaps = () => {
             </div>
           </div>
             <Image alt="final images"
-            src={final1} className="w-full mt-16 opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100" />
+            src={final1 as string} className="w-full mt-16 opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100" />
             <div className="relative isolate -z-10">
             <div
               className="absolute inset-x-0 -top-40 transform-gpu overflow-hidden blur-[100px] sm:-top-80 lg:-top-60"
@@ -638,9 +638,9 @@ const UwMaps = () => {
             </div>
           </div>
             <Image alt="final images"
-            src={final2} className="w-full mt-16 opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100" />
+            src={final2 as string} className="w-full mt-16 opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100" />
             <Image alt="final images"
-            src={final3} className="w-full mt-16 opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100" />
+            src={final3 as string} className="w-full mt-16 opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100" />
           </div>
 
           <h1 className='mb-16'>This is Project 1</h1>
