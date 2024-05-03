@@ -208,7 +208,7 @@ export default function Home() {
       
 
       constructor(el: string) {
-        this.el = document.querySelector(el)! as HTMLElement;
+        this.el = document.querySelector(el)!;
         this.init();
       }
       init() {
