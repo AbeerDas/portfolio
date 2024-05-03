@@ -208,7 +208,7 @@ export default function Home() {
       
 
       constructor(el: string) {
-        this.el = document.querySelector(el) as HTMLElement;
+        this.el = document.querySelector(el)! as HTMLElement;
         this.init();
       }
       init() {
@@ -851,7 +851,7 @@ export default function Home() {
                 </p>
               </div>
               {services.map((service) => (
-                <Link href={service.href} target="_blank">
+                <Link key={service.service} href={service.href} target="_blank">
                   <div
                     key={service.service}
                     className="flex flex-col items-start rounded-md bg-white/5 p-14 shadow-md backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-md"
