@@ -34,6 +34,7 @@ import {
 import uwmapsImage from '@/images/uwmaps.png';
 import rooted from '@/images/rooted.png';
 import bchm from '@/images/bchm.png';
+import openLink from '@/images/openLink.svg';
 
 
 import VanillaTilt from "vanilla-tilt";
@@ -138,13 +139,10 @@ export default function Home() {
   const [count, setCount] = useState<number>(0);
   const [expandAll, setExpandAll] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
- 
-  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
-  const [isOverlayVisible2, setIsOverlayVisible2] = useState(false);
 
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
   const spanRef = useRef<HTMLSpanElement>(null);
-  const spanRef2 = useRef<HTMLSpanElement>(null);
 
   {/* Function to handle mouse enter event */ }
   const handleMouseEnter = () => {
@@ -155,16 +153,6 @@ export default function Home() {
   const handleMouseLeave = () => {
     setIsOverlayVisible(false);
   };
-
-  const handleMouseEnter2 = () => {
-    setIsOverlayVisible2(true);
-  };
-
-  {/* Function to handle mouse leave event */ }
-  const handleMouseLeave2 = () => {
-    setIsOverlayVisible2(false);
-  };
-
 
 
   // handle scroll
@@ -462,25 +450,30 @@ export default function Home() {
               <span className="text-gradient 
               transition-colors 
               hover:text-orange-200 font-medium"
-             >
+              >
                 design teams {" "}
               </span>
- 
-              to {" "}
-              <span className="text-gradient 
-              transition-colors 
-              hover:text-orange-200 font-medium"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              ref={spanRef}>
-              mid-sized </span>
 
-                {isOverlayVisible && (
-        <div className="absolute top-0 left-0 mt-2 ml-2">
-          <img src="/assets/questradefam.jpg" alt="Overlay Image" />
-        </div>
-      )}
-      
+              to {" "}
+              <span
+                className="text-gradient transition-colors hover:text-orange-200 font-medium"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                ref={spanRef}
+              >
+                mid-sized {" "}
+              </span>
+
+              {isOverlayVisible && (
+                <div
+                  className="absolute text-center justify-center w-1/3 top-24 left-80 mt-2 ml-2 z-50 p-4 bg-black"
+                  style={{ zIndex: 9999 }}
+                >
+                  <h1 className="text-3xl">Questrade Family ❤️</h1>
+                  <img src="/assets/questradefam.jpg" alt="Overlay Image" />
+                </div>
+              )}
+
               companies, where I&apos;ve been instrumental in the entire {" "}
               <span className="text-gradient transition-colors hover:text-orange-200 font-medium">
                 product
@@ -664,7 +657,9 @@ export default function Home() {
                       </Link>
                     </div>
                     <div className="p-4">
-                      <h3 className="text-lg font-semibold mb-2">{project.title}</h3>
+                      <div className="flex items-center">
+                        <h3 className="text-lg font-semibold mb-2">{project.title}</h3>
+                      </div>
                       <p className="text-sm text-gray-500 mb-2">{project.stack}</p>
                       <p className="text-base text-gray-400">{project.description}</p>
                     </div>
@@ -745,7 +740,7 @@ export default function Home() {
                 <div className="timeline__item-body" id="item1-ctrld" role="region" aria-labelledby="item1" aria-hidden="true">
                   <div className="timeline__item-body-content">
                     <p className="text-xl sm:text-md timeline__item-p">
-                      •  Currently going through the onboarding process
+                      Currently going through the onboarding process
 
                     </p>
                   </div>
