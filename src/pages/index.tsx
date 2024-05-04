@@ -65,7 +65,7 @@ const projects = [
     title: "StockAI",
     description: "LSTM AI predicting stock prices given financial indicators",
     image: "/assets/stockai.png",
-    href: "https://translatebot.app/",
+    href: "https://github.com/AbeerDas/StockMarketPrediction",
     stack: "",
   },
   {
