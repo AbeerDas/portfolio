@@ -436,7 +436,7 @@ export default function Home() {
             className="mt-14 mb-[-8] flex max-w-6xl space-y-10"
           >
             <Gradient />
-            <h2 className="py-16 pb-2 text-lg font-light leading-normal tracking-tighter text-foreground xl:text-[38px] lg:text-[28px]">
+            <h2 className="py-16 pb-2 text-2xl font-light leading-normal tracking-tighter text-foreground xl:text-[38px] lg:text-[28px]">
               I&apos;m a student studying {" "}
               <a href="https://uwaterloo.ca/systems-design-engineering/" target="_blank" rel="noopener noreferrer" className="text-gradient font-medium transition-colors hover:text-yellow-500">
                 Systems Design Engineering
@@ -738,7 +738,7 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="timeline__item-body" id="item1-ctrld" role="region" aria-labelledby="item1" aria-hidden="true">
-                  <div className="timeline__item-body-content">
+                  <div className="timeline__item-body-content z-[9999]">
                     <p className="text-xl sm:text-md timeline__item-p">
                       Currently going through the onboarding process
 
@@ -768,7 +768,7 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="timeline__item-body" id="item2-ctrld" role="region" aria-labelledby="item2" aria-hidden="true">
-                  <div className="timeline__item-body-content">
+                  <div className="timeline__item-body-content z-[9999]">
                     <p className="text-xl sm:text-md timeline__item-p">
                       •  Led 6 research initiatives, collaborating cross-departmentally to optimize digital infrastructure for their active trading platform, auto
                       insurance, and mortgage services.
@@ -807,7 +807,7 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="timeline__item-body" id="item3-ctrld" role="region" aria-labelledby="item3" aria-hidden="true">
-                  <div className="timeline__item-body-content">
+                  <div className="timeline__item-body-content ">
                     <p className="text-xl sm:text-md timeline__item-p">
                       •   Redesigned and developed 29 new webpages by creating wireframes and prototypes on Figma, while also incorporating and reiterating
                       based on stakeholder feedback from senior committee board meetings
