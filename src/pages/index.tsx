@@ -48,33 +48,42 @@ const aboutStats = [
 const projects = [
   {
     title: "Statsanity",
-    description: "Statsanity: NBA AI Predictor",
-    image: "/assets/unqueue.webm",
-    href: "https://unqueue.shop/",
+    description: "Predict NBA games and MVP with linear regression AI model",
+    image: "/assets/statsanity.png",
+    href: "https://github.com/achow111/Statsanity",
+    stack: "",
   },
   {
-    title: "InfiniteVPS",
-    description: "OnePass: Password Manager",
-    image: "/assets/infinitevps.webm",
+    title: "OnePass",
+    description: "CRUD Password Manager",
+    image: "/assets/onepass.png",
     href: "#",
+    stack: "",
   },
   {
-    title: "TranslateBot",
-    description: "Powerful Multilingual Translation Bot for Discord",
-    image: "/assets/translate_bot.webm",
+    title: "StockAI",
+    description: "LSTM AI predicting stock prices given financial indicators",
+    image: "/assets/stockai.png",
     href: "https://translatebot.app/",
+    stack: "",
   },
   {
-    title: "Wrona",
-    description: "Robotics-focused technology company",
-    image: "/assets/wrona.jpeg",
+    title: "ASL Recog",
+    description: "Video Recognition AI of sign language",
+    image: "/assets/asl.png",
     href: "https://www.wrona.com/",
   },
   {
-    title: "This website",
+    title: "Movie Land",
+    description: "Search for movies and TV Shows",
+    image: "/assets/movieland.png",
+    href: "https://github.com/AbeerDas/MovieLand",
+  },
+  {
+    title: "Personal Portfolio",
     description: "My personal website",
-    image: "/assets/portfolio.webm",
-    href: "https://github.com/wendoj/portfolio",
+    image: "/assets/portfolio.png",
+    href: "https://github.com/AbeerDas/portfolio",
   },
 ];
 
@@ -129,6 +138,34 @@ export default function Home() {
   const [count, setCount] = useState<number>(0);
   const [expandAll, setExpandAll] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+ 
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+  const [isOverlayVisible2, setIsOverlayVisible2] = useState(false);
+
+
+  const spanRef = useRef<HTMLSpanElement>(null);
+  const spanRef2 = useRef<HTMLSpanElement>(null);
+
+  {/* Function to handle mouse enter event */ }
+  const handleMouseEnter = () => {
+    setIsOverlayVisible(true);
+  };
+
+  {/* Function to handle mouse leave event */ }
+  const handleMouseLeave = () => {
+    setIsOverlayVisible(false);
+  };
+
+  const handleMouseEnter2 = () => {
+    setIsOverlayVisible2(true);
+  };
+
+  {/* Function to handle mouse leave event */ }
+  const handleMouseLeave2 = () => {
+    setIsOverlayVisible2(false);
+  };
+
+
 
   // handle scroll
   useEffect(() => {
@@ -205,17 +242,17 @@ export default function Home() {
     const CollapsibleTimeline = class {
       el: Element | null;
       animation: Animation | undefined;
-      
+
 
       constructor(el: string) {
         this.el = document.querySelector(el)!;
         this.init();
       }
       init() {
-        this.el?.addEventListener("click", this.itemAction.bind(this)  as EventListener);
+        this.el?.addEventListener("click", this.itemAction.bind(this) as EventListener);
       }
       animateItemAction(button: Element | null | undefined, ctrld: Element | null | undefined, contentHeight: number, shouldCollapse: boolean) {
-        
+
         if (!button || !ctrld) return;
 
         const expandedClass = "timeline__item-body--expanded";
@@ -361,23 +398,23 @@ export default function Home() {
                 Projects
               </Button>
               <div className="inline-flex">
-                        <a
-                            href="https://github.com/your-profile"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block transition-transform duration-300 transform hover:scale-150"
-                        >
-                            <Github className="h-6 w-6 ml-4 mr-4" />
-                        </a>
-                        <a
-                            href="https://www.linkedin.com/in/abeerdas/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block transition-transform duration-300 transform hover:scale-150"
-                        >
-                            <Linkedin className="h-6 w-6 md:mr-2 mx-2" />
-                        </a>
-                    </div>
+                <a
+                  href="https://github.com/your-profile"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block transition-transform duration-300 transform hover:scale-150"
+                >
+                  <Github className="h-6 w-6 ml-4 mr-4" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/abeerdas/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block transition-transform duration-300 transform hover:scale-150"
+                >
+                  <Linkedin className="h-6 w-6 md:mr-2 mx-2" />
+                </a>
+              </div>
             </span>
             <div
               className={cn(
@@ -408,25 +445,42 @@ export default function Home() {
             data-scroll
             data-scroll-speed=".4"
             data-scroll-position="top"
-            className="my-14 flex max-w-6xl space-y-10"
+            className="mt-14 mb-[-8] flex max-w-6xl space-y-10"
           >
             <Gradient />
             <h2 className="py-16 pb-2 text-lg font-light leading-normal tracking-tighter text-foreground xl:text-[38px] lg:text-[28px]">
               I&apos;m a student studying {" "}
-              <a href="https://uwaterloo.ca/systems-design-engineering/" target="_blank" rel="noopener noreferrer"  className="text-gradient font-medium transition-colors hover:text-yellow-500">
+              <a href="https://uwaterloo.ca/systems-design-engineering/" target="_blank" rel="noopener noreferrer" className="text-gradient font-medium transition-colors hover:text-yellow-500">
                 Systems Design Engineering
-                </a> at the
+              </a> at the
               Univeristy of Waterloo. Here is my {" "}
 
-              <span className="font-medium text-gradient italic transition-colors hover:text-blue-200 clash-grotesk">tech stack.
-              </span>
-              
-              <br /><br />My experience spans from <span className="text-gradient transition-colors hover:text-orange-200 font-medium">
+              <span className="font-medium text-gradient italic transition-colors hover:text-blue-200 clash-grotesk">
+                tech stack.
+              </span> {" "}
+              My experience spans from {" "}
+              <span className="text-gradient 
+              transition-colors 
+              hover:text-orange-200 font-medium"
+             >
                 design teams {" "}
               </span>
+ 
               to {" "}
-              <span className="text-gradient sticky transition-colors hover:text-orange-200 font-medium">
-                mid-sized </span>
+              <span className="text-gradient 
+              transition-colors 
+              hover:text-orange-200 font-medium"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              ref={spanRef}>
+              mid-sized </span>
+
+                {isOverlayVisible && (
+        <div className="absolute top-0 left-0 mt-2 ml-2">
+          <img src="/assets/questradefam.jpg" alt="Overlay Image" />
+        </div>
+      )}
+      
               companies, where I&apos;ve been instrumental in the entire {" "}
               <span className="text-gradient transition-colors hover:text-orange-200 font-medium">
                 product
@@ -436,24 +490,24 @@ export default function Home() {
               <br /><br />
               Other than that, I love playing the {" "}
               <span className="text-gradient transition-colors hover:text-orange-200 font-medium">
-                acoustic 
-      
-                 and 
-       
-                 electric guitar
-                 </span>, as well as the {" "}
-                 <span className="text-gradient transition-colors hover:text-orange-200 font-medium"> 
-                 tabla {" "}
-                 </span> 
-                 whenever I have
-              some free time! I also enjoy {" "} 
-              
+                acoustic
+
+                and
+
+                electric guitar
+              </span>, as well as the {" "}
+              <span className="text-gradient transition-colors hover:text-orange-200 font-medium">
+                tabla {" "}
+              </span>
+              whenever I have
+              some free time! I also enjoy {" "}
+
               watching
               basketball
-              and listening to <a href="https://open.spotify.com/playlist/3doftAiaXi0HvwySBeqAYw?si=a17bc1dc74e54404" 
-              target="_blank" rel="noopener noreferrer"  
-              className="text-gradient font-medium transition-colors italic hover:text-green-500"> 
-              R&B.
+              and listen to a ton of  <a href="https://open.spotify.com/playlist/3doftAiaXi0HvwySBeqAYw?si=a17bc1dc74e54404"
+                target="_blank" rel="noopener noreferrer"
+                className="text-gradient font-medium transition-colors italic hover:text-green-500">
+                R&B.
               </a>
 
 
@@ -492,60 +546,60 @@ export default function Home() {
               </div>
             </div>
             <div data-scroll data-scroll-speed=".4" className="mt-[-10.0rem]">
-            <div
-              data-scroll
-              data-scroll-direction="horizontal"
-              data-scroll-speed=".09"
-              className="items-center space-x-1.5"
-            >
+              <div
+                data-scroll
+                data-scroll-direction="horizontal"
+                data-scroll-speed=".09"
+                className="items-center space-x-1.5"
+              >
                 <div
-              data-scroll
-              data-scroll-direction="horizontal"
-              data-scroll-speed=".04"
-              className="items-center space-x-1.5"
-            >
-              <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
-                ✨ Featured Work
-              </span>
-              <h2 className="mt-3 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
-                UX Designs
-              </h2>
-              <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
-                All my designs prioritize user experience,
-                ensuring that every aspect is well-crafted to enhance
-                usability, accessibility, and overall enjoyment.
-              </p>
-              </div>
-              
+                  data-scroll
+                  data-scroll-direction="horizontal"
+                  data-scroll-speed=".04"
+                  className="items-center space-x-1.5"
+                >
+                  <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
+                    ✨ Projects
+                  </span>
+                  <h2 className="mt-3 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
+                    UX Design
+                  </h2>
+                  <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
+                    All my designs prioritize user experience,
+                    ensuring that every aspect is well-crafted to enhance
+                    usability, accessibility, and overall enjoyment.
+                  </p>
+                </div>
 
-              {/* new card content here */}
-              <div className="max-w-6xl mx-auto">
-                <Link href='/uwmaps'>
-                  <div className="mt-14 rounded-xl gray-overlay scale-up">
-                    <div className="border bg-card/10 text-card-foreground shadow-sm">
-                      <div className='flex'>
-                        <Image alt="waterloo maps main image"
-                        src={uwmapsImage} className="aspect-video rounded-2xl w-full h-full bg-primary object-cover" />
-                        <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
-                          <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
-                            <div className={styles.d_pill_container}>
-                              <span className={styles.d_pill}>User Research</span>
-                              <span className={styles.d_pill}>Low/High Fidelity Prototypes</span>
-                              <span className={styles.d_pill}>Iterative Designing</span>
-                            </div>
-                          </h3>
+
+                {/* new card content here */}
+                <div className="max-w-6xl mx-auto">
+                  <Link href='/uwmaps'>
+                    <div className="mt-14 rounded-xl gray-overlay scale-up">
+                      <div className="border bg-card/10 text-card-foreground shadow-sm">
+                        <div className='flex'>
+                          <Image alt="waterloo maps main image"
+                            src={uwmapsImage} className="aspect-video rounded-2xl w-full h-full bg-primary object-cover" />
+                          <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
+                            <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
+                              <div className={styles.d_pill_container}>
+                                <span className={styles.d_pill}>User Research</span>
+                                <span className={styles.d_pill}>Low/High Fidelity Prototypes</span>
+                                <span className={styles.d_pill}>Iterative Designing</span>
+                              </div>
+                            </h3>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
                 </div>
                 <Link href='/uwmaps'>
                   <div className="hidden mt-14 gray-overlay scale-up">
                     <div className="border rounded-2xl bg-card/10 text-card-foreground shadow-sm">
                       <div className='flex'>
                         <Image alt="rooted second design case"
-                        src={rooted} className="aspect-video rounded-2xl h-full w-full  bg-primary object-cover" />
+                          src={rooted} className="aspect-video rounded-2xl h-full w-full  bg-primary object-cover" />
                         <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
                           <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
                             <div className={styles.d_pill_container}>
@@ -568,7 +622,7 @@ export default function Home() {
                     <div className=" border rounded-2xl bg-card/10 text-card-foreground shadow-sm">
                       <div className='flex flex-col'>
                         <Image alt="temple design case"
-                        src={bchm} className="aspect-video rounded-2xl w-full h-full  bg-primary object-cover" />
+                          src={bchm} className="aspect-video rounded-2xl w-full h-full  bg-primary object-cover" />
                         <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
                           <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
                             <div className={styles.d_pill_container}>
@@ -594,54 +648,30 @@ export default function Home() {
                 large-scale web applications. Here are some of my favorites:
               </p>
 
-              {/* Carousel */}
-              <div className="mt-14">
-                <Carousel setApi={setCarouselApi} className="w-full">
-                  <CarouselContent>
-                    {projects.map((project) => (
-                      <CarouselItem key={project.title} className="md:basis-1/2">
-                        <Card id="tilt">
-                          <CardHeader className="p-0">
-                            <Link href={project.href} target="_blank" passHref>
-                              {project.image.endsWith(".webm") ? (
-                                <video
-                                  src={project.image}
-                                  autoPlay
-                                  loop
-                                  muted
-                                  className="aspect-video h-full w-full rounded-t-md bg-primary object-cover"
-                                />
-                              ) : (
-                                <Image
-                                  src={project.image}
-                                  alt={project.title}
-                                  width={600}
-                                  height={300}
-                                  quality={100}
-                                  className="aspect-video h-full w-full rounded-t-md bg-primary object-cover"
-                                />
-                              )}
-                            </Link>
-                          </CardHeader>
-                          <CardContent className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
-                            <CardTitle className="border-t border-white/5 p-4 text-base font-normal tracking-tighter">
-                              {project.description}
-                            </CardTitle>
-                          </CardContent>
-                        </Card>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </Carousel>
-                <div className="py-2 text-center text-sm text-muted-foreground">
-                  <span className="font-semibold">
-                    {current} / {count}
-                  </span>{" "}
-                  projects
-                </div>
+              <div className="mt-14 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2">
+                {projects.map((project) => (
+                  <div key={project.title} className="flex flex-col items-start rounded-md bg-white/5 shadow-md backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:scale-up hover:bg-white/10 hover:shadow-md">
+                    <div className="relative aspect-w-16 aspect-h-9">
+                      <Link href={project.href} target="_blank" passHref>
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          width={600}
+                          height={300}
+                          quality={100}
+                          className="aspect-video h-full w-full rounded-t-md bg-primary object-cover"
+                        />
+                      </Link>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="text-lg font-semibold mb-2">{project.title}</h3>
+                      <p className="text-sm text-gray-500 mb-2">{project.stack}</p>
+                      <p className="text-base text-gray-400">{project.description}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
+
               <div className="relative isolate -z-10">
                 <div
                   className="absolute inset-x-0 -top-40 transform-gpu overflow-hidden blur-[100px] sm:-top-80 lg:-top-60"
@@ -662,14 +692,14 @@ export default function Home() {
 
         {/* Work Experience */}
         <section id="experience" data-scroll-section>
-      
+
           <div
             data-scroll
             data-scroll-speed=".4"
             data-scroll-position="top"
             className="mt-12 flex max-w-6xl flex-col justify-start space-y-10"
           >
-     
+
             <div className="mb-[-12.5rem]">
               <h2 className="mb-[0.5rem] text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
                 Work Experience
@@ -797,10 +827,10 @@ export default function Home() {
               </div>
 
 
-            
+
             </div>
-           
-            
+
+
           </div>
         </section>
 
