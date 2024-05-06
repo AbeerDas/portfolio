@@ -629,7 +629,7 @@ export default function Home() {
                           width={600}
                           height={300}
                           quality={100}
-                          className="aspect-video h-full w-full rounded-t-md bg-primary object-cover"
+                          className="h-full rounded-t-md bg-primary object-cover"
                         />
                       </Link>
                     </div>
@@ -776,7 +776,7 @@ export default function Home() {
                     clash-grotesk font-medium 
                     tracking-tighter 
                     timeline__title">
-                      Software Engineer
+                      Web Developer
                     </h1>
                     <h3 className="md:text-3xl text-lg mt-2 mb-[0.5rem] timeline__body">
                       Bangladesh Canada Cultural Society
