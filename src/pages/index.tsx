@@ -941,7 +941,7 @@ export default function Home() {
             <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
               I&apos;m currently seeking for 2024 fall internships as well as freelance opportunities.
             </p>
-            <Link href="mailto:wendoj@proton.me" passHref>
+            <Link href="mailto:ak5das@uwaterloo.ca" passHref>
               <Button className="mt-6">Get in touch</Button>
             </Link>
           </div>
