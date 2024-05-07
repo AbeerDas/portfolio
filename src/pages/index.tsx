@@ -23,15 +23,6 @@ import Spline from "@splinetool/react-spline";
 import Link from "next/link";
 import { cn, scrollTo } from "@/lib/utils";
 import Image from "next/image";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  type CarouselApi,
-} from "@/components/ui/carousel";
 
 import uwmapsImage from '@/images/uwmaps.png';
 import rooted from '@/images/rooted.png';
@@ -39,7 +30,6 @@ import bchm from '@/images/bchm.png';
 import openLink from '@/images/openLink.svg';
 
 
-import VanillaTilt from "vanilla-tilt";
 import { motion } from "framer-motion";
 
 const aboutStats = [
@@ -85,7 +75,7 @@ const projects = [
   {
     title: "Personal Portfolio",
     description: "My personal website",
-    image: "/assets/portfolio.png",
+    image: "/assets/port.png",
     href: "https://github.com/AbeerDas/portfolio",
   },
 ];
@@ -358,7 +348,10 @@ export default function Home() {
               </Button>
               <Button
                 variant="outline"
-                onClick={() => scrollTo(document.querySelector("#projects"))}
+                onClick={() => {
+                  const projectsSection = document.querySelector("#projects");
+                  projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
               >
                 Projects
               </Button>
@@ -491,13 +484,11 @@ export default function Home() {
           </div>
 
         </section>
+        
 
         {/* Projects */}
         <section id="projects" className="flex justify-center" data-scroll-section>
           <div
-            data-scroll
-            data-scroll-speed=".4"
-            data-scroll-position="top"
             className="my-1 flex max-w-6xl flex-col justify-start space-y-10"
           >
             {/* Gradient */}
@@ -516,18 +507,8 @@ export default function Home() {
               </div>
             </div>
             <div data-scroll data-scroll-speed=".4" className="mt-[-10.0rem]">
-              <div
-                data-scroll
-                data-scroll-direction="horizontal"
-                data-scroll-speed=".09"
-                className="items-center space-x-1.5"
-              >
-                <div
-                  data-scroll
-                  data-scroll-direction="horizontal"
-                  data-scroll-speed=".04"
-                  className="items-center space-x-1.5"
-                >
+              <div>
+                <div>
                   <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
                     ✨ Projects
                   </span>
