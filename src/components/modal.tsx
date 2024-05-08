@@ -43,7 +43,17 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
         </div>
 
         {formStatus === 'success' ? (
+          <div className="justify-end">
           <p className="text-green-500">Form submitted successfully!</p>
+          <button type="button" 
+          onClick={onClose} 
+          className="px-4 py-2 bg-gray-300 
+          text-md
+          hover:bg-gray-400 
+          text-gray-800 mt-4 font-semibold rounded-lg">
+            Close
+          </button>
+          </div>
         ) : formStatus === 'error' ? (
           <p className="text-red-500">An error occurred. Please try again later.</p>
         ) : (
