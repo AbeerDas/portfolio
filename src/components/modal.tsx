@@ -22,7 +22,7 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
         },
         body: JSON.stringify({
           access_key: "c62f05c1-d405-42b4-a808-88d8fc2ceb92",
-          name: e.currentTarget.name.value,
+          name: e.currentTarget.name.valueOf,
           email: e.currentTarget.email.value,
           message: e.currentTarget.message.value,
         }),
