@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MailIcon } from "lucide-react";
 
+interface ModalProps {
+    onClose: () => void;
+  }
+
 const Modal: React.FC<ModalProps> = ({ onClose }) => {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   
