@@ -12,35 +12,44 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
     setFormStatus('submitting');
   
     try {
-      const name = (document.getElementById('name') as HTMLInputElement).value;
-      const email = (document.getElementById('email') as HTMLInputElement).value;
-      const message = (document.getElementById('message') as HTMLTextAreaElement).value;
+        const nameElement = document.getElementById('name') as HTMLInputElement | null;
+        const emailElement = document.getElementById('email') as HTMLInputElement | null;
+        const messageElement = document.getElementById('message') as HTMLTextAreaElement | null;
   
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key: "c62f05c1-d405-42b4-a808-88d8fc2ceb92",
-          name: name,
-          email: email,
-          message: message,
-        }),
-      });
-      const result = await response.json();
-      
-      if (result.success) {
-        setFormStatus('success');
-      } else {
+        if (nameElement && emailElement && messageElement) {
+          const name = nameElement.value;
+          const email = emailElement.value;
+          const message = messageElement.value;
+  
+          const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              access_key: "c62f05c1-d405-42b4-a808-88d8fc2ceb92",
+              name: name,
+              email: email,
+              message: message,
+            }),
+          });
+          const result: { success: boolean } = await response.json() as { success: boolean };
+  
+          if (result.success) {
+            setFormStatus('success');
+          } else {
+            setFormStatus('error');
+          }
+        } else {
+          // Handle the case where one of the elements is not found
+          setFormStatus('error');
+        }
+      } catch (error) {
         setFormStatus('error');
       }
-    } catch (error) {
-      setFormStatus('error');
-    }
-  };
-  
+    };
+
   return (
     <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
       <div className="bg-black md:w-[40rem] p-8 rounded-lg shadow-lg border-2 border-1e293b">
