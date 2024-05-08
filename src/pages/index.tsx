@@ -354,7 +354,7 @@ export default function Home() {
               </Button>
               <div className="inline-flex">
                 <a
-                  href="https://github.com/your-profile"
+                  href="https://github.com/AbeerDas"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block transition-transform duration-300 transform hover:scale-150"
