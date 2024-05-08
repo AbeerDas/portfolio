@@ -283,8 +283,6 @@ export default function Home() {
   };
 
 
-
-
   return (
 
     <Container>
@@ -525,11 +523,15 @@ export default function Home() {
                 {/* new card content here */}
                 <div className="max-w-6xl mx-auto">
                   <Link href='/uwmaps'>
-                    <div className="mt-14 rounded-xl gray-overlay scale-up">
+                    <div className="mt-14 rounded-xl gray-overlay scale-up relative">
+                    <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                            <p className="text-5xl">View Full Design Case</p>
+                          </div>
                       <div className="border bg-card/10 text-card-foreground shadow-sm">
-                        <div className='flex'>
+                        <div className='flex relative'>
                           <Image alt="waterloo maps main image"
                             src={uwmapsImage} className="aspect-video rounded-2xl w-full h-full bg-primary object-cover" />
+                        
                           <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
                             <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
                               <div className={styles.d_pill_container}>
@@ -543,6 +545,7 @@ export default function Home() {
                       </div>
                     </div>
                   </Link>
+
                 </div>
                 <Link href='/uwmaps'>
                   <div className="hidden mt-14 gray-overlay scale-up">

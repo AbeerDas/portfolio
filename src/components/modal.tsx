@@ -2,123 +2,85 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MailIcon } from "lucide-react";
 
-interface ModalProps {
-    onClose: () => void;
-}
+const Modal: React.FC<ModalProps> = ({ onClose }) => {
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormStatus('submitting');
 
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "c62f05c1-d405-42b4-a808-88d8fc2ceb92",
+          name: e.currentTarget.name.value,
+          email: e.currentTarget.email.value,
+          message: e.currentTarget.message.value,
+        }),
+      });
+      const result = await response.json();
+      
+      if (result.success) {
+        setFormStatus('success');
+      } else {
+        setFormStatus('error');
+      }
+    } catch (error) {
+      setFormStatus('error');
+    }
+  };
 
-const Modal: React.FC<ModalProps>  = ({ onClose }) => {
-    const [focused, setFocused] = useState({
-        name: false,
-        email: false,
-        phone: false,
-        message: false
-    });
-
-    const handleFocus = (field: string) => {
-        setFocused({ ...focused, [field]: true });
-    };
-
-    const handleBlur = (field: string, value: string) => {
-        if (!value) {
-            setFocused({ ...focused, [field]: false });
-        }
-    };
-
-    return (
-        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
-            <div className="bg-black md:w-[40rem] p-8 rounded-lg shadow-lg border-2 border-1e293b">
-            <div className="flex items-center">
-                <h2 className="text-2xl font-bold mb-4">Send Email</h2>
-                <div className="inline-flex ml-12">
-                    <Button className="mb-6" variant={"outline"}>
-                        <MailIcon className="h-4 w-4 md:mr-2" />
-                        <span className="hidden md:flex">ak5das@uwaterloo.ca</span>
-                    </Button>
-                </div>
-                </div>
-
-                <form action="send-contact.php" method="post" id="submit-contact-form">
-                    <div className="flex flex-col">
-                        <div className="flex mt-2 ">
-                            <div className="p-2 w-full relative">
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    
-                                    className="w-full  bg-inputColour rounded border  focus:border-blue-500 focus: bg-inputColour focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-300 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
-                                    onFocus={() => handleFocus("name")}
-                                    onBlur={(e) => handleBlur("name", e.target.value)}
-                                />
-                                <label
-                                    htmlFor="name"
-                                    className={`absolute top-0 left-4 transition-all duration-300 ${focused.name ? "text-sm text-gray-400 left-2 -translate-y-full" : "text-lg  text-gray-400  translate-y-2/4"}`}
-                                >
-                                    Name
-                                </label>
-                            </div>
-
-                            <div className="p-2 w-full relative">
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    
-                                    className="w-full bg-inputColour rounded border  focus:border-blue-500 focus:bg-inputColour focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-300 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
-                                    onFocus={() => handleFocus("email")}
-                                    onBlur={(e) => handleBlur("email", e.target.value)}
-                                />
-                                <label
-                                    htmlFor="email"
-                                    className={`absolute top-0 left-4 transition-all duration-300 ${focused.email ? "text-sm text-gray-400 left-2 -translate-y-full" : "text-lg text-gray-400 translate-y-2/4"}`}
-                                >
-                                    Email
-                                </label>
-                            </div>
-                        </div>
-
-                        <div className="p-2 mt-6 w-full relative">
-                            <textarea
-                                id="message"
-                                name="message"
-                              
-                                className="w-full  bg-inputColour rounded border  focus:border-blue-500 focus: bg-inputColour focus:ring-2 focus:ring-blue-200 h-32 text-base outline-none text-gray-300 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-                                onFocus={() => handleFocus("message")}
-                                onBlur={(e) => handleBlur("message", e.target.value)}
-                            ></textarea>
-                            <label
-                                htmlFor="message"
-                                className={`absolute top-0 left-4 transition-all duration-300 ${focused.message ? "text-sm text-gray-400 left-2 -translate-y-full" : "text-lg  text-gray-400  translate-y-2/4"}`}
-                            >
-                                Message
-                            </label>
-                        </div>
-                    </div>
-                    <div className="flex mt-4 justify-end">
-                        <button
-                            type="submit"
-                            className="flex px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold rounded-lg mr-2"
-                        >
-                            Send Message ✉
-                        </button>
-
-
-                        <div className="flex">
-                            <button
-                                type="button"
-                                onClick={onClose}
-                                className="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold rounded-lg mr-2"
-                            >
-                                Close
-                            </button>
-                        </div>
-
-                    </div>
-                </form>
-            </div>
+  return (
+    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
+      <div className="bg-black md:w-[40rem] p-8 rounded-lg shadow-lg border-2 border-1e293b">
+        <div className="flex items-center">
+          <h2 className="text-2xl font-bold mb-4">Send Email</h2>
         </div>
-    );
+
+        {formStatus === 'success' ? (
+          <p className="text-green-500">Form submitted successfully!</p>
+        ) : formStatus === 'error' ? (
+          <p className="text-red-500">An error occurred. Please try again later.</p>
+        ) : (
+          <form onSubmit={handleSubmit} action="send-contact.php" method="post" id="submit-contact-form">
+            <div className="flex flex-col mb-4">
+              <label htmlFor="name" className="text-lg font-medium text-gray-400 mb-1">Name</label>
+              <input type="text" id="name" name="name" required className="border rounded-lg py-2 px-3 bg-gray-900 text-gray-300 focus:outline-none focus:ring focus:border-blue-500" />
+            </div>
+
+            <div className="flex flex-col mb-4">
+              <label htmlFor="email" className="text-lg font-medium text-gray-400 mb-1">Your Email</label>
+              <input type="email" id="email" name="email" required className="border rounded-lg py-2 px-3 bg-gray-900 text-gray-300 focus:outline-none focus:ring focus:border-blue-500" />
+            </div>
+
+            <div className="flex flex-col mb-4">
+              <label htmlFor="message" className="text-lg font-medium text-gray-400 mb-1">Message</label>
+              <textarea id="message" name="message" required rows={4} className="border rounded-lg py-2 px-3 bg-gray-900 text-gray-300 focus:outline-none focus:ring focus:border-blue-500"></textarea>
+            </div>
+
+            <div className="flex items-center justify-end">
+              <button type="submit" className="bg-blue-500 
+              text-md text-white font-semibold 
+              py-2 px-4 rounded-lg hover:bg-blue-600">Submit Form</button>
+              <button type="button" 
+              onClick={onClose} 
+              className="px-4 py-2 bg-gray-300 
+              text-md
+              hover:bg-gray-400 
+              text-gray-800 font-semibold rounded-lg ml-2">
+                Close
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Modal;
