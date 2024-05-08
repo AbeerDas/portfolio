@@ -347,7 +347,9 @@ export default function Home() {
                 variant="outline"
                 onClick={() => {
                   const projectsSection = document.querySelector("#projects");
-                  projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  if (projectsSection) {
+                    projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
                 }}
               >
                 Projects
@@ -481,7 +483,7 @@ export default function Home() {
           </div>
 
         </section>
-        
+
 
         {/* Projects */}
         <section id="projects" className="flex justify-center" data-scroll-section>
