@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { MailIcon } from "lucide-react";
 
 interface ModalProps {
     onClose: () => void;
@@ -12,8 +10,12 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormStatus('submitting');
-
+  
     try {
+      const name = (document.getElementById('name') as HTMLInputElement).value;
+      const email = (document.getElementById('email') as HTMLInputElement).value;
+      const message = (document.getElementById('message') as HTMLTextAreaElement).value;
+  
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
@@ -22,9 +24,9 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
         },
         body: JSON.stringify({
           access_key: "c62f05c1-d405-42b4-a808-88d8fc2ceb92",
-          name: e.currentTarget.name.valueOf,
-          email: e.currentTarget.email.value,
-          message: e.currentTarget.message.value,
+          name: name,
+          email: email,
+          message: message,
         }),
       });
       const result = await response.json();
@@ -38,7 +40,7 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
       setFormStatus('error');
     }
   };
-
+  
   return (
     <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
       <div className="bg-black md:w-[40rem] p-8 rounded-lg shadow-lg border-2 border-1e293b">
@@ -59,7 +61,17 @@ const Modal: React.FC<ModalProps> = ({ onClose }) => {
           </button>
           </div>
         ) : formStatus === 'error' ? (
+            <div className="justify-end">
           <p className="text-red-500">An error occurred. Please try again later.</p>
+          <button type="button" 
+          onClick={onClose} 
+          className="px-4 py-2 bg-gray-300 
+          text-md
+          hover:bg-gray-400 
+          text-gray-800 mt-4 font-semibold rounded-lg">
+            Close
+          </button>
+          </div>
         ) : (
           <form onSubmit={handleSubmit} action="send-contact.php" method="post" id="submit-contact-form">
             <div className="flex flex-col mb-4">
