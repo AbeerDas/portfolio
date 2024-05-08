@@ -41,7 +41,7 @@ const aboutStats = [
 const projects = [
   {
     title: "Statsanity",
-    description: "Predict NBA games and MVP with linear regression AI model",
+    description: "Full-stack application with login database to predict NBA games and MVP with linear regression AI model",
     image: "/assets/statsanity.png",
     href: "https://github.com/achow111/Statsanity",
     stack: "",
