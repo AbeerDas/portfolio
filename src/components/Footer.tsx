@@ -30,7 +30,7 @@ export default function Footer() {
             Made with <Link href='/safiya'>
               ❤️</Link> by{" "}
             <Link
-              href="https://github.com/wendoj"
+              href="https://github.com/AbeerDas"
               target="_blank"
               passHref
               className="text-foreground transition hover:text-primary"
