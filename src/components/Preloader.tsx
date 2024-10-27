@@ -28,7 +28,7 @@ const words = [
   "Hello",
   "Bonjour",
   "Ciao",
-  "Olà",
+  "Γειά σου",
   "やあ",
 ];
 

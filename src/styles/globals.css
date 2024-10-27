@@ -311,22 +311,18 @@
     display: flex;
   }
 
-  .timeline__item-body {
-    border-radius: calc(0.375em * var(--scaling-factor));
-    overflow: hidden;
-    margin-top: calc(0.2em * var(--scaling-factor));
-    margin-inline-start: calc(4em * var(--scaling-factor));
-    height: 0;
+  .list-disc li {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
   }
 
   .timeline__item-body-content {
     background-color: hsla(var(--hue_t), 10%, 50%, 0.2);
-    opacity: 0;
+    opacity: 1;
     padding: 0.5em 0.75em;
-    visibility: hidden;
-    transition:
-      opacity var(--trans-dur_t) var(--trans-timing_t),
-      visibility var(--trans-dur_t) steps(1, end);
+    visibility: visible;
+
     z-index: 9999;
 
   }

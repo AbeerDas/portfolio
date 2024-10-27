@@ -32,51 +32,153 @@ import openLink from '@/images/openLink.svg';
 
 import { motion } from "framer-motion";
 
-const aboutStats = [
-  { label: "Years of experience", value: "3+" },
-  { label: "Technologies mastered", value: "5+" },
-  { label: "Companies worked with", value: "15+" },
-];
-
 const projects = [
+  {
+    title: "Estia",
+    description: "Publicly hosted platform with 100+ coding projects, AI-powered project generation, RAG retrieval, and user profiles (auth, comments, etc.)",
+    image: "/assets/estia.png",
+    href: "https://estiafrontend.vercel.app/",
+    stack: ["React", "Node.js", "PostgreSQL", "Groq", "Vercel"],
+  },
   {
     title: "Statsanity",
     description: "Full-stack application with login database to predict NBA games and MVP with linear regression AI model",
     image: "/assets/statsanity.png",
     href: "https://github.com/achow111/Statsanity",
-    stack: "",
+    stack: ["React", "Tensorflow", "Python (BeautifulSoup)", "Flask"],
   },
   {
     title: "OnePass",
-    description: "CRUD Password Manager",
-    image: "/assets/onepass.png",
+    description: "Password Manager CRUD app featuring strong password generation, a password checker, and a password storage system",
+    image: "/assets/onepassv2.png",
     href: "#",
-    stack: "",
+    stack: ["Next.js", "Firebase", "Node.js"],
   },
   {
     title: "StockAI",
-    description: "LSTM AI predicting stock prices given financial indicators",
+    description: "Built an LSTM AI model to predict next-day stock prices using candlestick data on varying training configs to explore optimization",
     image: "/assets/stockai.png",
     href: "https://github.com/AbeerDas/StockMarketPrediction",
-    stack: "",
+    stack: ["Python", "Keras", "Pandas", "NumPy"],
   },
   {
-    title: "ASL Recog",
-    description: "Video Recognition AI of sign language",
-    image: "/assets/asl.png",
-    href: "https://www.wrona.com/",
+    title: "Dungeon Map Generator",
+    description: "Won WEC 2024 building a dynamic tile-based map generator with pathfinding using Dijkstra's algorithm",
+    image: "/assets/wecv4.png",
+    href: "https://github.com/tawsifrm/WEC-2024",
+    stack: ["Python", "Turtle Graphics"],
   },
   {
     title: "Movie Land",
-    description: "Search for movies and TV Shows",
+    description: "Search tool for finding movies and TV shows, offering concise descriptions and release dates for each title",
     image: "/assets/movieland.png",
     href: "https://github.com/AbeerDas/MovieLand",
+    stack: ["React", "OMDb API", "TailwindCSS"],
+  },
+];
+
+const workExperiences = [
+  {
+    id: 1,
+    date: "Aug. - Present (Fall 2024 Internship)",
+    title: "Software Developer Intern",
+    company: "University of Toronto - Enterprise Applications",
+    image: "/assets/uoft.png",
+    description: (
+      <ul className="list-disc pl-5">
+        <li>
+          Engineered and launched over 15 microservices for the University’s Student Information System (SIS)
+          using <span className="font-bold text-lightblue">NodeJS</span>
+          , <span className="font-bold text-lightblue">TypeScript</span>,
+          and  <span className="font-bold text-lightblue">OData</span>, querying
+          an <span className="font-bold text-lightblue">Azure SQL</span> server to enable
+          scalable <span className="font-bold text-lightblue">RESTful APIs</span> that now support over 60,000 students and B2B clients.
+        </li>
+        <li>
+          Optimized microservice deployment
+          with <span className="font-bold text-lightblue">Azure Container Apps</span> and <span className="font-bold text-lightblue">Docker</span>, effectively cutting deployment time in half while
+          integrating <span className="font-bold text-lightblue">OIDC/OAuth 2.0</span> to enhance security measures.
+        </li>
+        <li>
+          Designed AODA-compliant front-end interfaces
+          using <span className="font-bold text-lightblue">Angular</span>, significantly improving user accessibility and streamlining navigation for a better user experience.
+        </li>
+      </ul>
+
+    ),
   },
   {
-    title: "Personal Portfolio",
-    description: "My personal website",
-    image: "/assets/port.png",
-    href: "https://github.com/AbeerDas/portfolio",
+    id: 2,
+    date: "Mar - Present",
+    title: "Project Developer & Designer",
+    company: "UW Blueprint",
+    image: "/assets/blueprint.png",
+    description: (
+      <ul className="list-disc pl-5">
+        <li>
+          Contributed to a cross-functional team
+          of <span className="font-bold text-lightblue">4 designers</span> and <span className="font-bold text-lightblue">8 developers</span> in the creation of a comprehensive financial literacy platform designed
+          on <span className="font-bold text-lightblue">Figma</span>, tailored specifically for children with developmental disabilities. This collaboration with the nonprofit Extend-a-Family ensured that the platform addressed the unique needs of its young users.
+        </li>
+        <li>
+          Implemented a full-stack solution
+          with <span className="font-bold text-lightblue">React</span>
+          , <span className="font-bold text-lightblue">NodeJS (Express)</span>,
+          and <span className="font-bold text-lightblue">Firebase</span>, creating
+          scalable <span className="font-bold text-lightblue">RESTful APIs</span> communicating with
+          the <span className="font-bold text-lightblue">MongoDB</span> database, increasing the system’s capacity to
+          handle <span className="font-bold text-lightblue">1,000+</span> requests per second.
+        </li>
+      </ul>
+
+    ),
+  },
+  {
+    id: 3,
+    date: "Jan - Apr (Winter 2024 Internship)",
+    title: "UX Researcher Intern",
+    company: "Questrade",
+    image: "/assets/questrade.png",
+    description: (
+      <ul className="list-disc pl-5">
+        <li>
+          Led <span className="font-bold text-lightblue">6 research initiatives</span>, collaborating cross-departmentally to optimize digital infrastructure for
+          their <span className="font-bold text-lightblue">active trading platform</span>
+          , <span className="font-bold text-lightblue">auto insurance</span>
+          , and <span className="font-bold text-lightblue">mortgage services</span>.
+        </li>
+        <li>
+          Employed methodologies including <span className="font-bold text-lightblue">
+            A/B testing</span>, <span className="font-bold text-lightblue">usability studies</span>, <span className="font-bold text-lightblue">open/closed card sorting</span>, <span className="font-bold text-lightblue">moderated interviews</span>, and <span className="font-bold text-lightblue">expert reviews</span> utilizing tools such as <span className="font-bold text-lightblue">Optimal Workshop</span> and <span className="font-bold text-lightblue">UserTesting</span>.
+        </li>
+        <li>
+          Presented findings and reports to diverse stakeholders, including board members, C-level executives, UX designers, product managers, software engineers, and others, employing synthesis methodologies such as <span className="font-bold text-lightblue">affinity mapping</span>.
+        </li>
+        <li>
+          Designed <span className="font-bold text-lightblue">Figma</span> prototypes and components, integrating personal recommendations to influence product development.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    id: 4,
+    date: "Mar 2023 - Apr 2024",
+    title: "Web Developer",
+    company: "Bangladesh Canada Cultural Society",
+    image: "/assets/bchm.png",
+    description: (
+      <ul className="list-disc pl-5">
+        <li>
+          Redesigned and developed <span className="font-bold text-lightblue">29</span> new webpages by creating <span className="font-bold text-lightblue">wireframes</span> and <span className="font-bold text-lightblue">prototypes</span> on <span className="font-bold text-lightblue">Figma</span>, while also incorporating and reiterating based on stakeholder feedback from senior committee board meetings.
+        </li>
+        <li>
+          Implemented website redesign using <span className="font-bold text-lightblue">HTML</span>, <span className="font-bold text-lightblue">CSS</span>, and <span className="font-bold text-lightblue">React</span>, ensuring seamless user experience and modern design aesthetics resulting in a <span className="font-bold text-lightblue">35% increase</span> in donations.
+        </li>
+        <li>
+          Integrated email subscription feature, capturing user data stored in <span className="font-bold text-lightblue">SQL</span> database for targeted communications resulting in <span className="font-bold text-lightblue">2500+</span> new email subscribers within the first month of launch.
+        </li>
+      </ul>
+    ),
   },
 ];
 
@@ -304,8 +406,8 @@ export default function Home() {
               data-scroll-speed=".09"
               className="flex flex-row items-center space-x-1.5"
             >
-              <span className={styles.pill}>UX Design</span>
               <span className={styles.pill}>Software Engineering</span>
+              <span className={styles.pill}>UX Design</span>
               <span className={styles.pill}>ML/AI</span>
             </div>
             <div>
@@ -329,7 +431,7 @@ export default function Home() {
                 data-scroll-speed=".06"
                 className="mt-1 max-w-lg tracking-tight text-muted-foreground 2xl:text-xl"
               >
-                A UX designer and full-stack developer with a love for product development.
+                Full-stack developer and UX Designer with a love for end-to-end product development.
               </p>
             </div>
             <span
@@ -408,11 +510,7 @@ export default function Home() {
               <a href="https://uwaterloo.ca/systems-design-engineering/" target="_blank" rel="noopener noreferrer" className="text-gradient font-medium transition-colors hover:text-yellow-500">
                 Systems Design Engineering
               </a> at the
-              Univeristy of Waterloo. Here is my {" "}
-
-              <span className="font-medium text-gradient italic transition-colors hover:text-blue-200 clash-grotesk">
-                tech stack.
-              </span> {" "}
+              Univeristy of Waterloo.
               My experience spans from {" "}
               <span className="text-gradient 
               transition-colors 
@@ -450,20 +548,9 @@ export default function Home() {
               <br /><br />
               Other than that, I love playing the {" "}
               <span className="text-gradient transition-colors hover:text-orange-200 font-medium">
-                acoustic
-
-                and
-
-                electric guitar
-              </span>, as well as the {" "}
-              <span className="text-gradient transition-colors hover:text-orange-200 font-medium">
-                tabla {" "}
-              </span>
-              whenever I have
+                acoustic and electric guitar</span> whenever I have
               some free time! I also enjoy {" "}
-
-              watching
-              basketball
+              keeping up with the NBA
               and listen to a ton of  <a href="https://open.spotify.com/playlist/3doftAiaXi0HvwySBeqAYw?si=a17bc1dc74e54404"
                 target="_blank" rel="noopener noreferrer"
                 className="text-gradient font-medium transition-colors italic hover:text-green-500">
@@ -504,13 +591,52 @@ export default function Home() {
               </div>
             </div>
             <div data-scroll data-scroll-speed=".4" className="mt-[-10.0rem]">
+              <h2 className="mt-[-80px] text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
+                Software Projects
+              </h2>
+              <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
+                I&apos;ve worked on a variety of projects, from small websites to
+                large-scale web applications. Here are some of my favorites:
+              </p>
+
+              <div className="mt-14 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2">
+                {projects.map((project) => (
+                  <div key={project.title} className="flex flex-col items-start rounded-md bg-white/5 shadow-md backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:scale-up hover:bg-white/10 hover:shadow-md">
+                    <div className="relative w-full h-64"> {/* Fixed height for the image container */}
+                      <Link href={project.href} target="_blank" passHref>
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          layout="fill" // This makes the image fill the container
+                          quality={100}
+                          className="object-cover rounded-t-md bg-primary" // Use object-cover to fill and maintain aspect ratio
+                        />
+                      </Link>
+                    </div>
+                    <div className="p-4">
+                      <div className="flex items-center">
+                        <h3 className="text-lg font-semibold mb-2">{project.title}</h3>
+                      </div>
+                      <p className="text-base text-gray-400">{project.description}</p>
+                      <div className="flex flex-wrap gap-2 mt-8">
+                        {project.stack.map((tech, index) => (
+                          <span key={index} className="bg-[#0A0A13] border border-[#141521] text-sm text-gray-200 py-1 px-6 rounded-full">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
               <div>
-                <div>
+                <div className="mt-64">
                   <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
                     ✨ Projects
                   </span>
                   <h2 className="mt-3 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
-                    UX Design
+                    UX Design Cases
                   </h2>
                   <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
                     All my designs prioritize user experience,
@@ -524,14 +650,14 @@ export default function Home() {
                 <div className="max-w-6xl mx-auto">
                   <Link href='/uwmaps'>
                     <div className="mt-14 rounded-xl gray-overlay scale-up relative">
-                    <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                            <p className="text-5xl">View Full Design Case</p>
-                          </div>
+                      <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                        <p className="text-5xl">View Full Design Case</p>
+                      </div>
                       <div className="border bg-card/10 text-card-foreground shadow-sm">
                         <div className='flex relative'>
                           <Image alt="waterloo maps main image"
                             src={uwmapsImage} className="aspect-video rounded-2xl w-full h-full bg-primary object-cover" />
-                        
+
                           <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
                             <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
                               <div className={styles.d_pill_container}>
@@ -593,40 +719,6 @@ export default function Home() {
               </div>
 
 
-              <h2 className="mt-64 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
-                Software Projects
-              </h2>
-              <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
-                I&apos;ve worked on a variety of projects, from small websites to
-                large-scale web applications. Here are some of my favorites:
-              </p>
-
-              <div className="mt-14 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2">
-                {projects.map((project) => (
-                  <div key={project.title} className="flex flex-col items-start rounded-md bg-white/5 shadow-md backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:scale-up hover:bg-white/10 hover:shadow-md">
-                    <div className="relative aspect-w-16 aspect-h-9">
-                      <Link href={project.href} target="_blank" passHref>
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          width={600}
-                          height={300}
-                          quality={100}
-                          className="h-full rounded-t-md bg-primary object-cover"
-                        />
-                      </Link>
-                    </div>
-                    <div className="p-4">
-                      <div className="flex items-center">
-                        <h3 className="text-lg font-semibold mb-2">{project.title}</h3>
-                      </div>
-                      <p className="text-sm text-gray-500 mb-2">{project.stack}</p>
-                      <p className="text-base text-gray-400">{project.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
               <div className="relative isolate -z-10">
                 <div
                   className="absolute inset-x-0 -top-40 transform-gpu overflow-hidden blur-[100px] sm:-top-80 lg:-top-60"
@@ -647,147 +739,56 @@ export default function Home() {
 
         {/* Work Experience */}
         <section id="experience" data-scroll-section>
-
-          <div
-            data-scroll
-            data-scroll-speed=".4"
-            data-scroll-position="top"
-            className="mt-12 flex max-w-6xl flex-col justify-start space-y-10"
-          >
-
-            <div className="mb-[-12.5rem]">
+          <div data-scroll data-scroll-speed=".4" data-scroll-position="top" className="mt-12 flex max-w-6xl flex-col justify-start space-y-10">
+            <div className="mb-10">
               <h2 className="mb-[0.5rem] text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
                 Work Experience
               </h2>
               <Gradient />
-
               <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
-                Experience is the greatest teacher, and I&apos;ve embraced diverse opportunities to learn and grow.              </p>
+                Experience is the greatest teacher, and I&apos;ve embraced diverse opportunities to learn and grow.
+              </p>
             </div>
-            <svg display="none">
-              <symbol id="arrow">
-                <polyline points="7 10,12 15,17 10" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-              </symbol>
-            </svg>
+
             <div id="timeline" className="timeline">
-              <div className="btn-group">
-                <div className="mt-12">
-                  <button
-                    className={`text-xl btn ${expandAll ? 'bg-indigo-500 text-white' : 'bg-indigo-500 text-white'}`}
-                    type="button"
-                    onClick={handleToggleExpand}
-                    data-action={expandAll ? "collapse" : "expand"}
-                  >
-                    {expandAll ? "Collapse All" : "Expand All"}
-                  </button>
-                </div>
-              </div>
-              <div className="timeline__item">
-                <div className="timeline__item-header">
-                  <button className="timeline__arrow" type="button" id="item1" aria-labelledby="item1-name" aria-expanded="false" aria-controls="item1-ctrld" aria-haspopup="true" data-item="1">
-                    <svg className="timeline__arrow-icon" viewBox="0 0 24 24" width="24px" height="24px">
-                      <use href="#arrow" />
-                    </svg>
-                  </button>
-                  <span className="timeline__dot"></span>
-                  <span id="item1-name" className="timeline__meta">
-                    April - Present<br />
-                    <h3 className="mt-1 text-gradient clash-grotesk font-medium tracking-tighter timeline__title">
-                      Product Designer</h3>
-                    <h3 className="text-3xl mt-1 mb-[0.5rem]">UW Blueprint</h3>
-                  </span>
-                </div>
-                <div className="timeline__item-body" id="item1-ctrld" role="region" aria-labelledby="item1" aria-hidden="true">
-                  <div className="timeline__item-body-content z-[9999]">
-                    <p className="text-xl sm:text-md timeline__item-p">
-                      Currently going through the onboarding process
-
-                    </p>
+              {workExperiences.map((experience) => (
+                <div key={experience.id} className="timeline__item">
+                  <div className="timeline__item-header">
+                    <button className="timeline__arrow" type="button" aria-hidden="true">
+                      <svg className="timeline__arrow-icon" viewBox="0 0 24 24" width="24px" height="24px">
+                        <use href="#arrow" />
+                      </svg>
+                    </button>
+                    <span className="timeline__dot"></span>
+                    <span id={`item${experience.id}-name`} className="mb-[0.5rem] timeline__meta">
+                      <span>{experience.date}</span>
+                      <br /><br />
+                      <div className="flex items-center">
+                        {/* Logo image on the left */}
+                        <img src={experience.image} alt={`${experience.company} logo`} className="w-16 h-16 mr-4" />
+                        {/* Title and company name container */}
+                        <div>
+                          <h3 className="mt-1 text-gradient clash-grotesk font-medium tracking-tighter timeline__title">
+                            {experience.title}
+                          </h3>
+                          <h3 className="text-3xl mt-1 mb-[0.5rem]">{experience.company}</h3>
+                        </div>
+                      </div>
+                    </span>
+                  </div>
+                  <div className="timeline__item-body" role="region" aria-labelledby={`item${experience.id}`}>
+                    <div className="timeline__item-body-content ml-28 z-[9999]">
+                      <div className="text-xlsm:text-md timeline__item-p">
+                        {experience.description}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="timeline__item">
-                <div className="timeline__item-header">
-                  <button className="timeline__arrow" type="button" id="item2" aria-labelledby="item2-name" aria-expanded="false" aria-controls="item2-ctrld" aria-haspopup="true" data-item="2">
-                    <svg className="timeline__arrow-icon" viewBox="0 0 24 24" width="24px" height="24px">
-                      <use href="#arrow" />
-                    </svg>
-                  </button>
-                  <span className="timeline__dot"></span>
-                  <span id="item2-nam" className=" mb-[0.5rem] timeline__meta">
-                    <span className="">
-                      Winter 2024
-                    </span><br /><br />
-                    <h1 className="mt-[-1.2rem] text-gradient clash-grotesk font-medium tracking-tighter timeline__title">
-                      UX Researcher Intern
-                    </h1>
-                    <h3 className="text-3xl mt-2 mb-[0.5rem]">
-                      Questrade
-                    </h3>
-                  </span>
-                </div>
-                <div className="timeline__item-body" id="item2-ctrld" role="region" aria-labelledby="item2" aria-hidden="true">
-                  <div className="timeline__item-body-content z-[9999]">
-                    <p className="text-xl sm:text-md timeline__item-p">
-                      •  Led 6 research initiatives, collaborating cross-departmentally to optimize digital infrastructure for their active trading platform, auto
-                      insurance, and mortgage services.
-                      <br /><br />•  Employed methodologies including A/B testing, usability studies, open/closed card sorting, moderated interviews, and expert reviews
-                      utilizing tools such as Optimal Workshop and UserTesting
-                      <br /><br />•  Presented findings and reports to diverse stakeholders, including board members, C-level executives, UX designers, product managers,
-                      software engineers, and others, employing synthesis methodologies such as affinity mapping.
-                      <br /><br />•  Designed Figma prototypes and components, integrating personal recommendations to influence product development
-
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="timeline__item">
-                <div className="timeline__item-header">
-                  <button className="timeline__arrow" type="button" id="item3" aria-labelledby="item3-name" aria-expanded="false" aria-controls="item3-ctrld" aria-haspopup="true" data-item="3">
-                    <svg className="timeline__arrow-icon" viewBox="0 0 24 24" width="24px" height="24px">
-                      <use href="#arrow" />
-                    </svg>
-                  </button>
-                  <span className="timeline__dot"></span>
-                  <span id="item3-nam" className=" mb-[0.5rem] timeline__meta">
-                    <span className="">
-                      March - Present
-                    </span><br /><br />
-                    <h1 className="mt-[-1.1rem] text-gradient 
-                    clash-grotesk font-medium 
-                    tracking-tighter 
-                    timeline__title">
-                      Web Developer
-                    </h1>
-                    <h3 className="md:text-3xl text-lg mt-2 mb-[0.5rem] timeline__body">
-                      Bangladesh Canada Cultural Society
-                    </h3>
-                  </span>
-                </div>
-                <div className="timeline__item-body" id="item3-ctrld" role="region" aria-labelledby="item3" aria-hidden="true">
-                  <div className="timeline__item-body-content ">
-                    <p className="text-xl sm:text-md timeline__item-p">
-                      •   Redesigned and developed 29 new webpages by creating wireframes and prototypes on Figma, while also incorporating and reiterating
-                      based on stakeholder feedback from senior committee board meetings
-                      <br /><br />•   Implemented website redesign using HTML, CSS, and React, ensuring seamless user experience and modern design aesthetics resulting
-                      in a 35% increase in donations
-                      <br /><br />•   Integrated email subscription feature, capturing user data stored in SQL database for targeted communications resulting in 2500+ new
-                      email subscribers within the first month of launch
-
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-
-
+              ))}
             </div>
-
-
           </div>
         </section>
+
 
         {/* Services */}
         <section id="certifications" data-scroll-section>
@@ -899,7 +900,7 @@ export default function Home() {
               <span className="text-gradient clash-grotesk">see?</span>
             </h2>
             <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
-              I&apos;m currently seeking for 2024 fall internships as well as freelance opportunities.
+              I&apos;m currently seeking for Summer 2025 internships as well as freelance opportunities.
             </p>
             <Link href="mailto:ak5das@uwaterloo.ca" passHref>
               <Button className="mt-6">Get in touch</Button>

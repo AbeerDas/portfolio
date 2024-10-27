@@ -1,20 +1,20 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
     './src/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
   theme: {
     container: {
       center: true,
-        padding: "1rem",
+      padding: "1rem",
       screens: {
         "2xl": "1400px",
       },
     },
-  
+
     extend: {
       colors: {
         borderColour: "#1f2a3c",
@@ -52,6 +52,15 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Custom colors
+        lightgreen: "#90ee90",
+        blue: "#4479fd",
+        yellow: "#f7fabd",
+        lightblue: "#bdd7fa",
+        red: "#fc9c9c",
+        pink: "#edb0e8",
+        orange: "#f7c47c",
+
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -76,6 +85,6 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;
