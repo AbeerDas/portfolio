@@ -24,6 +24,7 @@ type NavProps = {
   href: string;
   i: number;
   className?: string;
+  target?: string;
 };
 
 const variants = {
@@ -41,12 +42,15 @@ const navLinks = [
   { href: "#projects", text: "projects" },
   { href: "#experience", text: "experience" },
   { href: "#certifications", text: "certifications" },
-  { href: "", text: "[ resume ]" },
+  {
+    href: "https://drive.google.com/file/d/10KQf_MxDJ3aeq6jBeGP7zyPwshlWxN4T/view?usp=sharing",
+    text: "[ resume ]",
+    target: "_blank",
+  },
 ];
 
 function handleClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
   const href = e.currentTarget.getAttribute("href");
-
   if (href && href.startsWith("#")) {
     e.preventDefault();
     const section = document.querySelector(href);
@@ -68,6 +72,7 @@ function NavItem(props: NavProps) {
         href={props.href}
         onClick={handleClick}
         className={cn(props.i === 0 && "nav-active", "nav-link")}
+        target={props.target}
       >
         {props.text}
       </a>
@@ -90,20 +95,14 @@ export default function Container(props: ContainerProps) {
     ...customMeta,
   };
 
-  // handle scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
-
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // preloader effect
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
@@ -119,137 +118,56 @@ export default function Container(props: ContainerProps) {
         <meta name="robots" content="follow, index" />
         <meta name="theme-color" content="#7B82FE" />
         <meta content={meta.description} name="description" />
-        <meta
-          property="og:url"
-          content={`https://www.wendoj.codes${router.asPath}`}
-        />
-        <link
-          rel="canonical"
-          href={`https://www.wendoj.codes${router.asPath}`}
-        />
+        <meta property="og:url" content={`https://www.wendoj.codes${router.asPath}`} />
+        <link rel="canonical" href={`https://www.wendoj.codes${router.asPath}`} />
         <meta property="og:type" content={meta.type} />
         <meta property="og:site_name" content="Abeer" />
         <meta property="og:description" content={meta.description} />
         <meta property="og:title" content={meta.title} />
         <meta property="og:image" content={meta.image} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="Abeer" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
         <link rel="manifest" href="/manifest.json" />
         <link rel="shortcut icon" href="/images/favicon.ico" />
-          <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo.png" />
-          <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo.png"/>
-          <link rel="icon" type="image/png" sizes="16x16" href="/assets/logo.png"/>
-        <link rel="apple-touch-icon" href="/assets/logo.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo.png" />
       </Head>
-      <nav
-        className={cn(
-          styles.nav,
-          isScrolled
-            ? "bg-gradient-to-br from-background to-transparent shadow-md backdrop-blur transition"
-            : "bg-transparent",
-        )}
-      >
+      <nav className={cn(styles.nav, isScrolled ? "shadow-md backdrop-blur" : "bg-transparent")}>
         <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={cn(
-              styles.burger,
-              "inline-flex transform items-center justify-center rounded-md p-2 transition-all duration-300 focus:outline-none",
-            )}
-            aria-controls="mobile-menu"
-            aria-expanded="false"
+            className={cn(styles.burger, "p-2 rounded-md")}
           >
-            <span className="sr-only">Open main menu</span>
             <MenuIcon data-hide={isOpen} />
             <CrossIcon data-hide={!isOpen} />
           </button>
         </div>
-        <Link href="/">
-          <span className="text-xl">abeer das</span>
-        </Link>
-
-        {/* Desktop menu */}
+        <Link href="/"><span className="text-xl">abeer das</span></Link>
         <ul className={styles["desktop-nav"]}>
           {navLinks.map((link, i) => (
-            <NavItem
-              key={link.href}
-              href={link.href}
-              text={link.text}
-              i={i}
-              className="text-base"
-            />
+            <NavItem key={link.href} {...link} i={i} className="text-base" />
           ))}
         </ul>
-
-        {/* Mobile menu */}
-        <AnimatePresence key="menu">
+        <AnimatePresence>
           {isOpen && (
             <motion.div
-              className="fixed right-0 top-0 z-40 flex h-screen w-full flex-col justify-start overflow-y-hidden bg-background"
+              className="fixed z-40 bg-background"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ duration: 1, type: "spring", bounce: 0.25 }}
             >
-              {/* Expandable menu */}
-              <div className="flex h-20 max-h-20 min-h-[60px] w-full items-center justify-between border-b pl-[22px] pr-1">
-                <span className="text-base font-medium lowercase">Menu</span>
-                <button
-                  onClick={() => setIsOpen(!isOpen)}
-                  className={styles.burger}
-                  aria-controls="mobile-menu"
-                  aria-expanded="false"
-                >
-                  <span className="sr-only">Open main menu</span>
-                  <CrossIcon data-hide={!isOpen} />
-                </button>
-              </div>
-              <div className="flex h-full flex-col items-start justify-between overflow-y-auto">
-                {/* Links */}
-                <ul className="flex min-h-fit w-full flex-col items-start space-y-6 px-[22px] py-[58px]">
-                  {navLinks.map((link, i) => (
-                    <button key={link.href} onClick={() => setIsOpen(false)}>
-                      <NavItem
-                        href={link.href}
-                        text={link.text}
-                        i={i}
-                        className="text-xl"
-                      />
-                    </button>
-                  ))}
-                </ul>
-
-                {/* Footer */}
-                <div className="flex min-h-fit w-full flex-col space-y-8 px-[22px] py-10">
-                  <span className="text-sm text-muted-foreground">
-                    © {new Date().getFullYear()} abeer das. All rights reserved.
-                  </span>
-                </div>
-              </div>
+              <ul>
+                {navLinks.map((link, i) => (
+                  <NavItem key={link.href} {...link} i={i} className="text-xl" />
+                ))}
+              </ul>
             </motion.div>
           )}
         </AnimatePresence>
-        <style jsx global>{`
-          html,
-          body {
-            overflow-y: ${isOpen ? "hidden" : "initial"};
-            scrollbar-width: ${isOpen ? "none" : "unset"};
-            -ms-overflow-style: ${isOpen ? "none" : "unset"};
-            touch-action: ${isOpen ? "none" : "unset"};
-            -ms-touch-action: ${isOpen ? "none" : "unset"};
-          }
-        `}</style>
       </nav>
-
-      {/* Preloader */}
-      <AnimatePresence mode="wait">
-        {isLoading && <Preloader />}
-      </AnimatePresence>
-
-      {/* Main content */}
+      {isLoading && <Preloader />}
       <main className={cn("container", props.className)}>{children}</main>
       <Footer />
     </>
@@ -258,57 +176,19 @@ export default function Container(props: ContainerProps) {
 
 function MenuIcon(props: IconProps) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="absolute h-5 w-5 text-neutral-100"
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      {...props}
-    >
-      <path
-        d="M2.5 2.5H17.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M2.5 7.5H17.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M2.5 12.5H17.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" {...props}>
+      <path d="M2.5 2.5H17.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M2.5 7.5H17.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M2.5 12.5H17.5" stroke="currentColor" strokeWidth="1.5" />
     </svg>
   );
 }
 
 function CrossIcon(props: IconProps) {
   return (
-    <svg
-      className="absolute h-5 w-5 text-neutral-100"
-      viewBox="0 0 24 24"
-      width="24"
-      height="24"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      fill="none"
-      shapeRendering="geometricPrecision"
-      {...props}
-    >
-      <path d="M18 6L6 18" />
-      <path d="M6 6l12 12" />
+    <svg className="h-5 w-5" viewBox="0 0 24 24" {...props}>
+      <path d="M18 6L6 18" stroke="currentColor" />
+      <path d="M6 6l12 12" stroke="currentColor" />
     </svg>
   );
 }

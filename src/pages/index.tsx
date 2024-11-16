@@ -601,34 +601,43 @@ export default function Home() {
 
               <div className="mt-14 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2">
                 {projects.map((project) => (
-                  <div key={project.title} className="flex flex-col items-start rounded-md bg-white/5 shadow-md backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:scale-up hover:bg-white/10 hover:shadow-md">
-                    <div className="relative w-full h-64"> {/* Fixed height for the image container */}
-                      <Link href={project.href} target="_blank" passHref>
+                  <Link href={project.href} target="_blank" passHref>
+                    <div
+                      key={project.title}
+                      className="flex flex-col items-start rounded-md bg-white/5 shadow-md backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:bg-white/10 hover:shadow-md"
+                    >
+                      <div className="relative w-full h-64 overflow-hidden rounded-t-md">
+                        {/* The container has overflow hidden */}
                         <Image
                           src={project.image}
                           alt={project.title}
                           layout="fill" // This makes the image fill the container
                           quality={100}
-                          className="object-cover rounded-t-md bg-primary" // Use object-cover to fill and maintain aspect ratio
+                          className="object-cover transition-transform duration-300 hover:scale-110"
+                        /* Scaling on hover */
                         />
-                      </Link>
-                    </div>
-                    <div className="p-4">
-                      <div className="flex items-center">
-                        <h3 className="text-lg font-semibold mb-2">{project.title}</h3>
                       </div>
-                      <p className="text-base text-gray-400">{project.description}</p>
-                      <div className="flex flex-wrap gap-2 mt-8">
-                        {project.stack.map((tech, index) => (
-                          <span key={index} className="bg-[#0A0A13] border border-[#141521] text-sm text-gray-200 py-1 px-6 rounded-full">
-                            {tech}
-                          </span>
-                        ))}
+                      <div className="p-4">
+                        <div className="flex items-center">
+                          <h3 className="text-lg font-semibold mb-2">{project.title}</h3>
+                        </div>
+                        <p className="text-base text-gray-400">{project.description}</p>
+                        <div className="flex flex-wrap gap-2 mt-8">
+                          {project.stack.map((tech, index) => (
+                            <span
+                              key={index}
+                              className="bg-[#0A0A13] border border-[#141521] text-sm text-gray-200 py-1 px-6 rounded-full"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
+
 
               <div>
                 <div className="mt-64">
