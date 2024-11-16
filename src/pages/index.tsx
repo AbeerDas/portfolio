@@ -21,13 +21,12 @@ import {
 import { TriangleDownIcon } from "@radix-ui/react-icons";
 import Spline from "@splinetool/react-spline";
 import Link from "next/link";
-import { cn, scrollTo } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 import uwmapsImage from '@/images/uwmaps.png';
 import rooted from '@/images/rooted.png';
 import bchm from '@/images/bchm.png';
-import openLink from '@/images/openLink.svg';
 
 
 import { motion } from "framer-motion";
@@ -601,7 +600,7 @@ export default function Home() {
 
               <div className="mt-14 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2">
                 {projects.map((project) => (
-                  <Link key="" href={project.href} target="_blank" passHref>
+                  <Link  key={project.title} href={project.href} target="_blank" passHref>
                     <div
                       key={project.title}
                       className="flex flex-col items-start rounded-md bg-white/5 shadow-md backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:bg-white/10 hover:shadow-md"
