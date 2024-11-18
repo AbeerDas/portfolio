@@ -516,3 +516,23 @@
     transform: rotate(0);
   }
 }
+
+
+@media screen and (max-width: 639px) {
+  /* Mobile Styles - hiding the timeline elements */
+  .timeline__dot,
+  .timeline__item:not(:last-child):before,
+  .timeline__arrow {
+    display: none !important; /* Hide these elements on mobile */
+  }
+
+  /* Ensure the timeline content still shows */
+  .timeline__item-body-content {
+    margin-left: 0 !important;
+    padding: 1em !important;
+  }
+
+  .timeline__item-body {
+    margin-inline-start: 0 !important;
+  }
+}
