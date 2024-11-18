@@ -10,7 +10,7 @@
 
 /* burger menu */
 .burger-button {
-  @apply inline-flex transform items-center justify-center rounded-md p-2 transition-all duration-300 focus:outline-none;
+  @apply inline-flex transform items-center justify-center rounded-md p-2 transition-all duration-300 focus:outline-none absolute right-4;
 }
 .burger {
   @apply relative h-40 w-40 border-0 bg-transparent transition-opacity duration-300;

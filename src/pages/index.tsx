@@ -430,7 +430,7 @@ export default function Home() {
                 data-scroll-speed=".06"
                 className="mt-1 max-w-lg tracking-tight text-muted-foreground 2xl:text-xl"
               >
-                Full-stack developer and UX Designer with a love for end-to-end product development.
+                Full-stack developer and aspiring PM with a love for end-to-end product development.
               </p>
             </div>
             <span
