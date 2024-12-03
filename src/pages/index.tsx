@@ -590,7 +590,7 @@ export default function Home() {
               </div>
             </div>
             <div data-scroll data-scroll-speed=".4" className="mt-[-10.0rem]">
-              <h2 className="mt-[-80px] text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
+              <h2 className="mt-[90px] text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
                 Software Projects
               </h2>
               <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
