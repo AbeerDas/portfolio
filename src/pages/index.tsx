@@ -79,8 +79,48 @@ const projects = [
 const workExperiences = [
   {
     id: 1,
+    date: "Apr 2025 - Aug 2025",
+    title: "Software Developer",
+    company: "BorderPass AI",
+    image: "/assets/borderpass.png",
+    description: (
+      <ul className="list-disc pl-5">
+        <li>
+          Streamlined immigration document processing for <span className="font-bold text-lightblue">100k+ users</span>, automating legal form completion and reducing manual lawyer work by <span className="font-bold text-lightblue">67%</span> to improve service efficiency and user experience.
+        </li>
+        <li>
+          Built data analytics infrastructure to track business performance, creating dashboards that identified revenue opportunities and directly contributed to securing <span className="font-bold text-lightblue">5 new business partnerships</span>.
+        </li>
+        <li>
+          Redesigned user application flows to simplify the immigration process, cutting submission time from hours to just <span className="font-bold text-lightblue">20 minutes</span> and significantly improving user satisfaction scores.
+        </li>
+        <li>
+          Implemented comprehensive tracking systems for marketing campaigns, enabling data-driven decision making that boosted <span className="font-bold text-lightblue">lead generation</span> and provided clear insights into campaign performance and ROI.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    id: 2,
+    date: "Aug 2024 - Dec 2024",
+    title: "Software Developer",
+    company: "Industry 4.0",
+    image: "/assets/industry.png",
+    description: (
+      <ul className="list-disc pl-5">
+        <li>
+          Led website development project with <span className="font-bold text-lightblue">20+ executive members</span>, coordinating cross-functional teams to deliver a platform that generated <span className="font-bold text-lightblue">350+ case competition signups</span> and increased student engagement.
+        </li>
+        <li>
+          Managed project delivery using agile methodologies and project management tools, ensuring on-time delivery while maintaining high product quality and fostering effective team collaboration.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    id: 3,
     date: "Aug. - Present (Fall 2024 Internship)",
-    title: "Software Developer Intern",
+    title: "Software Developer",
     company: "University of Toronto - Enterprise Applications",
     image: "/assets/uoft.png",
     description: (
@@ -107,7 +147,7 @@ const workExperiences = [
     ),
   },
   {
-    id: 2,
+    id: 4,
     date: "Mar - Present",
     title: "Project Developer & Designer",
     company: "UW Blueprint",
@@ -115,9 +155,7 @@ const workExperiences = [
     description: (
       <ul className="list-disc pl-5">
         <li>
-          Contributed to a cross-functional team
-          of <span className="font-bold text-lightblue">4 designers</span> and <span className="font-bold text-lightblue">8 developers</span> in the creation of a comprehensive financial literacy platform designed
-          on <span className="font-bold text-lightblue">Figma</span>, tailored specifically for children with developmental disabilities. This collaboration with the nonprofit Extend-a-Family ensured that the platform addressed the unique needs of its young users.
+          Led a cross-functional team of <span className="font-bold text-lightblue">4 designers</span> and <span className="font-bold text-lightblue">8 developers</span> to create a comprehensive financial literacy platform designed specifically for children with developmental disabilities, collaborating with the nonprofit Extend-a-Family to address unique user needs.
         </li>
         <li>
           Implemented a full-stack solution
@@ -133,34 +171,30 @@ const workExperiences = [
     ),
   },
   {
-    id: 3,
+    id: 5,
     date: "Jan - Apr (Winter 2024 Internship)",
-    title: "UX Researcher Intern",
+    title: "UX Researcher",
     company: "Questrade",
     image: "/assets/questrade.png",
     description: (
       <ul className="list-disc pl-5">
         <li>
-          Led <span className="font-bold text-lightblue">6 research initiatives</span>, collaborating cross-departmentally to optimize digital infrastructure for
-          their <span className="font-bold text-lightblue">active trading platform</span>
-          , <span className="font-bold text-lightblue">auto insurance</span>
-          , and <span className="font-bold text-lightblue">mortgage services</span>.
+          Led <span className="font-bold text-lightblue">6 research initiatives</span> across multiple product lines including trading platforms, insurance, and mortgage services to identify user experience improvements and business opportunities.
         </li>
         <li>
-          Employed methodologies including <span className="font-bold text-lightblue">
-            A/B testing</span>, <span className="font-bold text-lightblue">usability studies</span>, <span className="font-bold text-lightblue">open/closed card sorting</span>, <span className="font-bold text-lightblue">moderated interviews</span>, and <span className="font-bold text-lightblue">expert reviews</span> utilizing tools such as <span className="font-bold text-lightblue">Optimal Workshop</span> and <span className="font-bold text-lightblue">UserTesting</span>.
+          Conducted comprehensive user research using industry-standard methodologies to gather insights that directly informed product design decisions and feature prioritization.
         </li>
         <li>
-          Presented findings and reports to diverse stakeholders, including board members, C-level executives, UX designers, product managers, software engineers, and others, employing synthesis methodologies such as <span className="font-bold text-lightblue">affinity mapping</span>.
+          Presented strategic recommendations to <span className="font-bold text-lightblue">50+ stakeholders</span> including C-level executives and board members, influencing product roadmap decisions and driving user-centered design improvements.
         </li>
         <li>
-          Designed <span className="font-bold text-lightblue">Figma</span> prototypes and components, integrating personal recommendations to influence product development.
+          Created interactive prototypes and design systems that translated research findings into actionable product improvements, directly impacting user experience and business outcomes.
         </li>
       </ul>
     ),
   },
   {
-    id: 4,
+    id: 6,
     date: "Mar 2023 - Apr 2024",
     title: "Web Developer",
     company: "Bangladesh Canada Cultural Society",
@@ -168,13 +202,13 @@ const workExperiences = [
     description: (
       <ul className="list-disc pl-5">
         <li>
-          Redesigned and developed <span className="font-bold text-lightblue">29</span> new webpages by creating <span className="font-bold text-lightblue">wireframes</span> and <span className="font-bold text-lightblue">prototypes</span> on <span className="font-bold text-lightblue">Figma</span>, while also incorporating and reiterating based on stakeholder feedback from senior committee board meetings.
+          Led complete website redesign project by creating <span className="font-bold text-lightblue">29</span> new webpages, developing wireframes and prototypes based on stakeholder feedback from senior committee board meetings to ensure alignment with organizational goals.
         </li>
         <li>
-          Implemented website redesign using <span className="font-bold text-lightblue">HTML</span>, <span className="font-bold text-lightblue">CSS</span>, and <span className="font-bold text-lightblue">React</span>, ensuring seamless user experience and modern design aesthetics resulting in a <span className="font-bold text-lightblue">35% increase</span> in donations.
+          Redesigned the organization's digital presence, resulting in a <span className="font-bold text-lightblue">35% increase</span> in donations and significantly improved user engagement through modern design and improved user experience.
         </li>
         <li>
-          Integrated email subscription feature, capturing user data stored in <span className="font-bold text-lightblue">SQL</span> database for targeted communications resulting in <span className="font-bold text-lightblue">2500+</span> new email subscribers within the first month of launch.
+          Built and launched an email marketing system that captured <span className="font-bold text-lightblue">2,500+</span> new subscribers in the first month, enabling targeted communications and improved community engagement.
         </li>
       </ul>
     ),
@@ -773,7 +807,7 @@ export default function Home() {
                       <br /><br />
                       <div className="flex items-center">
                         {/* Logo image on the left */}
-                        <img src={experience.image} alt={`${experience.company} logo`} className="w-16 h-16 mr-4" />
+                        <img src={experience.image} alt={`${experience.company} logo`} className="w-16 h-16 mr-4 rounded-lg" />
                         {/* Title and company name container */}
                         <div>
                           <h3 className="mt-1 text-gradient clash-grotesk font-medium tracking-tighter timeline__title">
