@@ -942,7 +942,7 @@ export default function Home() {
               <span className="text-gradient clash-grotesk">see?</span>
             </h2>
             <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
-              I&apos;m currently seeking for Summer 2025 internships as well as freelance opportunities.
+              I&apos;m currently seeking for Fall 2025 internships as well as freelance opportunities.
             </p>
             <Link href="mailto:ak5das@uwaterloo.ca" passHref>
               <Button className="mt-6">Get in touch</Button>
