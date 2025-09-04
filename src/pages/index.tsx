@@ -16,7 +16,8 @@ import {
   PackageSearch,
   MonitorSmartphone,
   Github,
-  Linkedin
+  Linkedin,
+  FileText
 } from "lucide-react";
 import { TriangleDownIcon } from "@radix-ui/react-icons";
 import Spline from "@splinetool/react-spline";
@@ -205,7 +206,7 @@ const workExperiences = [
           Led complete website redesign project by creating <span className="font-bold text-lightblue">29</span> new webpages, developing wireframes and prototypes based on stakeholder feedback from senior committee board meetings to ensure alignment with organizational goals.
         </li>
         <li>
-          Redesigned the organization's digital presence, resulting in a <span className="font-bold text-lightblue">35% increase</span> in donations and significantly improved user engagement through modern design and improved user experience.
+          Redesigned the organization&apos;s digital presence, resulting in a <span className="font-bold text-lightblue">35% increase</span> in donations and significantly improved user engagement through modern design and improved user experience.
         </li>
         <li>
           Built and launched an email marketing system that captured <span className="font-bold text-lightblue">2,500+</span> new subscribers in the first month, enabling targeted communications and improved community engagement.
@@ -504,6 +505,13 @@ export default function Home() {
                 >
                   <Linkedin className="h-6 w-6 md:mr-2 mx-2" />
                 </a>
+                <a
+                  href="https://drive.google.com/file/d/1vkwVVkTH6PU3QJb5WRQPs294CvlNLgYt/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block transition-transform duration-300 transform hover:scale-150"
+                >
+                  <FileText className="h-6 w-6 md:mr-2 mx-2" />                </a>
               </div>
             </span>
             <div

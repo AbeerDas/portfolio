@@ -29,7 +29,7 @@ const words = [
   "Bonjour",
   "Ciao",
   "Γειά σου",
-  "やあ",
+  "নমস্কার"
 ];
 
 export default function Preloader() {

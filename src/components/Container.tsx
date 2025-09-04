@@ -44,7 +44,7 @@ const navLinks = [
   { href: "#experience", text: "experience" },
   { href: "#certifications", text: "certifications" },
   { 
-    href: "https://drive.google.com/file/d/1wkuFX9N_IaWureIEhaTQF1Im3SoH8lvI/view?usp=sharing", 
+    href: "https://drive.google.com/file/d/1vkwVVkTH6PU3QJb5WRQPs294CvlNLgYt/view?usp=sharing", 
     text: "{ resume }", 
     target: "_blank", 
     rel: "noopener noreferrer" 
