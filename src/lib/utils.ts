@@ -42,7 +42,7 @@ export async function updateResumeUrl(newUrl: string, password: string) {
       CONFIG.resume.url = newUrl;
       return { success: true };
     } else {
-      const error = await response.json();
+      const error = await response.json() as { message: string };
       return { success: false, error: error.message };
     }
   } catch (error) {
@@ -55,7 +55,7 @@ export async function loadResumeUrl() {
   try {
     const response = await fetch('/api/get-config');
     if (response.ok) {
-      const config = await response.json();
+      const config = await response.json() as { resumeUrl: string };
       CONFIG.resume.url = config.resumeUrl;
     }
   } catch (error) {

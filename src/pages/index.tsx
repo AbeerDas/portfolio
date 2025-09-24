@@ -2,7 +2,7 @@ import Container from "@/components/Container";
 import { useEffect, useRef, Suspense, useState } from "react";
 import styles from "@/styles/Home.module.css";
 import { Button } from "@/components/ui/button";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+// import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 import Modal from '../components/modal';
@@ -263,7 +263,7 @@ const services = [
 export default function Home() {
   const refScrollContainer = useRef(null);
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
-  const [expandAll, setExpandAll] = useState(false);
+  // const [expandAll, setExpandAll] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
   const [pillClickCount, setPillClickCount] = useState(0);
@@ -315,9 +315,9 @@ export default function Home() {
   };
 
 
-  // Load resume URL from localStorage on mount
+  // Load resume URL from server on mount
   useEffect(() => {
-    loadResumeUrl();
+    void loadResumeUrl();
   }, []);
 
   // handle scroll
@@ -362,93 +362,91 @@ export default function Home() {
     };
   }, []);
 
-  const handleToggleExpand = () => {
-    setExpandAll((prevExpandAll) => !prevExpandAll);
-  }
+  // const handleToggleExpand = () => {
+  //   setExpandAll((prevExpandAll) => !prevExpandAll);
+  // }
 
-  useEffect(() => {
-    const CollapsibleTimeline = class {
-      el: Element | null;
-      animation: Animation | undefined;
+  // useEffect(() => {
+  //   const CollapsibleTimeline = class {
+  //     el: Element | null;
+  //     animation: Animation | undefined;
 
+  //     constructor(el: string) {
+  //       this.el = document.querySelector(el)!;
+  //       this.init();
+  //     }
+  //     init() {
+  //       this.el?.addEventListener("click", this.itemAction.bind(this) as EventListener);
+  //     }
+  //     animateItemAction(button: Element | null | undefined, ctrld: Element | null | undefined, contentHeight: number, shouldCollapse: boolean) {
 
-      constructor(el: string) {
-        this.el = document.querySelector(el)!;
-        this.init();
-      }
-      init() {
-        this.el?.addEventListener("click", this.itemAction.bind(this) as EventListener);
-      }
-      animateItemAction(button: Element | null | undefined, ctrld: Element | null | undefined, contentHeight: number, shouldCollapse: boolean) {
+  //       if (!button || !ctrld) return;
 
-        if (!button || !ctrld) return;
+  //       const expandedClass = "timeline__item-body--expanded";
+  //       const animOptions = {
+  //         duration: 300,
+  //         easing: "cubic-bezier(0.65,0,0.35,1)"
+  //       };
 
-        const expandedClass = "timeline__item-body--expanded";
-        const animOptions = {
-          duration: 300,
-          easing: "cubic-bezier(0.65,0,0.35,1)"
-        };
+  //       if (shouldCollapse) {
+  //         button.ariaExpanded = "false";
+  //         ctrld.ariaHidden = "true";
+  //         ctrld.classList.remove(expandedClass);
+  //         animOptions.duration *= 2;
+  //         this.animation = ctrld.animate([
+  //           { height: `${contentHeight}px` },
+  //           { height: `${contentHeight}px` },
+  //           { height: "0px" }
+  //         ], animOptions);
+  //       } else {
+  //         button.ariaExpanded = "true";
+  //         ctrld.ariaHidden = "false";
+  //         ctrld.classList.add(expandedClass);
+  //         this.animation = ctrld.animate([
+  //           { height: "0px" },
+  //           { height: `${contentHeight}px` }
+  //         ], animOptions);
+  //       }
+  //     }
+  //     itemAction(e: MouseEvent) {
+  //       const { target } = e;
+  //       const action = (target as HTMLElement)?.getAttribute("data-action");
+  //       const item = (target as HTMLElement)?.getAttribute("data-item");
 
-        if (shouldCollapse) {
-          button.ariaExpanded = "false";
-          ctrld.ariaHidden = "true";
-          ctrld.classList.remove(expandedClass);
-          animOptions.duration *= 2;
-          this.animation = ctrld.animate([
-            { height: `${contentHeight}px` },
-            { height: `${contentHeight}px` },
-            { height: "0px" }
-          ], animOptions);
-        } else {
-          button.ariaExpanded = "true";
-          ctrld.ariaHidden = "false";
-          ctrld.classList.add(expandedClass);
-          this.animation = ctrld.animate([
-            { height: "0px" },
-            { height: `${contentHeight}px` }
-          ], animOptions);
-        }
-      }
-      itemAction(e: MouseEvent) {
-        const { target } = e;
-        const action = (target as HTMLElement)?.getAttribute("data-action");
-        const item = (target as HTMLElement)?.getAttribute("data-item");
+  //       if (action) {
+  //         const targetExpanded = action === "expand" ? "false" : "true";
+  //         const buttons = Array.from(this.el?.querySelectorAll(`[aria-expanded="${targetExpanded}"]`) ?? []);
+  //         const wasExpanded = action === "collapse";
 
-        if (action) {
-          const targetExpanded = action === "expand" ? "false" : "true";
-          const buttons = Array.from(this.el?.querySelectorAll(`[aria-expanded="${targetExpanded}"]`) ?? []);
-          const wasExpanded = action === "collapse";
+  //         for (const button of buttons) {
+  //           const buttonID = button.getAttribute("data-item");
+  //           const ctrld = this.el?.querySelector(`#item${buttonID}-ctrld`);
+  //           const contentHeight = ctrld?.firstElementChild?.clientHeight ?? 0;
 
-          for (const button of buttons) {
-            const buttonID = button.getAttribute("data-item");
-            const ctrld = this.el?.querySelector(`#item${buttonID}-ctrld`);
-            const contentHeight = ctrld?.firstElementChild?.clientHeight ?? 0;
+  //           this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
+  //         }
 
-            this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
-          }
+  //       } else if (item) {
+  //         const button = this.el?.querySelector(`[data-item="${item}"]`);
+  //         const expanded = button?.getAttribute("aria-expanded");
 
-        } else if (item) {
-          const button = this.el?.querySelector(`[data-item="${item}"]`);
-          const expanded = button?.getAttribute("aria-expanded");
+  //         if (!expanded) return;
 
-          if (!expanded) return;
+  //         const wasExpanded = expanded === "true";
+  //         const ctrld = this.el?.querySelector(`#item${item}-ctrld`);
+  //         const contentHeight = ctrld?.firstElementChild?.clientHeight ?? 0;
 
-          const wasExpanded = expanded === "true";
-          const ctrld = this.el?.querySelector(`#item${item}-ctrld`);
-          const contentHeight = ctrld?.firstElementChild?.clientHeight ?? 0;
+  //         this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
+  //       }
+  //     }
+  //   };
 
-          this.animateItemAction(button, ctrld, contentHeight, wasExpanded);
-        }
-      }
-    };
+  //   const ctl = new CollapsibleTimeline("#timeline");
 
-
-    const ctl = new CollapsibleTimeline("#timeline");
-
-    return () => {
-      // Cleanup code if needed
-    };
-  }, []);
+  //   return () => {
+  //     // Cleanup code if needed
+  //   };
+  // }, []);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -617,7 +615,7 @@ export default function Home() {
                   style={{ zIndex: 9999 }}
                 >
                   <h1 className="text-3xl">Questrade Family ❤️</h1>
-                  <img src="/assets/questradefam.jpg" alt="Overlay Image" />
+                  <Image src="/assets/questradefam.jpg" alt="Overlay Image" width={300} height={200} />
                 </div>
               )}
 
@@ -856,7 +854,7 @@ export default function Home() {
                       <br /><br />
                       <div className="flex items-center">
                         {/* Logo image on the left */}
-                        <img src={experience.image} alt={`${experience.company} logo`} className="w-16 h-16 mr-4 rounded-lg" />
+                        <Image src={experience.image} alt={`${experience.company} logo`} className="w-16 h-16 mr-4 rounded-lg" width={64} height={64} />
                         {/* Title and company name container */}
                         <div>
                           <h3 className="mt-1 text-gradient clash-grotesk font-medium tracking-tighter timeline__title">

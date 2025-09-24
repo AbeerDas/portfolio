@@ -12,7 +12,7 @@ const AdminModal: React.FC<AdminModalProps> = ({ onClose, onUpdateResume }) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   // Secret password - you can change this
-  const ADMIN_PASSWORD = "abeer2024";
+  // const ADMIN_PASSWORD = "abeer2024";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,7 +41,7 @@ const AdminModal: React.FC<AdminModalProps> = ({ onClose, onUpdateResume }) => {
         setStatus('success');
       } else {
         setStatus('error');
-        setErrorMessage(result.error || "Failed to update resume URL");
+        setErrorMessage(result.error ?? "Failed to update resume URL");
       }
     } catch (error) {
       setStatus('error');

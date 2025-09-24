@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import fs from 'fs';
 import path from 'path';
 
@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const configPath = path.join(process.cwd(), 'public', 'config.json');
     const configData = fs.readFileSync(configPath, 'utf8');
-    const config = JSON.parse(configData);
+    const config = JSON.parse(configData) as { resumeUrl: string };
     
     return res.status(200).json(config);
   } catch (error) {
