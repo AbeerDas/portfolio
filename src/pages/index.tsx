@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 import Modal from '../components/modal';
+import AdminModal from '../components/AdminModal';
 
 
 import {
@@ -22,7 +23,7 @@ import {
 import { TriangleDownIcon } from "@radix-ui/react-icons";
 import Spline from "@splinetool/react-spline";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, CONFIG, updateResumeUrl, loadResumeUrl } from "@/lib/utils";
 import Image from "next/image";
 
 import uwmapsImage from '@/images/uwmaps.png';
@@ -264,6 +265,9 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [expandAll, setExpandAll] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
+  const [pillClickCount, setPillClickCount] = useState(0);
+  const [lastPillClickTime, setLastPillClickTime] = useState(0);
 
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
@@ -279,6 +283,42 @@ export default function Home() {
     setIsOverlayVisible(false);
   };
 
+  // Function to handle pill clicks for admin access
+  const handlePillClick = () => {
+    const now = Date.now();
+    const timeDiff = now - lastPillClickTime;
+    
+    // Reset count if more than 3 seconds have passed
+    if (timeDiff > 3000) {
+      setPillClickCount(1);
+    } else {
+      setPillClickCount(prev => prev + 1);
+    }
+    
+    setLastPillClickTime(now);
+    
+    // Open admin modal after 3 clicks within 3 seconds
+    if (pillClickCount >= 2) { // 0-indexed, so 2 means 3rd click
+      setIsAdminModalOpen(true);
+      setPillClickCount(0);
+    }
+  };
+
+  // Function to handle resume URL update
+  const handleResumeUpdate = async (newUrl: string, password: string) => {
+    const result = await updateResumeUrl(newUrl, password);
+    if (result.success) {
+      // Force a re-render by updating a dummy state
+      setPillClickCount(prev => prev + 1);
+    }
+    return result;
+  };
+
+
+  // Load resume URL from localStorage on mount
+  useEffect(() => {
+    loadResumeUrl();
+  }, []);
 
   // handle scroll
   useEffect(() => {
@@ -433,6 +473,7 @@ export default function Home() {
           className="mt-40 flex w-full flex-col items-center xl:mt-0 xl:min-h-screen xl:flex-row xl:justify-between"
         >
           {isModalOpen && <Modal onClose={closeModal} />}
+          {isAdminModalOpen && <AdminModal onClose={() => setIsAdminModalOpen(false)} onUpdateResume={handleResumeUpdate} />}
           <div className={styles.intro}>
             <div
               data-scroll
@@ -440,9 +481,9 @@ export default function Home() {
               data-scroll-speed=".09"
               className="flex flex-row items-center space-x-1.5"
             >
-              <span className={styles.pill}>Software Engineering</span>
-              <span className={styles.pill}>UX Design</span>
-              <span className={styles.pill}>ML/AI</span>
+              <span className={styles.pill} onClick={handlePillClick} style={{ cursor: 'pointer' }}>Software Engineering</span>
+              <span className={styles.pill} onClick={handlePillClick} style={{ cursor: 'pointer' }}>UX Design</span>
+              <span className={styles.pill} onClick={handlePillClick} style={{ cursor: 'pointer' }}>ML/AI</span>
             </div>
             <div>
               <h1
@@ -506,7 +547,7 @@ export default function Home() {
                   <Linkedin className="h-6 w-6 md:mr-2 mx-2" />
                 </a>
                 <a
-                  href="https://drive.google.com/file/d/1vkwVVkTH6PU3QJb5WRQPs294CvlNLgYt/view?usp=sharing"
+                  href={CONFIG.resume.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block transition-transform duration-300 transform hover:scale-150"

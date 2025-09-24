@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { cn, scrollTo } from "@/lib/utils";
+import { cn, scrollTo, CONFIG } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
 import { useRouter } from "next/router";
@@ -44,7 +44,7 @@ const navLinks = [
   { href: "#experience", text: "experience" },
   { href: "#certifications", text: "certifications" },
   { 
-    href: "https://drive.google.com/file/d/1vkwVVkTH6PU3QJb5WRQPs294CvlNLgYt/view?usp=sharing", 
+    href: CONFIG.resume.url, 
     text: "{ resume }", 
     target: "_blank", 
     rel: "noopener noreferrer" 
