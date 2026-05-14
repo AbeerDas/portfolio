@@ -11,14 +11,8 @@ import AdminModal from '../components/AdminModal';
 
 import {
   ChevronRight,
-  Rabbit,
-  Bot,
-  Database,
-  PackageSearch,
-  MonitorSmartphone,
   Github,
   Linkedin,
-  FileText
 } from "lucide-react";
 import { TriangleDownIcon } from "@radix-ui/react-icons";
 import Spline from "@splinetool/react-spline";
@@ -32,7 +26,6 @@ import bchm from '@/images/bchm.png';
 import spellbookLongLogo from '@/images/spellbook/SpellbookLongLogo.svg';
 
 
-import { motion } from "framer-motion";
 
 const projects = [
   {
@@ -82,122 +75,120 @@ const projects = [
 const workExperiences = [
   {
     id: 1,
-    date: "Apr 2025 - Aug 2025",
-    title: "Software Developer",
-    company: "BorderPass AI",
-    image: "/assets/borderpass.png",
+    date: "Jan 2026 - May 2026",
+    title: "Software Engineer Intern",
+    company: "Spellbook (Khosla Ventures)",
+    image: "/assets/spellbook.svg",
     description: (
       <ul className="list-disc pl-5">
         <li>
-          Streamlined immigration document processing for <span className="font-bold text-lightblue">100k+ users</span>, automating legal form completion and reducing manual lawyer work by <span className="font-bold text-lightblue">67%</span> to improve service efficiency and user experience.
+          Solo-shipped a <span className="font-bold text-lightblue">legal workflow agent builder</span> using Vercel AI SDK, leading to closure of a <span className="font-bold text-lightblue">$100k+ enterprise contract</span>.
         </li>
         <li>
-          Built data analytics infrastructure to track business performance, creating dashboards that identified revenue opportunities and directly contributed to securing <span className="font-bold text-lightblue">5 new business partnerships</span>.
+          Slashed AI agent failures by <span className="font-bold text-lightblue">~50%</span> by replacing unpredictable tool calls with configurable, structured execution steps.
         </li>
         <li>
-          Redesigned user application flows to simplify the immigration process, cutting submission time from hours to just <span className="font-bold text-lightblue">20 minutes</span> and significantly improving user satisfaction scores.
+          Conceived Personalization Settings and shipped <span className="font-bold text-lightblue">Company Profiles</span>, anchoring startup&apos;s push into in-house legal teams.
         </li>
         <li>
-          Implemented comprehensive tracking systems for marketing campaigns, enabling data-driven decision making that boosted <span className="font-bold text-lightblue">lead generation</span> and provided clear insights into campaign performance and ROI.
+          Instrumented <span className="font-bold text-lightblue">35 Datadog</span> UX/error analytic events across all features, catching <span className="font-bold text-lightblue">3 critical drop-offs</span> before reaching users.
         </li>
       </ul>
     ),
   },
   {
     id: 2,
-    date: "Aug 2024 - Dec 2024",
+    date: "Sept 2025 - Dec 2025",
     title: "Software Developer",
     company: "Industry 4.0",
     image: "/assets/industry.png",
     description: (
       <ul className="list-disc pl-5">
         <li>
-          Led website development project with <span className="font-bold text-lightblue">20+ executive members</span>, coordinating cross-functional teams to deliver a platform that generated <span className="font-bold text-lightblue">350+ case competition signups</span> and increased student engagement.
+          Drove <span className="font-bold text-lightblue">350+ case competition signups</span> by leading a website rebuild with a team of <span className="font-bold text-lightblue">20+ executives</span>, owning the project from design through release.
         </li>
         <li>
-          Managed project delivery using agile methodologies and project management tools, ensuring on-time delivery while maintaining high product quality and fostering effective team collaboration.
+          Ran agile delivery end-to-end, coordinating scope and timeline across cross-functional teams while keeping a high product quality bar.
         </li>
       </ul>
     ),
   },
   {
     id: 3,
-    date: "Aug. - Present (Fall 2024 Internship)",
-    title: "Software Developer",
-    company: "University of Toronto - Enterprise Applications",
-    image: "/assets/uoft.png",
+    date: "Apr 2025 - Aug 2025",
+    title: "Software Engineer Intern",
+    company: "BorderPass",
+    image: "/assets/borderpass.png",
     description: (
       <ul className="list-disc pl-5">
         <li>
-          Engineered and launched over 15 microservices for the University’s Student Information System (SIS)
-          using <span className="font-bold text-lightblue">NodeJS</span>
-          , <span className="font-bold text-lightblue">TypeScript</span>,
-          and  <span className="font-bold text-lightblue">OData</span>, querying
-          an <span className="font-bold text-lightblue">Azure SQL</span> server to enable
-          scalable <span className="font-bold text-lightblue">RESTful APIs</span> that now support over 60,000 students and B2B clients.
+          Propelled a <span className="font-bold text-lightblue">35% increase in paying customers</span> by redesigning the Visitor Visa flow in React/TypeScript, eliminating manual entry by parsing uploaded documents to validate against the latest scraped IRCC requirements.
         </li>
         <li>
-          Optimized microservice deployment
-          with <span className="font-bold text-lightblue">Azure Container Apps</span> and <span className="font-bold text-lightblue">Docker</span>, effectively cutting deployment time in half while
-          integrating <span className="font-bold text-lightblue">OIDC/OAuth 2.0</span> to enhance security measures.
+          Automated document generation, scaling to <span className="font-bold text-lightblue">105k+ PDFs</span> processed via a serverless AWS Lambda pipeline with S3 triggers.
         </li>
         <li>
-          Designed AODA-compliant front-end interfaces
-          using <span className="font-bold text-lightblue">Angular</span>, significantly improving user accessibility and streamlining navigation for a better user experience.
+          Drove <span className="font-bold text-lightblue">12+ university partnerships</span> by building an AWS Redshift data warehouse with a real-time finances pipeline.
+        </li>
+        <li>
+          Owned weekly zero-downtime prod releases, managing the full CI/CD pipeline across AWS backend services and Vercel.
         </li>
       </ul>
-
     ),
   },
   {
     id: 4,
-    date: "Mar - Present",
-    title: "Project Developer & Designer",
+    date: "Mar 2024 - Present",
+    title: "Software Engineering Lead",
     company: "UW Blueprint",
     image: "/assets/blueprint.png",
     description: (
       <ul className="list-disc pl-5">
         <li>
-          Led a cross-functional team of <span className="font-bold text-lightblue">4 designers</span> and <span className="font-bold text-lightblue">8 developers</span> to create a comprehensive financial literacy platform designed specifically for children with developmental disabilities, collaborating with the nonprofit Extend-a-Family to address unique user needs.
+          Led a cross-functional team of <span className="font-bold text-lightblue">12</span> to build a full-stack financial literacy platform for disabled children for a nonprofit (Extend-a-Family).
         </li>
         <li>
-          Implemented a full-stack solution
-          with <span className="font-bold text-lightblue">React</span>
-          , <span className="font-bold text-lightblue">NodeJS (Express)</span>,
-          and <span className="font-bold text-lightblue">Firebase</span>, creating
-          scalable <span className="font-bold text-lightblue">RESTful APIs</span> communicating with
-          the <span className="font-bold text-lightblue">MongoDB</span> database, increasing the system’s capacity to
-          handle <span className="font-bold text-lightblue">1,000+</span> requests per second.
+          Engineered a React/TypeScript PDF viewer and bookmarking dashboard using component memoization and lazy loading.
+        </li>
+        <li>
+          Architected a JWT auth system using Express, MongoDB, and Firebase, implementing role-based access and token refresh.
         </li>
       </ul>
-
     ),
   },
   {
     id: 5,
-    date: "Jan - Apr (Winter 2024 Internship)",
-    title: "UX Researcher",
-    company: "Questrade",
-    image: "/assets/questrade.png",
+    date: "Sept 2024 - Dec 2024",
+    title: "Software Engineer Intern",
+    company: "University of Toronto",
+    image: "/assets/uoft.png",
     description: (
       <ul className="list-disc pl-5">
         <li>
-          Led <span className="font-bold text-lightblue">6 research initiatives</span> across multiple product lines including trading platforms, insurance, and mortgage services to identify user experience improvements and business opportunities.
+          Migrated a monolithic student records API into <span className="font-bold text-lightblue">Node.js microservices</span>, improving modularity using the sidecar pattern.
         </li>
         <li>
-          Conducted comprehensive user research using industry-standard methodologies to gather insights that directly informed product design decisions and feature prioritization.
-        </li>
-        <li>
-          Presented strategic recommendations to <span className="font-bold text-lightblue">50+ stakeholders</span> including C-level executives and board members, influencing product roadmap decisions and driving user-centered design improvements.
-        </li>
-        <li>
-          Created interactive prototypes and design systems that translated research findings into actionable product improvements, directly impacting user experience and business outcomes.
+          Delivered data access for <span className="font-bold text-lightblue">60,000+ students</span> by integrating OIDC and OAuth 2.0 for authorization over financial records.
         </li>
       </ul>
     ),
   },
   {
     id: 6,
+    date: "Jan 2024 - Apr 2024",
+    title: "UX Research Intern",
+    company: "Questrade",
+    image: "/assets/questrade.png",
+    description: (
+      <ul className="list-disc pl-5">
+        <li>
+          Conducted <span className="font-bold text-lightblue">6 UX research studies</span> across Questrade&apos;s investment platform, uncovering insights that boosted customer satisfaction by up to <span className="font-bold text-lightblue">40%</span>.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    id: 7,
     date: "Mar 2023 - Apr 2024",
     title: "Web Developer",
     company: "Bangladesh Canada Cultural Society",
@@ -205,59 +196,16 @@ const workExperiences = [
     description: (
       <ul className="list-disc pl-5">
         <li>
-          Led complete website redesign project by creating <span className="font-bold text-lightblue">29</span> new webpages, developing wireframes and prototypes based on stakeholder feedback from senior committee board meetings to ensure alignment with organizational goals.
+          Led a complete website redesign covering <span className="font-bold text-lightblue">29 new pages</span>, taking the org from an outdated brochure site to a modern donor-facing presence.
         </li>
         <li>
-          Redesigned the organization&apos;s digital presence, resulting in a <span className="font-bold text-lightblue">35% increase</span> in donations and significantly improved user engagement through modern design and improved user experience.
+          Drove a <span className="font-bold text-lightblue">35% increase in donations</span> through the redesign by improving navigation, accessibility, and trust signals across the site.
         </li>
         <li>
-          Built and launched an email marketing system that captured <span className="font-bold text-lightblue">2,500+</span> new subscribers in the first month, enabling targeted communications and improved community engagement.
+          Shipped an email marketing system that captured <span className="font-bold text-lightblue">2,500+ subscribers</span> in the first month, enabling targeted community communications.
         </li>
       </ul>
     ),
-  },
-];
-
-const services = [
-  {
-    service: "Databases for Back-End Development",
-    description:
-      "Covered database schema design principles, including SQL usage, ERDs, key concepts like primary & foreign keys, and database normalization up to third normal form, emphasizing CRUD operations and comprehensive database design and normalization understanding.",
-    icon: Database,
-    company: "Meta",
-    href: "https://www.coursera.org/account/accomplishments/verify/ESJFL6QXKVMZ",
-  },
-  {
-    service: "AI Deep Learning",
-    description:
-      "Explored Convolutional Neural Network (CNN) architecture, delved into data cleaning and preprocessing techniques, acquired proficiency in effective retraining methods, implemented transfer learning using GoogLeNet, and conducted comprehensive evaluations of model performance.",
-    icon: Bot,
-    company: "MathWorks",
-    href: "https://www.coursera.org/account/accomplishments/verify/ESJFL6QXKVMZ",
-  },
-  {
-    service: "Product Management: An Introduction",
-    description:
-      "Explored the responsibilities and knowledge requirements essential for a product manager’s success, while examining the end-to-end product & project management lifecycle and how to drive product success. Additionally, investigated the concept of value creation.",
-    icon: PackageSearch,
-    company: "IBM",
-    href: "https://www.coursera.org/account/accomplishments/verify/4A53JR3JE55L",
-  },
-  {
-    service: "Introduction to Back-End Development",
-    description:
-      "Explored HTTP requests and various Internet Protocols, gained proficiency in leveraging frameworks and libraries such as React, Bootstrap, Material UI, responsive design principles, and gained insight into potential career paths in backend development.",
-    icon: MonitorSmartphone,
-    company: "Meta",
-    href: "https://www.coursera.org/account/accomplishments/verify/6Y3448H9CNQV",
-  },
-  {
-    service: "Agile Development and Scrum",
-    description:
-      "Explored the fundamental principles of these techniques, enabling iterative development and efficient project management. Lqearnt how to refine product backlogs through sprint planning to ensure performance satisfaciton via metric-driven insights.",
-    icon: Rabbit,
-    company: "IBM",
-    href: "https://www.coursera.org/account/accomplishments/verify/9KHY8854XC55",
   },
 ];
 
@@ -505,7 +453,7 @@ export default function Home() {
                 data-scroll-speed=".06"
                 className="mt-1 max-w-lg tracking-tight text-muted-foreground 2xl:text-xl"
               >
-                Full-stack developer and aspiring PM with a love for end-to-end product development.
+                SYDE @ Waterloo · Product Engineering at two VC-backed startups.
               </p>
             </div>
             <span
@@ -545,13 +493,6 @@ export default function Home() {
                 >
                   <Linkedin className="h-6 w-6 md:mr-2 mx-2" />
                 </a>
-                <a
-                  href={CONFIG.resume.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block transition-transform duration-300 transform hover:scale-150"
-                >
-                  <FileText className="h-6 w-6 md:mr-2 mx-2" />                </a>
               </div>
             </span>
             <div
@@ -576,81 +517,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* About */}
-        <section id="about" data-scroll-section>
-
-          <div
-            data-scroll
-            data-scroll-speed=".4"
-            data-scroll-position="top"
-            className="mt-14 mb-[-8] flex max-w-6xl space-y-10"
-          >
-            <Gradient />
-            <h2 className="py-16 pb-2 text-2xl font-light leading-normal tracking-tighter text-foreground xl:text-[38px] lg:text-[28px]">
-              I&apos;m a student studying {" "}
-              <a href="https://uwaterloo.ca/systems-design-engineering/" target="_blank" rel="noopener noreferrer" className="text-gradient font-medium transition-colors hover:text-yellow-500">
-                Systems Design Engineering
-              </a> at the
-              Univeristy of Waterloo.
-              My experience spans from {" "}
-              <span className="text-gradient 
-              transition-colors 
-              hover:text-orange-200 font-medium"
-              >
-                design teams {" "}
-              </span>
-
-              to {" "}
-              <span
-                className="text-gradient transition-colors hover:text-orange-200 font-medium"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                ref={spanRef}
-              >
-                mid-sized {" "}
-              </span>
-
-              {isOverlayVisible && (
-                <div
-                  className="absolute text-center justify-center w-1/3 top-24 left-80 mt-2 ml-2 z-50 p-4 bg-black"
-                  style={{ zIndex: 9999 }}
-                >
-                  <h1 className="text-3xl">Questrade Family ❤️</h1>
-                  <Image src="/assets/questradefam.jpg" alt="Overlay Image" width={300} height={200} />
-                </div>
-              )}
-
-              companies, where I&apos;ve been instrumental in the entire {" "}
-              <span className="text-gradient transition-colors hover:text-orange-200 font-medium">
-                product
-                design process.
-              </span>
-
-              <br /><br />
-              Other than that, I love playing the {" "}
-              <span className="text-gradient transition-colors hover:text-orange-200 font-medium">
-                acoustic and electric guitar</span> whenever I have
-              some free time! I also enjoy {" "}
-              keeping up with the NBA
-              and listen to a ton of  <a href="https://open.spotify.com/playlist/3doftAiaXi0HvwySBeqAYw?si=a17bc1dc74e54404"
-                target="_blank" rel="noopener noreferrer"
-                className="text-gradient font-medium transition-colors italic hover:text-green-500">
-                R&B.
-              </a>
-
-
-            </h2>
-            <div className="grid grid-cols-2 gap-8 xl:grid-cols-3">
-              <div className="flex items-center text-center xl:items-start xl:text-start">
-
-              </div>
-            </div>
-
-          </div>
-
-        </section>
-
-
         {/* Projects */}
         <section id="projects" className="flex justify-center" data-scroll-section>
           <div
@@ -672,7 +538,61 @@ export default function Home() {
               </div>
             </div>
             <div data-scroll data-scroll-speed=".4" className="mt-[-10.0rem]">
-              <h2 className="mt-[90px] text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
+              {/* Software Cases (first up) */}
+              <div className="mt-[90px]">
+                <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
+                  ✨ Cases
+                </span>
+                <h2 className="mt-3 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
+                  Software Cases
+                </h2>
+                <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
+                  Deep dives into the software work I&apos;m most proud of,
+                  written for product engineers and recruiters who want to
+                  understand the impact.
+                </p>
+              </div>
+
+              <div className="max-w-6xl mx-auto">
+                <Link href='/spellbook'>
+                  <div className="group mt-14 rounded-2xl scale-up relative overflow-hidden">
+                    {/* Smooth darkening overlay on hover */}
+                    <div className="pointer-events-none absolute inset-0 z-10 bg-black/80 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" />
+                    {/* "View Full Case Study" label */}
+                    <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100">
+                      <p className="text-5xl text-white">View Full Case Study</p>
+                    </div>
+                    <div className="border bg-card/10 text-card-foreground shadow-sm rounded-2xl overflow-hidden">
+                      <div className='flex relative'>
+                        <div
+                          style={{ backgroundColor: '#13171A' }}
+                          className="aspect-video w-full flex items-center justify-center"
+                        >
+                          <Image
+                            alt="Spellbook"
+                            src={spellbookLongLogo as string}
+                            className="h-auto w-60 md:w-96"
+                          />
+                        </div>
+
+                        <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
+                          <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
+                            <div className={styles.d_pill_container}>
+                              <span className={styles.d_pill}>Spellbook</span>
+                              <span className={styles.d_pill}>Software Engineering</span>
+                              <span className={styles.d_pill}>Product Ownership</span>
+                              <span className={styles.d_pill}>AI / LLMs</span>
+                            </div>
+                          </h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+
+              {/* Software Projects */}
+              <h2 className="mt-32 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
                 Software Projects
               </h2>
               <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
@@ -721,55 +641,6 @@ export default function Home() {
 
 
               <div>
-                <div className="mt-64">
-                  <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
-                    ✨ Cases
-                  </span>
-                  <h2 className="mt-3 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
-                    Software Cases
-                  </h2>
-                  <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
-                    Deep dives into the software work I&apos;m most proud of,
-                    written for product engineers and recruiters who want to
-                    understand the impact, not just the stack.
-                  </p>
-                </div>
-
-                <div className="max-w-6xl mx-auto">
-                  <Link href='/spellbook'>
-                    <div className="mt-14 rounded-xl gray-overlay scale-up relative">
-                      <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity z-10">
-                        <p className="text-5xl">View Full Case Study</p>
-                      </div>
-                      <div className="border bg-card/10 text-card-foreground shadow-sm rounded-2xl overflow-hidden">
-                        <div className='flex relative'>
-                          <div
-                            style={{ backgroundColor: '#13171A' }}
-                            className="aspect-video w-full flex items-center justify-center"
-                          >
-                            <Image
-                              alt="Spellbook"
-                              src={spellbookLongLogo as string}
-                              className="h-auto w-60 md:w-96"
-                            />
-                          </div>
-
-                          <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
-                            <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
-                              <div className={styles.d_pill_container}>
-                                <span className={styles.d_pill}>Spellbook</span>
-                                <span className={styles.d_pill}>Software Engineering</span>
-                                <span className={styles.d_pill}>Product Ownership</span>
-                                <span className={styles.d_pill}>AI / LLMs</span>
-                              </div>
-                            </h3>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-
                 <div className="mt-32">
                   <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
                     ✨ Projects
@@ -785,17 +656,19 @@ export default function Home() {
                 </div>
 
 
-                {/* new card content here */}
                 <div className="max-w-6xl mx-auto">
                   <Link href='/uwmaps'>
-                    <div className="mt-14 rounded-xl gray-overlay scale-up relative">
-                      <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                        <p className="text-5xl">View Full Design Case</p>
+                    <div className="group mt-14 rounded-2xl scale-up relative overflow-hidden">
+                      {/* Smooth darkening overlay on hover */}
+                      <div className="pointer-events-none absolute inset-0 z-10 bg-black/80 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" />
+                      {/* "View Full Design Case" label */}
+                      <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100">
+                        <p className="text-5xl text-white">View Full Design Case</p>
                       </div>
-                      <div className="border bg-card/10 text-card-foreground shadow-sm">
+                      <div className="border bg-card/10 text-card-foreground shadow-sm rounded-2xl overflow-hidden">
                         <div className='flex relative'>
                           <Image alt="waterloo maps main image"
-                            src={uwmapsImage} className="aspect-video rounded-2xl w-full h-full bg-primary object-cover" />
+                            src={uwmapsImage} className="aspect-video w-full h-full bg-primary object-cover" />
 
                           <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
                             <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
@@ -929,89 +802,6 @@ export default function Home() {
         </section>
 
 
-        {/* Services */}
-        <section id="certifications" data-scroll-section>
-          <div className="relative isolate -z-10">
-            <div
-              className="absolute inset-x-0 -top-40 transform-gpu overflow-hidden blur-[100px] sm:-top-80 lg:-top-60"
-              aria-hidden="true"
-            >
-              <div
-                className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-primary via-primary to-secondary opacity-10 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-                style={{
-                  clipPath:
-                    "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-                }}
-              />
-            </div>
-          </div>
-          <div
-            data-scroll
-            data-scroll-speed=".4"
-            data-scroll-position="top"
-            className="my-24 flex flex-col justify-start space-y-10"
-          >
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{
-                duration: 1,
-                staggerChildren: 0.5,
-              }}
-              viewport={{ once: true }}
-              className="grid items-center gap-1.5 md:grid-cols-2 xl:grid-cols-3"
-            >
-              <div className="flex flex-col py-6 xl:p-6">
-                <h2 className="text-4xl font-medium tracking-tight">
-                  Need Qualifications?
-                  <br />
-                  <span className="text-gradient clash-grotesk tracking-normal">
-                    I got you.
-                  </span>
-                </h2>
-                <p className="mt-2 tracking-tighter text-secondary-foreground">
-                  As an active learner,
-                  I am always looking for ways to enhance my skillset.
-                  Here are some courses I have completed.
-                </p>
-              </div>
-              {services.map((service) => (
-                <Link key={service.service} href={service.href} target="_blank">
-                  <div
-                    key={service.service}
-                    className="flex flex-col items-start rounded-md bg-white/5 p-14 shadow-md backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-md"
-                  >
-                    <service.icon className="my-6 text-primary" size={20} />
-                    <span className="text-lg tracking-tight text-foreground">
-                      {service.service}
-                    </span>
-                    <span className="mt-2 italic tracking-tighter text-muted-foreground">
-                      {service.company}
-                    </span>
-                    <span className="mt-2 tracking-tighter text-muted-foreground">
-                      {service.description}
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </motion.div>
-          </div>
-          <div className="relative isolate -z-10">
-            <div
-              className="absolute inset-x-0 -top-40 transform-gpu overflow-hidden blur-[100px] sm:-top-80 lg:-top-60"
-              aria-hidden="true"
-            >
-              <div
-                className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-primary via-primary to-secondary opacity-10 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-                style={{
-                  clipPath:
-                    "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-                }}
-              />
-            </div>
-          </div>
-        </section>
-
         {/* Contact */}
         <section id="contact" data-scroll-section className="my-64">
           <div className="relative isolate -z-10">
@@ -1039,7 +829,7 @@ export default function Home() {
               <span className="text-gradient clash-grotesk">see?</span>
             </h2>
             <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
-              I&apos;m currently seeking for Fall 2025 internships as well as freelance opportunities.
+              I&apos;m currently looking for Summer 2026 opportunities.
             </p>
             <Link href="mailto:ak5das@uwaterloo.ca" passHref>
               <Button className="mt-6">Get in touch</Button>

@@ -23,7 +23,6 @@ import workflowChat2 from "@/images/spellbook/workflow-1-chat-2.png";
 import workflowChat3 from "@/images/spellbook/workflow-1-chat-3.png";
 import workflowNatural1 from "@/images/spellbook/workflow-natural-1.png";
 import orgProfile1 from "@/images/spellbook/org-profile-1.png";
-import orgProfile2 from "@/images/spellbook/org-profile-2.png";
 import orgProfile3 from "@/images/spellbook/org-profile-3.png";
 import orgProfileChat1 from "@/images/spellbook/org-profile-chat-1.png";
 import orgProfileChat2 from "@/images/spellbook/org-profile-chat-2.png";
@@ -192,7 +191,7 @@ const Spellbook = () => {
               that of commerce.
             </p>
           </div>
-          <blockquote className="mx-auto mt-12 max-w-2xl text-center text-2xl italic md:text-3xl">
+          <blockquote className="mt-12 text-2xl italic md:text-3xl">
             <span className="text-gradient">Contracts at the speed of commerce.</span>
           </blockquote>
         </section>
@@ -280,6 +279,26 @@ const Spellbook = () => {
               </span>
               !
             </p>
+            <p>
+              The shape the model returns when it finishes a step looks roughly like this. The
+              frontend reads <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-base">nextStep.kind</code>{" "}
+              and renders the matching interaction zone, no guessing:
+            </p>
+          </div>
+
+          <pre className="mt-6 overflow-x-auto rounded-xl border borderColour bg-[#0A0A13] p-6 font-mono text-sm leading-relaxed text-foreground/90">
+{`type StepResult =
+  | { status: "in_progress"; nextStep: NextStep }
+  | { status: "workflow_complete" };
+
+type NextStep =
+  | { kind: "autonomous"; prompt: string }
+  | { kind: "ask_for_files"; constraint: FileConstraint }
+  | { kind: "ask_conditional"; options: ChoiceOption[] }
+  | { kind: "ask_variable_inputs"; fields: InputField[] };`}
+          </pre>
+
+          <div className="mt-8 space-y-6 text-lg leading-relaxed">
             <p>Workflows were cited as a deal-closing feature in enterprise sales calls.</p>
           </div>
 
@@ -442,20 +461,12 @@ const Spellbook = () => {
             </p>
           </div>
 
-          {/* Profile editor wizard images */}
-          <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
+          {/* Profile editor images */}
+          <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="overflow-hidden rounded-xl border borderColour">
               <Image
                 src={orgProfile1}
                 alt="Organization profile editor"
-                className="h-full w-full object-cover"
-                placeholder="blur"
-              />
-            </div>
-            <div className="overflow-hidden rounded-xl border borderColour">
-              <Image
-                src={orgProfile2}
-                alt="Organization profile wizard"
                 className="h-full w-full object-cover"
                 placeholder="blur"
               />
@@ -470,8 +481,8 @@ const Spellbook = () => {
             </div>
           </div>
 
-          {/* Chat with profile context */}
-          <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+          {/* Chat with profile context, stacked vertically */}
+          <div className="mt-4 flex flex-col gap-4">
             <div className="overflow-hidden rounded-xl border borderColour">
               <Image
                 src={orgProfileChat1}

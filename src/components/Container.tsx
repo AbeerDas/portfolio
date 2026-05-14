@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { cn, scrollTo, CONFIG } from "@/lib/utils";
+import { cn, scrollTo } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
 import { useRouter } from "next/router";
@@ -39,16 +39,8 @@ const variants = {
 };
 
 const navLinks = [
-  { href: "#about", text: "about" },
   { href: "#projects", text: "projects" },
   { href: "#experience", text: "experience" },
-  { href: "#certifications", text: "certifications" },
-  { 
-    href: CONFIG.resume.url, 
-    text: "{ resume }", 
-    target: "_blank", 
-    rel: "noopener noreferrer" 
-  },
 ];
 
 function handleClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
@@ -146,11 +138,12 @@ export default function Container(props: ContainerProps) {
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="shortcut icon" href="/images/favicon.ico" />
-          <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo.png" />
-          <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo.png"/>
-          <link rel="icon" type="image/png" sizes="16x16" href="/assets/logo.png"/>
-        <link rel="apple-touch-icon" href="/assets/logo.png" />
+        <link rel="icon" type="image/png" href="/AbeerDas.png" />
+        <link rel="shortcut icon" type="image/png" href="/AbeerDas.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/AbeerDas.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/AbeerDas.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/AbeerDas.png" />
+        <link rel="apple-touch-icon" href="/AbeerDas.png" />
       </Head>
       <nav
         className={cn(

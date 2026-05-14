@@ -1,8 +1,11 @@
 import React from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 
-import Container from "@/components/Container";
-import styles from "@/styles/Home.module.css";
-import Image from "next/image";
+import CaseTOC from "@/components/CaseTOC";
 
 import uwmapsImage from '@/images/uwmaps.png';
 import floorPlan from '@/images/hagey_hall_floor_plan.webp';
@@ -27,669 +30,534 @@ import final1 from '@/images/final1.svg';
 import final2 from '@/images/final2.svg';
 import final3 from '@/images/final3.svg';
 
+const tocItems = [
+  { id: "background", label: "Background" },
+  { id: "research", label: "Research & Ideation" },
+  { id: "design", label: "Designing Process" },
+  { id: "final", label: "Final Designs" },
+];
+
+const MIRO_URL = "https://miro.com/app/board/uXjVKYtlv9E=/?share_link_id=641909903582";
+
 const UwMaps = () => {
+  const router = useRouter();
+
   return (
-    <section
-      id="home"
-      data-scroll-section
-      className="mt-40 flex w-full flex-col mx-auto items-center xl:mt-0 xl:min-h-screen xl:flex-row xl:justify-between"
-    >
-      <div className={styles.intro}>
-        <Container>
-          <div className="mt-36 ">
-            <div className=" mx-auto rounded-2xl w-9/10 border bg-card/10 text-card-foreground shadow-sm">
-              <div className='flex flex-col'>
-                <Image alt="header image waterloo campus mobile app"
-                src={uwmapsImage} className="rounded-3xl bg-primary object-cover" />
+    <>
+      <Head>
+        <title>UW Maps · Abeer Das</title>
+        <meta
+          name="description"
+          content="UX design case study: rethinking campus navigation for first-year University of Waterloo students."
+        />
+      </Head>
 
-              </div>
+      {/* Sticky top bar */}
+      <header className="fixed inset-x-0 top-0 z-40 flex items-center justify-between px-6 py-5 md:px-10">
+        <button
+          onClick={() => router.push("/#projects")}
+          className="group flex items-center gap-2 text-sm tracking-tight text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
+          Back
+        </button>
+        <a
+          href={MIRO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex items-center gap-2 text-sm tracking-tight text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Prototype
+          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </a>
+      </header>
+
+      <CaseTOC items={tocItems} />
+
+      <main className="mx-auto max-w-3xl px-6 pb-32 pt-32 md:pt-40">
+        {/* Title block */}
+        <div className="flex flex-col items-center text-center">
+          <h1 className="clash-grotesk text-6xl italic tracking-tight md:text-7xl">
+            UW Maps
+          </h1>
+          <p className="mt-6 text-lg text-muted-foreground">Personal Project, 2024</p>
+        </div>
+
+        {/* Hero */}
+        <div className="relative mt-16 aspect-video w-full overflow-hidden rounded-2xl border borderColour bg-primary">
+          <Image
+            src={uwmapsImage}
+            alt="UW Maps app concept hero"
+            priority
+            className="h-full w-full object-cover"
+          />
+        </div>
+
+        {/* Two-column metadata + overview */}
+        <section id="overview" className="mt-24 grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16">
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-semibold">Timeline</h3>
+              <p className="mt-1 text-muted-foreground">3 weeks</p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">Team</h3>
+              <p className="mt-1 text-muted-foreground">Solo</p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">Prototype</h3>
+              <a
+                href={MIRO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1 inline-block text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+              >
+                Miro Board ↗
+              </a>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">Tools</h3>
+              <p className="mt-1 text-muted-foreground">Figma · Miro · Google Forms</p>
             </div>
           </div>
 
-          <div className='flex items-center flex-col lg:flex-row items-center md:my-24 mt-12'>
-            <div className='
-            md:mr-[15rem]
-            w-9/10
-            md:w-[28rem]
-            font-light text-foreground 
-            text-lg
-            mb-12
-            md:mb-0
-            md:text-2xl'>
-              Did this as a solo project at home
-              during co-op. Looking to eventually
-              practice my software skills and
-              launch an MVP.
-            </div>
-            <div className='md:ml-20 lg:ml-44 flex flex-col lg:flex-row border borderColour rounded p-4'>
-              <div className='p-6'>
-                <div className='font-bold 
-                text-foreground 
-                text-2xl'>
-                  Duration
-                </div>
-                <div>
-                  3 weeks
-                </div>
-              </div>
-              <div className="p-6">
-                <div className='font-bold
-                text-foreground 
-                text-2xl inline'>
-                  My Team
-                </div>
-                <div >
-                  Solo
-                </div>
-              </div>
-              <div className="p-6">
-                <div className='font-bold 
-                text-foreground 
-            text-2xl'>
-                  Prototype
-                </div>
-                <div>
-                  Link
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <div className='mt-24 md:mt-44 mb-20'>
-            <h1 className="text-5xl">
-            <span className='text-gradient'>✨</span> 001 // Background & Problem 
-            </h1>
-            <p className='text-2xl mt-16'>
-              As a first-year student entering university, I anticipated
-              encountering various challenges, but one unexpected hurdle
-              was the <span className="text-gradient font-bold tracking-tighter">complexity of navigating Waterloo&apos;s sprawling campus.
-              </span>
-
-              <br></br>
-              <br></br>
-              With its maze-like paths and <span className="text-gradient font-bold tracking-tighter">
-                confusing building layouts</span>,
-              the University of Waterloo presented a daunting challenge for newcomers
-              like myself. Adding to the confusion were navigation apps like Google Maps,
-              which often provided <span className="text-gradient font-bold tracking-tighter">misleading building markers
-              </span> and <span className="text-gradient font-bold tracking-tighter">lacked comprehensive
-                reviews of campus amenities </span>. These apps also failed to alert users to
-              <span className="text-gradient font-bold tracking-tighter"> accessibility
-                issues</span> in study areas.
+          <div className="space-y-6 text-lg leading-relaxed">
+            <h3 className="text-lg font-semibold">Overview</h3>
+            <p>
+              Did this as a solo project at home during a coop term, mostly to practice my
+              software-product muscles and eventually launch an MVP. The goal was simple: build a
+              better map for the{" "}
+              <span className="text-gradient font-semibold tracking-tight">
+                University of Waterloo campus
+              </span>{" "}
+              that actually understood how students navigate it.
+            </p>
+            <p>
+              I ran the full UX process end-to-end. User research, ideation, low- and
+              high-fidelity prototypes, and a complete design system.
             </p>
           </div>
-          <div className='flex  flex-col md:flex-row justify-center items-center'>
-            <Image alt="floor plan of Hagey Hall - a waterloo building"
-            src={floorPlan} className="h-[26rem]  md:w-[40rem] mb-12 md:mb-0 mx-4 rounded-md bg-primary object-cover" />
-            <Image alt="waterloo campus scenary"
-            src={campus} className="md:w-1/2 h-[26rem] rounded-md bg-primary object-cover" />
+        </section>
 
+        {/* 001 Background */}
+        <section id="background" className="mt-40">
+          <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">
+            <span className='text-gradient'>✨</span> 001 // Background & Problem
+          </h2>
+          <p className='mt-10 text-lg leading-relaxed'>
+            As a first-year student entering university, I anticipated encountering various
+            challenges, but one unexpected hurdle was the{" "}
+            <span className="text-gradient font-bold tracking-tighter">
+              complexity of navigating Waterloo&apos;s sprawling campus.
+            </span>
+            <br /><br />
+            With its maze-like paths and{" "}
+            <span className="text-gradient font-bold tracking-tighter">
+              confusing building layouts
+            </span>
+            , the University of Waterloo presented a daunting challenge for newcomers like
+            myself. Adding to the confusion were navigation apps like Google Maps, which often
+            provided{" "}
+            <span className="text-gradient font-bold tracking-tighter">
+              misleading building markers
+            </span>{" "}
+            and{" "}
+            <span className="text-gradient font-bold tracking-tighter">
+              lacked comprehensive reviews of campus amenities
+            </span>
+            . These apps also failed to alert users to{" "}
+            <span className="text-gradient font-bold tracking-tighter">accessibility issues</span>{" "}
+            in study areas.
+          </p>
+
+          <div className='mt-12 grid grid-cols-1 gap-4 md:grid-cols-2'>
+            <Image
+              alt="floor plan of Hagey Hall - a waterloo building"
+              src={floorPlan}
+              className="aspect-[4/3] w-full rounded-md bg-primary object-cover"
+            />
+            <Image
+              alt="waterloo campus scenery"
+              src={campus}
+              className="aspect-[4/3] w-full rounded-md bg-primary object-cover"
+            />
           </div>
+        </section>
 
-
-
-          <div className='mt-44 mb-20'>
-            <h1 className="text-5xl">
+        {/* 002 Research & Ideation */}
+        <section id="research" className="mt-40">
+          <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">
             <span className='text-gradient'>✨</span> 002 // Research & Ideation
-            </h1>
-            <p className='text-2xl mt-16'>
-              I had two main questions I wanted answers to with my user research:
+          </h2>
+          <p className='mt-10 text-lg leading-relaxed'>
+            I had two main questions I wanted answers to with my user research:
+          </p>
 
-            </p>
-
-            <div className='flex flex-col md:flex-row  justify-center items-center mt-16'>
-              <div className='md:w-5/12 mb-12 md:mb-0 md:mr-12 flex border borderColour rounded p-12 md:p-14'>
-                <p className='text-md md:text-xl mx-auto text-center mt-2'>
-                  How <span className="text-gradient font-bold tracking-tighter">big</span> is the
-                  navigation problem?
-                </p>
-              </div>
-              <div className='md:w-5/12 flex border borderColour rounded p-12'>
-                <p className=' text-md md:text-xl mx-auto text-center'>
-                  What<span className="text-gradient font-bold tracking-tighter"> features</span>  should be prioritized given users&apos; needs?
-                </p>
-              </div>
-            </div>
-            <p className='text-2xl mt-32'>
-              To figure out the answers to both of these, I decided to conduct research in a
-            </p>
-            <p className='text-4xl mt-6'>
-              Three-Pronged Approach:
-            </p>
-
-
-            <div className='flex flex-col md:flex-row items-center justify-center mt-12'>
-              <div className='list1 scale-up-more md:mb-0 mb-24 mx-20'>
-                <div className='flex items-center justify-center flex-col'>
-                  <Image alt="identify clipart"
-                  src={identify} className="" />
-                  <p className='text-center w-4/6 text-2xl font-bold mt-6'>
-                    Identifying the Problem
-                  </p>
-                </div>
-                <div className='flex items-center justify-center flex-col mt-2'>
-                  <p className='text-center w-4/6 text-lg mt-4'>
-                    Quantitative
-                  </p>
-                  <h1 className='text-center w-4/6 text-6xl mt-6'>
-                    35
-                  </h1>
-                  <p className='text-center w-4/6 text-lg mt-2'>
-                    Participants
-                  </p>
-                </div>
-              </div>
-              <div className='list2 scale-up-more md:mb-0 mb-24 mx-20'>
-                <div className='flex items-center justify-center flex-col '>
-                  <Image alt="specify clipart - thought bubble"
-                  src={specify} className="" />
-                  <p className='text-center w-5/6 text-2xl font-bold mt-6'>
-                    Identifying specific challenges
-                  </p>
-                </div>
-                <div className='flex items-center justify-center flex-col mt-2'>
-                  <p className='text-center w-4/6 text-lg mt-4'>
-                    Qualitative
-                  </p>
-                  <h1 className='text-center w-4/6 text-6xl mt-6'>
-                    6
-                  </h1>
-                  <p className='text-center w-4/6 text-lg mt-2'>
-                    Participants
-                  </p>
-                </div>
-              </div>
-              <div className='list3 scale-up-more mx-20'>
-                <div className='flex items-center justify-center flex-col '>
-                  <Image alt="rank clipart"
-                  src={rank} className="" />
-                  <p className='text-center w-5/6 text-2xl font-bold mt-6'>
-                    Ranking the features                  </p>
-                </div>
-                <div className='flex items-center justify-center flex-col mt-2'>
-                  <p className='text-center w-4/6 text-lg mt-4'>
-                    Quantitative
-                  </p>
-                  <h1 className='text-center w-4/6 text-6xl mt-6'>
-                    28
-                  </h1>
-                  <p className='text-center w-4/6 text-lg mt-2'>
-                    Participants
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className='mt-40'>
-              <div className='flex items-center '>
-                <Image alt="identify clipart"
-                src={identify} className="w-[7rem]" />
-                <h1 className='font-bold ml-8 text-4xl'>
-                  Identifying the Problem
-                </h1>
-              </div>
-              <p className='text-2xl mt-6'>
-                The reason behind conducting this early quantitative study is
-                to measure the extent of the issue and determine its significance.
-                By opting for a quantitative approach, I was able to reach a
-                <span className="text-gradient font-bold tracking-tighter"> larger
-                  sample size</span>, providing   <span className="text-gradient font-bold tracking-tighter">more conclusive and confident data.</span>
-
+          <div className='mt-10 grid grid-cols-1 gap-4 md:grid-cols-2'>
+            <div className='flex items-center justify-center rounded border borderColour p-8'>
+              <p className='text-center text-base md:text-lg'>
+                How <span className="text-gradient font-bold tracking-tighter">big</span> is the
+                navigation problem?
               </p>
+            </div>
+            <div className='flex items-center justify-center rounded border borderColour p-8'>
+              <p className='text-center text-base md:text-lg'>
+                What{" "}
+                <span className="text-gradient font-bold tracking-tighter">features</span>{" "}
+                should be prioritized given users&apos; needs?
+              </p>
+            </div>
+          </div>
 
+          <p className='mt-16 text-lg'>
+            To figure out the answers to both of these, I decided to conduct research in a
+          </p>
+          <p className='mt-2 text-3xl font-semibold tracking-tight'>Three-Pronged Approach:</p>
 
-              <div className='text-gray-500 text-lg hidden md:flex mt-16'>
-                <h2 className='ml-12 mr-64'>
-                  Question
-                </h2>
-                <h2 className="ml-16 md:ml-80">
-                  Results
-                </h2>
-              </div>
-              <div>
-                <div className='w-full scale-up my-6 items-center flex flex-col md:flex-row border borderColour rounded p-12'>
-                  <h1 className='md:mr-48 text-center md:text-left md:mb-0 mb-16 text-xl w-1/2'>
-                    Given the resources available to you,
-                    how confident are you in your ability to
-                    navigate around campus effectively?
-                  </h1>
-                  <p className='w-1/3 text-lg text-center md:text-right'>
-                    Very Confident,
-                    Somewhat Confident, {" "}
-                    <span className="text-gradient font-bold tracking-tighter">
-                      Neutral,
-                      Somewhat Unconfident</span>, Not Confident
-                  </p>
-                </div>
+          <div className='mt-12 grid grid-cols-1 gap-10 md:grid-cols-3'>
+            <div className='flex flex-col items-center text-center'>
+              <Image alt="identify clipart" src={identify} className="h-24 w-24" />
+              <p className='mt-4 text-lg font-bold'>Identifying the Problem</p>
+              <p className='mt-3 text-sm text-muted-foreground'>Quantitative</p>
+              <p className='mt-2 text-5xl font-semibold'>35</p>
+              <p className='mt-1 text-sm text-muted-foreground'>Participants</p>
+            </div>
+            <div className='flex flex-col items-center text-center'>
+              <Image alt="specify clipart - thought bubble" src={specify} className="h-24 w-24" />
+              <p className='mt-4 text-lg font-bold'>Identifying Specific Challenges</p>
+              <p className='mt-3 text-sm text-muted-foreground'>Qualitative</p>
+              <p className='mt-2 text-5xl font-semibold'>6</p>
+              <p className='mt-1 text-sm text-muted-foreground'>Participants</p>
+            </div>
+            <div className='flex flex-col items-center text-center'>
+              <Image alt="rank clipart" src={rank} className="h-24 w-24" />
+              <p className='mt-4 text-lg font-bold'>Ranking the Features</p>
+              <p className='mt-3 text-sm text-muted-foreground'>Quantitative</p>
+              <p className='mt-2 text-5xl font-semibold'>28</p>
+              <p className='mt-1 text-sm text-muted-foreground'>Participants</p>
+            </div>
+          </div>
 
-                <div className='w-full scale-up my-6 items-center flex flex-col md:flex-row border borderColour rounded p-12'>
-                  <h1 className='md:mr-48 md:mb-0 mb-16 md:text-left text-center text-xl w-1/2'>
-                    During first semester, how many times have you been
-                    late to a class, meeting, or event because you couldn&apos;t
-                    find the location on campus?
-                  </h1>
-                  <p className='w-1/3 text-4xl text-center md:text-right'>
-                    At least <span className="text-gradient font-bold tracking-tighter">
-                      once </span>
-                  </p>
-                </div>
+          {/* Identifying the problem */}
+          <div className='mt-24'>
+            <div className='flex items-center gap-4'>
+              <Image alt="identify clipart" src={identify} className="h-16 w-16" />
+              <h3 className='text-2xl font-bold md:text-3xl'>Identifying the Problem</h3>
+            </div>
+            <p className='mt-6 text-lg leading-relaxed'>
+              The reason behind conducting this early quantitative study is to measure the
+              extent of the issue and determine its significance. By opting for a quantitative
+              approach, I was able to reach a{" "}
+              <span className="text-gradient font-bold tracking-tighter">larger sample size</span>
+              , providing{" "}
+              <span className="text-gradient font-bold tracking-tighter">
+                more conclusive and confident data.
+              </span>
+            </p>
 
-                <div className='w-full scale-up my-6 items-center flex flex-col md:flex-row border borderColour rounded p-12'>
-                  <h1 className='md:mr-48 md:mb-0 mb-16 md:text-left text-center text-xl w-1/2'>
-                    Would you consider using an app that provides readily available navigation
-                    information, including floor plans and recommended study spots?
-                    (Yes/No/Not Sure)                  </h1>
-                  <p className='w-1/3 text-4xl text-center md:text-right'>
-                    <span className="text-gradient font-bold tracking-tighter">
-                      77% {" "}
-                    </span>
-                    said yes
-                  </p>
-                </div>
-
-                <div className='w-full scale-up my-6 items-center flex flex-col md:flex-row border borderColour rounded p-12'>
-                  <h1 className='md:mr-48 md:text-left text-center md:mb-0 mb-16 text-xl w-1/2'>
-                    Do you believe it would be better and easier for you than existing
-                    options? (Yes/No/Not Sure)
-                  </h1>
-                  <p className='w-1/3 text-4xl md:text-right text-center'>
-                    <span className="text-gradient font-bold tracking-tighter">
-                      92% </span>
-                    said yes
-                  </p>
-                </div>
-              </div>
-              <div className='flex flex-col md:flex-row justify-center mx-auto items-center mt-16'>
-                <Image alt="convo clipart"
-                src={convo} className="md:mb-0 mb-16 md:mr-72 w-[18rem]" />
-                <p className='w-1/2 md:w-1/4 text-2xl text-center'>
-                  During their first year, the{" "}
+            <div className='mt-10 space-y-4'>
+              <div className='flex flex-col gap-4 rounded border borderColour p-6 md:flex-row md:items-center md:gap-8'>
+                <p className='flex-1 text-base'>
+                  Given the resources available to you, how confident are you in your ability to
+                  navigate around campus effectively?
+                </p>
+                <p className='flex-1 text-base md:text-right'>
+                  Very Confident, Somewhat Confident,{" "}
                   <span className="text-gradient font-bold tracking-tighter">
-                    majority {" "}
+                    Neutral, Somewhat Unconfident
                   </span>
-                  of individuals relied on {" "}
-                  <span className="text-gradient font-bold tracking-tighter">
-                    asking their friends {" "}
-                  </span>
-                  for navigation assistance.
+                  , Not Confident
+                </p>
+              </div>
+
+              <div className='flex flex-col gap-4 rounded border borderColour p-6 md:flex-row md:items-center md:gap-8'>
+                <p className='flex-1 text-base'>
+                  During first semester, how many times have you been late to a class, meeting,
+                  or event because you couldn&apos;t find the location on campus?
+                </p>
+                <p className='flex-1 text-2xl font-semibold md:text-right'>
+                  At least{" "}
+                  <span className="text-gradient font-bold tracking-tighter">once</span>
+                </p>
+              </div>
+
+              <div className='flex flex-col gap-4 rounded border borderColour p-6 md:flex-row md:items-center md:gap-8'>
+                <p className='flex-1 text-base'>
+                  Would you consider using an app that provides readily available navigation
+                  information, including floor plans and recommended study spots?
+                </p>
+                <p className='flex-1 text-2xl font-semibold md:text-right'>
+                  <span className="text-gradient font-bold tracking-tighter">77%</span> said yes
+                </p>
+              </div>
+
+              <div className='flex flex-col gap-4 rounded border borderColour p-6 md:flex-row md:items-center md:gap-8'>
+                <p className='flex-1 text-base'>
+                  Do you believe it would be better and easier for you than existing options?
+                </p>
+                <p className='flex-1 text-2xl font-semibold md:text-right'>
+                  <span className="text-gradient font-bold tracking-tighter">92%</span> said yes
                 </p>
               </div>
             </div>
 
-            <div className='mt-40'>
-              <div className='flex items-center '>
-                <Image alt="specify clipart - thought bubble"
-                src={specify} className="w-[7rem]" />
-                <h1 className='font-bold ml-8 text-4xl'>
-                  Identifying Specific Problems
-                </h1>
-              </div>
-              <p className='text-2xl mt-6'>
-                With the problem having now been validated as a real problem, I then
-                conducted {" "}
+            <div className='mt-12 flex flex-col items-center gap-6 md:flex-row md:gap-10'>
+              <Image alt="convo clipart" src={convo} className="h-40 w-40 md:h-48 md:w-48" />
+              <p className='flex-1 text-base md:text-lg'>
+                During their first year, the{" "}
+                <span className="text-gradient font-bold tracking-tighter">majority</span> of
+                individuals relied on{" "}
                 <span className="text-gradient font-bold tracking-tighter">
-                  6 moderated interviews/coffee chats</span> with students who fit
-                my persona. I had one simple question...
+                  asking their friends
+                </span>{" "}
+                for navigation assistance.
               </p>
-              <div className='flex flex-col lg:flex-row mt-20 mx-auto items-center'>
-                <Image alt="miro board clipart"
-                src={miro} className="lg:ml-12 h-[30rem] md:w-[46rem]
-                 mb-12 md:mb-0 mx-28
-              rounded-md flex-col md:flex-row object-cover" />
-
-                <p className='md:w-1/3 mt-16 lg:mt-0 text-2xl text-center lg:text-4xl flex-col lg:flex-row font-light mt-6 lg:text-right'>
-                  Considering the resources available to you right now,
-                  what {" "}
-                  <span className="text-gradient font-bold tracking-tighter">
-                    features </span>
-                  would you desire on the app to enhance your
-                  campus experience?
-                </p>
-              </div>
-              <div className=''>
-                <p className='text-2xl mt-24'>
-                  I took notes of all the features people brought up on a {' '}
-                  <span className="text-gradient font-bold tracking-tighter">
-                    Miro board </span> and created an {" "}
-                  <span className="text-gradient font-bold tracking-tighter">
-                    affinity map </span> of common themes. Here are all the features participants mentioned at
-                  least twice:
-                </p>
-                <Image alt="notes of different problems people identified"
-                src={notes} className="mx-auto w-5/6 mt-24 
-              rounded-md object-cover" />
-
-              </div>
-            </div>
-
-            <div className='mt-40'>
-              <div className='flex items-end'>
-                <Image alt="rank clipart"
-                src={rank} className="w-[7rem]" />
-                <h1 className='font-bold ml-8 text-4xl'>
-                  Ranking Potential Features
-                </h1>
-              </div>
-              <div>
-                <p className='text-2xl mt-24'>
-                  My last study had participants rank features they would want.
-                  I had a {" "}
-                  <span className="text-gradient font-bold tracking-tighter">
-                    google form </span> set up which had participants rank each of the above
-                  stickys 1-11. First place would get 11 points, second place - 10 points,
-                  3rd - 9 points, etc.
-
-                  <br></br>
-                  <br></br>It is important to note that {" "}
-                  <span className="text-gradient font-bold tracking-tighter">
-                    accessibility features {" "}
-                  </span>
-                  which are on the blue
-                  sticky notes were disregarded from the ranking process, as they are essential
-                  components irrespective of participant preferences.
-                  <br></br>
-                  <br></br>
-                  Here are the results:
-
-                </p>
-              </div>
-              <div className='flex flex-col md:flex-row items-center'>
-                <div className='mt-16'>
-                  <div className='flex my-6 items-center'>
-                    <div>
-                      <p className='mx-11 font-bold text-5xl'>
-                        1
-                      </p>
-                    </div>
-                    <div>
-                      <p className='w-2/3 text-2xl'>
-                        Finding classrooms
-                        and lecture halls for classes
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex my-6 items-center">
-                    <div> <p className='mx-10 font-bold text-5xl'>
-                      2
-                    </p>
-                    </div>
-                    <div>
-                      <p className='w-2/3 text-2xl '>
-                        Identifying suitable study
-                        areas on campus
-                      </p>
-                    </div>
-                  </div>
-                  <div className='flex my-6 items-center'>
-                    <div>
-                      <p className='mx-10 font-bold text-5xl'>
-                        3
-                      </p>
-                    </div>
-                    <div>
-                      <p className='w-2/3 text-2xl'>
-                        Receiving updates on campus
-                        construction, closures, events, etc.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex my-6 items-center">
-                    <div>
-                      <p className='mx-10 font-bold text-5xl'>
-                        4
-                      </p>
-                    </div>
-                    <div>
-                      <p className='w-2/3 text-2xl'>
-                        Finding what in the
-                        campus is open late (food, buildings,
-                        etc.)
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className='mt-16 md:mt-0'>
-                  <Image alt="mountain clipart"
-                  src={mountain} className="w-[20rem]" />
-                </div>
-              </div>
-
-              <div className=' mt-32 '>
-                <h1 className='font-bold text-4xl'>
-                  Competitive Analysis
-                </h1>
-                <p className='text-2xl mt-16'>
-                  It is very important to see what is already out there to check if
-                  similar services {" "}
-                  <span className="text-gradient font-bold tracking-tighter">
-                    already exist in the market. {" "}</span>
-                  Studying existing solutions
-                  can provide valuable inspiration for our my own design journey as well.
-
-                </p>
-                <div className='mt-32'>
-                  <div className='mx-auto justify-center flex flex-col md:flex-row items-center'>
-                    <Image alt="image of existing compeititor apps - google maps, apple maps, waterloo online map"
-                    src={existing} className="w-[24rem]" />
-                    <p className='mt-16 md:mt-0 md:ml-32 text-center md:text-right text-xl w-5/12'>
-                      The Waterloo online map, the sole
-                      option for personalized campus navigation, falls significantly
-                      short when measured against the interactive maps offered by other universities.
-                      For example, here is our map compared to Queen&apos;s.
-                    </p>
-                  </div>
-
-                  <div className='mt-16 mx-auto justify-center flex flex-col md:flex-row items-center'>
-                    <p className='mb-16 md:mb-0 md:mr-32 text-center md:text-left text-xl w-5/12'>
-                      Similar services in other univeristies&apos; offer us
-                      a lot of different USPs to incorporate into our own
-                      design (e.g. MacQuest&apos;s floor navigation!)
-                    </p>
-                    <Image alt="apps other universities offer: Mcmaaster, UofT, and Queen's map apps"
-                    src={otherUni} className="w-[24rem]" />
-
-                  </div>
-                </div>
-
-
-              </div>
-
-
             </div>
           </div>
 
-          <div className='mt-44 mb-20'>
-            <h1 className="font-bold text-5xl">
+          {/* Specific problems */}
+          <div className='mt-24'>
+            <div className='flex items-center gap-4'>
+              <Image alt="specify clipart" src={specify} className="h-16 w-16" />
+              <h3 className='text-2xl font-bold md:text-3xl'>Identifying Specific Problems</h3>
+            </div>
+            <p className='mt-6 text-lg leading-relaxed'>
+              With the problem having now been validated as a real problem, I then conducted{" "}
+              <span className="text-gradient font-bold tracking-tighter">
+                6 moderated interviews/coffee chats
+              </span>{" "}
+              with students who fit my persona. I had one simple question...
+            </p>
+
+            <div className='mt-10 flex flex-col gap-6 md:flex-row md:items-center'>
+              <Image
+                alt="miro board clipart"
+                src={miro}
+                className="w-full rounded-md md:w-2/3 object-cover"
+              />
+              <p className='flex-1 text-xl font-light md:text-2xl md:text-right'>
+                Considering the resources available to you right now, what{" "}
+                <span className="text-gradient font-bold tracking-tighter">features</span> would
+                you desire on the app to enhance your campus experience?
+              </p>
+            </div>
+
+            <p className='mt-10 text-lg leading-relaxed'>
+              I took notes of all the features people brought up on a{" "}
+              <span className="text-gradient font-bold tracking-tighter">Miro board</span> and
+              created an{" "}
+              <span className="text-gradient font-bold tracking-tighter">affinity map</span> of
+              common themes. Here are all the features participants mentioned at least twice:
+            </p>
+            <Image
+              alt="notes of different problems people identified"
+              src={notes}
+              className="mt-8 w-full rounded-md object-cover"
+            />
+          </div>
+
+          {/* Ranking features */}
+          <div className='mt-24'>
+            <div className='flex items-end gap-4'>
+              <Image alt="rank clipart" src={rank} className="h-16 w-16" />
+              <h3 className='text-2xl font-bold md:text-3xl'>Ranking Potential Features</h3>
+            </div>
+            <p className='mt-6 text-lg leading-relaxed'>
+              My last study had participants rank features they would want. I had a{" "}
+              <span className="text-gradient font-bold tracking-tighter">google form</span> set
+              up which had participants rank each of the above stickies 1–11. First place would
+              get 11 points, second place 10 points, third 9 points, and so on.
+              <br /><br />
+              Worth noting that{" "}
+              <span className="text-gradient font-bold tracking-tighter">
+                accessibility features
+              </span>{" "}
+              (on the blue sticky notes) were disregarded from the ranking process. They are
+              essential regardless of participant preferences.
+              <br /><br />
+              Here are the results:
+            </p>
+
+            <div className='mt-10 flex flex-col items-center gap-10 md:flex-row md:items-start'>
+              <div className='flex-1 space-y-6'>
+                <div className='flex items-center gap-6'>
+                  <p className='text-4xl font-bold'>1</p>
+                  <p className='text-base md:text-lg'>
+                    Finding classrooms and lecture halls for classes
+                  </p>
+                </div>
+                <div className='flex items-center gap-6'>
+                  <p className='text-4xl font-bold'>2</p>
+                  <p className='text-base md:text-lg'>
+                    Identifying suitable study areas on campus
+                  </p>
+                </div>
+                <div className='flex items-center gap-6'>
+                  <p className='text-4xl font-bold'>3</p>
+                  <p className='text-base md:text-lg'>
+                    Receiving updates on campus construction, closures, events, etc.
+                  </p>
+                </div>
+                <div className='flex items-center gap-6'>
+                  <p className='text-4xl font-bold'>4</p>
+                  <p className='text-base md:text-lg'>
+                    Finding what on campus is open late (food, buildings, etc.)
+                  </p>
+                </div>
+              </div>
+              <Image alt="mountain clipart" src={mountain} className="h-48 w-48 md:h-56 md:w-56" />
+            </div>
+
+            <div className='mt-16'>
+              <h3 className='text-2xl font-bold md:text-3xl'>Competitive Analysis</h3>
+              <p className='mt-6 text-lg leading-relaxed'>
+                It is very important to see what is already out there to check if similar
+                services{" "}
+                <span className="text-gradient font-bold tracking-tighter">
+                  already exist in the market.
+                </span>{" "}
+                Studying existing solutions can also provide valuable inspiration for the design
+                journey.
+              </p>
+
+              <div className='mt-12 grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center'>
+                <Image
+                  alt="existing competitor apps: google maps, apple maps, waterloo online map"
+                  src={existing}
+                  className="w-full"
+                />
+                <p className='text-base md:text-lg'>
+                  The Waterloo online map, the sole option for personalized campus navigation,
+                  falls significantly short when measured against the interactive maps offered by
+                  other universities. For example, here is our map compared to Queen&apos;s.
+                </p>
+              </div>
+
+              <div className='mt-12 grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center'>
+                <p className='text-base md:text-lg md:order-1 order-2'>
+                  Similar services in other universities offer a lot of different USPs to
+                  incorporate into our own design (e.g. MacQuest&apos;s floor navigation!).
+                </p>
+                <Image
+                  alt="apps other universities offer: McMaster, UofT, and Queen's map apps"
+                  src={otherUni}
+                  className="w-full md:order-2 order-1"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 003 Designing Process */}
+        <section id="design" className="mt-40">
+          <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">
             <span className='text-gradient'>✨</span> 003 // The Designing Process
-            </h1>
-            <p className='text-2xl mt-16'>
-              The first step was to develop a design system, a crucial step for maintaining
-              consistency and establishing a cohesive theme throughout the application. This system
-              provides clear guidelines on colors, components, and fonts, ensuring a unified vision
-              across the project.
-            </p>
-            <h1 className="font-bold text-3xl mt-16">
-              Design System and Brand Creation
-            </h1>
-            <p className='text-2xl mt-6'>
-              In selecting the primary colors for my app, I opted for white, blue, and red.
-              Blue, being a calming and universally recognized color often associated with
-              navigation, aligns perfectly with the app&apos;s purpose. During designing, I will make
-              sure to adhere to the 60/30/10 rule (60% primary colour, 30% secondary,
-              10% tertiary) as this ensures a balanced and visually appealing design.
-            </p>
-            <h1 className="font-bold text-3xl mt-16 mb-6">
-              Colours
-            </h1>
-            <Image alt="design system colours"
-            src={colours} className="w-full" />
-            <div className='my-16 mx-auto'>
-              <Image alt="design system typography"
-              src={typography} className="w-full" />
-              <p className='text-2xl mt-10 text-center'>
-                I chose the Blinker font for its modern and clean aesthetic, which gives off a sense of
-                friendliness that aligns well with the overall tone that I am aiming to go for.
-              </p>
-            </div>
-            <h1 className="font-bold text-3xl mt-32">
-              Logo and Name
-            </h1>
-            <p className='text-2xl mt-6'>
-              The logos needed to be simplistic to ensure they could be scaled
-              down without losing their recognizability. After a couple of iterations,
-              these are what I ended up going with:
-            </p>
-            <div className='mt-12 mx-auto items-center justify-center'>
-              <Image alt="design system for logos"
-              src={logos} className="w-full" />
-            </div>
-            <h1 className="font-bold text-4xl mt-32">
-              Information Architecture
-            </h1>
-            <p className='text-2xl mt-6'>
-              The next step involved establishing the information
-              architecture of the app. In essence, this diagram provides a
-              layout of where each page is located, aligning with the primary purposes
-              we&apos;ve outlined through our user research.
-              For a more detailed version of the image displayed below, you
-              can access the Miro Board by clicking <a
-                href="https://miro.com/app/board/uXjVKYtlv9E=/?share_link_id=641909903582"
-                target="_blank" rel="noopener noreferrer"
-                className="text-gradient 
-             transition-colors hover:text-yellow-500">here.</a>
+          </h2>
+          <p className='mt-10 text-lg leading-relaxed'>
+            The first step was to develop a design system, a crucial step for maintaining
+            consistency and establishing a cohesive theme throughout the application. This
+            system provides clear guidelines on colors, components, and fonts, ensuring a
+            unified vision across the project.
+          </p>
 
+          <h3 className="mt-12 text-2xl font-bold md:text-3xl">Design System and Brand Creation</h3>
+          <p className='mt-4 text-lg leading-relaxed'>
+            In selecting the primary colors for my app, I opted for white, blue, and red. Blue,
+            being a calming and universally recognized color often associated with navigation,
+            aligns perfectly with the app&apos;s purpose. During designing, I will make sure to
+            adhere to the 60/30/10 rule (60% primary, 30% secondary, 10% tertiary), which
+            ensures a balanced and visually appealing design.
+          </p>
+
+          <h3 className="mt-12 text-2xl font-bold md:text-3xl">Colours</h3>
+          <Image alt="design system colours" src={colours} className="mt-6 w-full" />
+
+          <div className='mt-12'>
+            <Image alt="design system typography" src={typography} className="w-full" />
+            <p className='mt-6 text-center text-base md:text-lg'>
+              I chose the Blinker font for its modern and clean aesthetic, which gives off a
+              sense of friendliness that aligns well with the overall tone I am aiming for.
             </p>
+          </div>
+
+          <h3 className="mt-16 text-2xl font-bold md:text-3xl">Logo and Name</h3>
+          <p className='mt-4 text-lg leading-relaxed'>
+            The logos needed to be simplistic to ensure they could be scaled down without losing
+            their recognizability. After a couple of iterations, these are what I ended up going
+            with:
+          </p>
+          <Image alt="design system for logos" src={logos} className="mt-8 w-full" />
+
+          <h3 className="mt-16 text-2xl font-bold md:text-3xl">Information Architecture</h3>
+          <p className='mt-4 text-lg leading-relaxed'>
+            The next step involved establishing the information architecture of the app. In
+            essence, this diagram provides a layout of where each page is located, aligning with
+            the primary purposes outlined through user research. For a more detailed version,
+            you can access the Miro board by clicking{" "}
             <a
-              href="https://miro.com/app/board/uXjVKYtlv9E=/?share_link_id=641909903582"
-              target="_blank" rel="noopener noreferrer">
-              <Image alt="information architecture"
-              src={infoarch} className="w-full gray-overlay scale-up mt-16" />
+              href={MIRO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gradient transition-colors hover:text-yellow-500"
+            >
+              here
             </a>
+            .
+          </p>
+          <a href={MIRO_URL} target="_blank" rel="noopener noreferrer">
+            <Image
+              alt="information architecture"
+              src={infoarch}
+              className="mt-8 w-full gray-overlay scale-up"
+            />
+          </a>
 
-            <h1 className="font-bold text-4xl mt-32">
-              Low & High-Fidelity Wireframes
-            </h1>
-            <p className='text-2xl mt-6'>
-              Time to actually start designing! To quickly visualize and have something
-              tangible, I usually grab a piece of paper and start creating an low-fidelity
-              wireframes. For UW Maps, I started off by creating very basic sketches of each of
-              the initial pages of all my navigation options.
-              <br></br>
-              <br></br>
-              Then, I decided to make slightly higher fidelity wireframes of the saved locations and
-              main explore tab. These are much easier to change and reiterate than actual designs.
-            </p>
-            <Image alt="low fidelity wireframes"
-            src={wireframes} className="w-full mt-16" />
-            <h1 className="font-bold text-5xl mt-32">
+          <h3 className="mt-16 text-2xl font-bold md:text-3xl">Low & High-Fidelity Wireframes</h3>
+          <p className='mt-4 text-lg leading-relaxed'>
+            Time to actually start designing! To quickly visualize and have something tangible,
+            I usually grab a piece of paper and start creating low-fidelity wireframes. For UW
+            Maps, I started off by creating very basic sketches of each of the initial pages of
+            all my navigation options.
+            <br /><br />
+            Then, I decided to make slightly higher fidelity wireframes of the saved locations
+            and main explore tab. These are much easier to change and reiterate than actual
+            designs.
+          </p>
+          <Image alt="low fidelity wireframes" src={wireframes} className="mt-8 w-full" />
+        </section>
+
+        {/* 004 Final Designs */}
+        <section id="final" className="mt-40">
+          <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">
             <span className='text-gradient'>✨</span> 004 // Final Designs
-            </h1>
-            <Gradient />
-            <div className="relative isolate -z-10">
-            <div
-              className="absolute inset-x-0 -top-40 transform-gpu overflow-hidden blur-[100px] sm:-top-80 lg:-top-60"
-              aria-hidden="true"
-            >
-              <div
-                className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-primary via-primary to-secondary opacity-10 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-                style={{
-                  clipPath:
-                    "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-                }}
-              />
-            </div>
-          </div>
-            <Image alt="final images"
-            src={final1 as string} className="w-full mt-16 opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100" />
-            <div className="relative isolate -z-10">
-            <div
-              className="absolute inset-x-0 -top-40 transform-gpu overflow-hidden blur-[100px] sm:-top-80 lg:-top-60"
-              aria-hidden="true"
-            >
-              <div
-                className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-primary via-primary to-secondary opacity-10 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-                style={{
-                  clipPath:
-                    "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-                }}
-              />
-            </div>
-          </div>
-            <Image alt="final images"
-            src={final2 as string} className="w-full mt-16 opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100" />
-            <Image alt="final images"
-            src={final3 as string} className="w-full mt-16 opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100" />
-          </div>
+          </h2>
+          <Image
+            src={final1 as string}
+            alt="final design 1"
+            className="mt-12 w-full opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100"
+          />
+          <Image
+            src={final2 as string}
+            alt="final design 2"
+            className="mt-8 w-full opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100"
+          />
+          <Image
+            src={final3 as string}
+            alt="final design 3"
+            className="mt-8 w-full opacity-60 transition-opacity duration-500 ease-in-out transform hover:opacity-100"
+          />
+        </section>
 
-          <h1 className='mb-16'>This is Project 1</h1>
-          {/* Add content for Project 1 here */}
-        </Container>
-      </div >
-
-
-    </section >
+        {/* Footer signature */}
+        <div className="mt-32 flex items-center justify-between border-t borderColour pt-8 text-sm text-muted-foreground">
+          <span>Abeer Das</span>
+          <Link href="/" className="transition-colors hover:text-foreground">
+            Home
+          </Link>
+        </div>
+      </main>
+    </>
   );
 };
 
 export default UwMaps;
-
-
-function Gradient() {
-  return (
-    <>
-      {/* Upper gradient */}
-      <div className="absolute -top-40 right-0 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
-        <svg
-          className="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
-          viewBox="0 0 1155 678"
-        >
-          <path
-            fill="url(#45de2b6b-92d5-4d68-a6a0-9b9b2abad533)"
-            fillOpacity=".1"
-            d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
-          />
-          <defs>
-            <linearGradient
-              id="45de2b6b-92d5-4d68-a6a0-9b9b2abad533"
-              x1="1155.49"
-              x2="-78.208"
-              y1=".177"
-              y2="474.645"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#7980fe" />
-              <stop offset={1} stopColor="#f0fff7" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-
-      {/* Lower gradient */}
-      <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
-        <svg
-          className="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]"
-          viewBox="0 0 1155 678"
-        >
-          <path
-            fill="url(#ecb5b0c9-546c-4772-8c71-4d3f06d544bc)"
-            fillOpacity=".1"
-            d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
-          />
-          <defs>
-            <linearGradient
-              id="ecb5b0c9-546c-4772-8c71-4d3f06d544bc"
-              x1="1155.49"
-              x2="-78.208"
-              y1=".177"
-              y2="474.645"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#9A70FF" />
-              <stop offset={1} stopColor="#838aff" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-    </>
-  );
-}
