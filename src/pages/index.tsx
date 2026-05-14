@@ -29,6 +29,7 @@ import Image from "next/image";
 import uwmapsImage from '@/images/uwmaps.png';
 import rooted from '@/images/rooted.png';
 import bchm from '@/images/bchm.png';
+import spellbookLongLogo from '@/images/spellbook/SpellbookLongLogo.svg';
 
 
 import { motion } from "framer-motion";
@@ -721,6 +722,55 @@ export default function Home() {
 
               <div>
                 <div className="mt-64">
+                  <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
+                    ✨ Cases
+                  </span>
+                  <h2 className="mt-3 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
+                    Software Cases
+                  </h2>
+                  <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
+                    Deep dives into the software work I&apos;m most proud of,
+                    written for product engineers and recruiters who want to
+                    understand the impact, not just the stack.
+                  </p>
+                </div>
+
+                <div className="max-w-6xl mx-auto">
+                  <Link href='/spellbook'>
+                    <div className="mt-14 rounded-xl gray-overlay scale-up relative">
+                      <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity z-10">
+                        <p className="text-5xl">View Full Case Study</p>
+                      </div>
+                      <div className="border bg-card/10 text-card-foreground shadow-sm rounded-2xl overflow-hidden">
+                        <div className='flex relative'>
+                          <div
+                            style={{ backgroundColor: '#13171A' }}
+                            className="aspect-video w-full flex items-center justify-center"
+                          >
+                            <Image
+                              alt="Spellbook"
+                              src={spellbookLongLogo as string}
+                              className="h-auto w-60 md:w-96"
+                            />
+                          </div>
+
+                          <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
+                            <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
+                              <div className={styles.d_pill_container}>
+                                <span className={styles.d_pill}>Spellbook</span>
+                                <span className={styles.d_pill}>Software Engineering</span>
+                                <span className={styles.d_pill}>Product Ownership</span>
+                                <span className={styles.d_pill}>AI / LLMs</span>
+                              </div>
+                            </h3>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+
+                <div className="mt-32">
                   <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
                     ✨ Projects
                   </span>
