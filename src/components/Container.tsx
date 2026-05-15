@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn, scrollTo } from "@/lib/utils";
 import { useState, useEffect } from "react";
@@ -138,12 +139,12 @@ export default function Container(props: ContainerProps) {
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" type="image/png" href="/AbeerDas.png" />
-        <link rel="shortcut icon" type="image/png" href="/AbeerDas.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/AbeerDas.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/AbeerDas.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/AbeerDas.png" />
-        <link rel="apple-touch-icon" href="/AbeerDas.png" />
+        <link rel="icon" type="image/png" href="/AbeerDasNav.png?v=2" />
+        <link rel="shortcut icon" type="image/png" href="/AbeerDasNav.png?v=2" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/AbeerDasNav.png?v=2" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/AbeerDasNav.png?v=2" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/AbeerDasNav.png?v=2" />
+        <link rel="apple-touch-icon" href="/AbeerDasNav.png?v=2" />
       </Head>
       <nav
         className={cn(
@@ -168,21 +169,78 @@ export default function Container(props: ContainerProps) {
             <CrossIcon data-hide={!isOpen} />
           </button>
         </div>
-        <Link href="/">
-          <span className="text-xl">abeer das</span>
+        <Link href="/" className="inline-block">
+          <Image
+            src="/AbeerDasNav.png"
+            alt="abeer das"
+            width={236}
+            height={60}
+            priority
+            className="h-8 w-auto md:h-9"
+          />
         </Link>
 
         {/* Desktop menu */}
         <ul className={styles["desktop-nav"]}>
-          {navLinks.map((link, i) => (
-            <NavItem
-              key={link.href}
-              href={link.href}
-              text={link.text}
-              i={i}
-              className="text-base"
-            />
-          ))}
+          <motion.li
+            variants={variants}
+            custom={0}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className="flex items-center gap-5"
+          >
+            <a
+              href="#projects"
+              onClick={handleClick}
+              className="nav-link text-base"
+            >
+              projects
+            </a>
+            {router.pathname === "/" && (
+              <span className="hidden lg:flex items-center gap-4">
+                <a
+                  href="#software-cases"
+                  onClick={handleClick}
+                  className="nav-sub-link flex items-center gap-1.5 text-sm tracking-tight text-slate-500 transition-colors hover:text-slate-200"
+                >
+                  <span aria-hidden className="text-slate-600">─</span>
+                  Software Cases
+                </a>
+                <a
+                  href="#software-projects"
+                  onClick={handleClick}
+                  className="nav-sub-link flex items-center gap-1.5 text-sm tracking-tight text-slate-500 transition-colors hover:text-slate-200"
+                >
+                  <span aria-hidden className="text-slate-600">─</span>
+                  Software Projects
+                </a>
+                <a
+                  href="#design-cases"
+                  onClick={handleClick}
+                  className="nav-sub-link flex items-center gap-1.5 text-sm tracking-tight text-slate-500 transition-colors hover:text-slate-200"
+                >
+                  <span aria-hidden className="text-slate-600">─</span>
+                  Design Cases
+                </a>
+              </span>
+            )}
+          </motion.li>
+          <motion.li
+            variants={variants}
+            custom={1}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+          >
+            <a
+              href="#experience"
+              onClick={handleClick}
+              className="nav-link text-base"
+            >
+              experience
+            </a>
+          </motion.li>
         </ul>
 
         {/* Mobile menu */}

@@ -27,7 +27,43 @@ import spellbookLongLogo from '@/images/spellbook/SpellbookLongLogo.svg';
 
 
 
-const projects = [
+const projects: Array<{
+  title: string;
+  description: string;
+  image?: string;
+  href: string;
+  stack: string[];
+  badge?: string;
+}> = [
+  {
+    title: "Sibyl",
+    badge: "1st Place · Hack for Humanity",
+    description: "Multi-agent LangGraph pipeline routing evidence gaps with a RAG stack over climate compliance reports, paired with a real-time SSE dashboard and a grounded RAG chatbot.",
+    image: "/assets/sibyl.jpg",
+    href: "https://devpost.com/software/sibyl-x8gpor",
+    stack: ["Python", "LangGraph", "pgvector", "PostgreSQL", "FastAPI"],
+  },
+  {
+    title: "Rosetta",
+    badge: "3rd Place · HackHive",
+    description: "Real-time lecture translation and transcription platform that injects RAG citations from student-uploaded notes and PDFs as professors speak.",
+    image: "/assets/rosetta.jpg",
+    href: "https://devpost.com/software/rosetta-hq6aby",
+    stack: ["TypeScript", "RAG", "OpenRouter", "ElevenLabs"],
+  },
+  {
+    title: "Go-Phish",
+    description: "Browser extension that flags phishing emails with 96% accuracy via a scikit-learn classifier, gamified with a gacha-style fish-collection reward and team leaderboards to make email security engaging.",
+    href: "https://devpost.com/software/go-phish-e7qzo3",
+    stack: ["React", "TypeScript", "Django", "Scikit-Learn", "Groq"],
+  },
+  {
+    title: "ScoutFox",
+    description: "Chrome extension (261 installs) that surfaces YouTube review videos directly on Amazon listings, using serverless APIs and LLM-driven query normalization.",
+    image: "/assets/scoutfox.jpg",
+    href: "https://github.com/AbeerDas/ScoutFox",
+    stack: ["TypeScript", "MV3", "React", "Vercel", "LLMs"],
+  },
   {
     title: "Estia",
     description: "Publicly hosted platform with 100+ coding projects, AI-powered project generation, RAG retrieval, and user profiles (auth, comments, etc.)",
@@ -272,7 +308,7 @@ export default function Home() {
   // handle scroll
   useEffect(() => {
     const sections = document.querySelectorAll("section");
-    const navLinks = document.querySelectorAll(".nav-link");
+    const navLinks = document.querySelectorAll(".nav-link, .nav-sub-link");
 
     async function getLocomotive() {
       const Locomotive = (await import("locomotive-scroll")).default;
@@ -293,12 +329,18 @@ export default function Home() {
         }
       });
 
+      const projectsSubIds = ["software-cases", "software-projects", "design-cases"];
+
       navLinks.forEach((li) => {
         li.classList.remove("nav-active");
 
-        if (li.getAttribute("href") === `#${current}`) {
+        const href = li.getAttribute("href");
+        if (href === `#${current}`) {
           li.classList.add("nav-active");
-          console.log(li.getAttribute("href"));
+        }
+        // Keep the top-level "projects" link active whenever any of its subsections is current.
+        if (href === "#projects" && projectsSubIds.includes(current)) {
+          li.classList.add("nav-active");
         }
       });
     }
@@ -539,6 +581,7 @@ export default function Home() {
             </div>
             <div data-scroll data-scroll-speed=".4" className="mt-[-10.0rem]">
               {/* Software Cases (first up) */}
+              <section id="software-cases">
               <div className="mt-[90px]">
                 <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
                   ✨ Cases
@@ -591,7 +634,10 @@ export default function Home() {
                 </Link>
               </div>
 
+              </section>
+
               {/* Software Projects */}
+              <section id="software-projects">
               <h2 className="mt-32 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
                 Software Projects
               </h2>
@@ -605,18 +651,32 @@ export default function Home() {
                   <Link  key={project.title} href={project.href} target="_blank" passHref>
                     <div
                       key={project.title}
-                      className="flex flex-col items-start rounded-md bg-white/5 shadow-md backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:bg-white/10 hover:shadow-md"
+                      className="flex flex-col items-start rounded-md bg-white/5 shadow-md backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:bg-white/10 hover:shadow-md overflow-hidden"
                     >
                       <div className="relative w-full h-64 overflow-hidden rounded-t-md">
-                        {/* The container has overflow hidden */}
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          layout="fill" // This makes the image fill the container
-                          quality={100}
-                          className="object-cover transition-transform duration-300 hover:scale-110"
-                        /* Scaling on hover */
-                        />
+                        {project.image ? (
+                          <Image
+                            src={project.image}
+                            alt={project.title}
+                            layout="fill"
+                            quality={100}
+                            className="object-cover transition-transform duration-300 hover:scale-110"
+                          />
+                        ) : (
+                          <div
+                            style={{ backgroundColor: '#13171A' }}
+                            className="flex h-full w-full flex-col items-center justify-center gap-2 text-center px-6"
+                          >
+                            <span className="clash-grotesk text-5xl italic tracking-tight text-white">
+                              {project.title}
+                            </span>
+                            {project.badge && (
+                              <span className="text-gradient clash-grotesk text-xs font-semibold tracking-tighter">
+                                {project.badge}
+                              </span>
+                            )}
+                          </div>
+                        )}
                       </div>
                       <div className="p-4">
                         <div className="flex items-center">
@@ -640,7 +700,9 @@ export default function Home() {
               </div>
 
 
-              <div>
+              </section>
+
+              <section id="design-cases">
                 <div className="mt-32">
                   <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
                     ✨ Projects
@@ -728,7 +790,7 @@ export default function Home() {
                   </div>
                 </Link>
 
-              </div>
+              </section>
 
 
               <div className="relative isolate -z-10">

@@ -34,7 +34,7 @@ const tocItems = [
   { id: "spellbook", label: "Spellbook" },
   { id: "workflows", label: "Workflows" },
   { id: "nl-builder", label: "NL Builder" },
-  { id: "org-profiles", label: "Org Profiles" },
+  { id: "org-profiles", label: "Company Profiles" },
   { id: "personalization", label: "Personalization" },
   { id: "analytics", label: "Analytics" },
   { id: "other-features", label: "Other Features" },
@@ -191,14 +191,12 @@ const Spellbook = () => {
               that of commerce.
             </p>
           </div>
-          <blockquote className="mt-12 text-2xl italic md:text-3xl">
+          <blockquote className="mt-10 text-2xl italic md:text-3xl">
             <span className="text-gradient">Contracts at the speed of commerce.</span>
           </blockquote>
-        </section>
 
-        {/* Transition: why I liked working there */}
-        <section className="mt-32">
-          <div className="space-y-6 text-lg leading-relaxed">
+          {/* Transition: why I liked working there */}
+          <div className="mt-12 space-y-6 text-lg leading-relaxed">
             <p>
               I had genuinely great managers. The bar for code review and product thinking was
               high, and my judgment was trusted early. By the back half of the coop I was
@@ -426,11 +424,11 @@ type NextStep =
           </div>
         </section>
 
-        {/* 03 - Org Profiles */}
+        {/* 03 - Company Profiles */}
         <section id="org-profiles" className="mt-40">
           <p className="text-sm tracking-[0.3em] text-muted-foreground">03</p>
           <h2 className="mt-2 text-4xl font-semibold tracking-tight md:text-5xl">
-            Organization Profiles
+            Company Profiles
           </h2>
           <div className="mt-10 space-y-6 text-lg leading-relaxed">
             <p>
@@ -466,7 +464,7 @@ type NextStep =
             <div className="overflow-hidden rounded-xl border borderColour">
               <Image
                 src={orgProfile1}
-                alt="Organization profile editor"
+                alt="Company profile editor"
                 className="h-full w-full object-cover"
                 placeholder="blur"
               />
@@ -474,7 +472,7 @@ type NextStep =
             <div className="overflow-hidden rounded-xl border borderColour">
               <Image
                 src={orgProfile3}
-                alt="Organization profile details"
+                alt="Company profile details"
                 className="h-full w-full object-cover"
                 placeholder="blur"
               />
@@ -486,7 +484,7 @@ type NextStep =
             <div className="overflow-hidden rounded-xl border borderColour">
               <Image
                 src={orgProfileChat1}
-                alt="AI using organization context in chat"
+                alt="AI using company context in chat"
                 className="h-full w-full object-cover"
                 placeholder="blur"
               />
@@ -547,7 +545,7 @@ type NextStep =
             <p>
               Across every feature I shipped, I instrumented the analytics layer underneath it.
               Before this work, the team had no reliable signal on whether workflows were being
-              started or completed, where the org-profile wizard converted, or how the
+              started or completed, where the company-profile wizard converted, or how the
               natural-language builder was being iterated.
             </p>
             <p>
@@ -564,7 +562,7 @@ type NextStep =
               <span className="text-gradient font-semibold tracking-tight">
                 ~25 unique events
               </span>{" "}
-              tied specifically to the work I shipped (workflows, the NL builder, org profiles,
+              tied specifically to the work I shipped (workflows, the NL builder, company profiles,
               personalization). The Datadog dashboards built on top of those events caught{" "}
               <span className="text-gradient font-semibold tracking-tight">
                 3 critical drop-offs before they reached users
@@ -607,6 +605,62 @@ type NextStep =
               className="h-full w-full object-cover"
               placeholder="blur"
             />
+          </div>
+        </section>
+
+        {/* Featured In */}
+        <section className="mt-40">
+          <h2 className="text-2xl font-semibold tracking-tight">Featured In</h2>
+          <p className="mt-3 text-muted-foreground">
+            A couple of Spellbook&apos;s monthly product spotlights where the work I shipped
+            went live for all teams.
+          </p>
+          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <a
+              href="https://www.spellbook.legal/blog/whats-new-in-spellbook-march-2026"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col gap-3 rounded-xl border borderColour bg-white/[0.02] p-6 transition-colors hover:bg-white/[0.05]"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+                  Spellbook · March 2026
+                </span>
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground" />
+              </div>
+              <h3 className="text-lg font-semibold leading-snug">
+                What&apos;s New in Spellbook · March 2026
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                The release that introduced{" "}
+                <span className="text-foreground font-medium">Company Profiles</span> to the
+                product.
+              </p>
+            </a>
+
+            <a
+              href="https://www.spellbook.legal/blog/the-revision-spellbooks-april-product-release"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col gap-3 rounded-xl border borderColour bg-white/[0.02] p-6 transition-colors hover:bg-white/[0.05]"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+                  Spellbook · April 2026
+                </span>
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground" />
+              </div>
+              <h3 className="text-lg font-semibold leading-snug">
+                The Revision · Spellbook&apos;s April Product Release
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Covering the{" "}
+                <span className="text-foreground font-medium">Tone &amp; Style settings page</span>{" "}
+                and the{" "}
+                <span className="text-foreground font-medium">Multi-Step Workflows</span> file
+                and question step updates.
+              </p>
+            </a>
           </div>
         </section>
 
