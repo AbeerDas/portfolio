@@ -41,7 +41,7 @@ const projects: Array<{
     description: "Multi-agent LangGraph pipeline routing evidence gaps with a RAG stack over climate compliance reports, paired with a real-time SSE dashboard and a grounded RAG chatbot.",
     image: "/assets/sibyl.jpg",
     href: "https://devpost.com/software/sibyl-x8gpor",
-    stack: ["Python", "LangGraph", "pgvector", "PostgreSQL", "FastAPI"],
+    stack: ["Python", "LangGraph", "pgvector", "PostgreSQL"],
   },
   {
     title: "Rosetta",
@@ -55,7 +55,7 @@ const projects: Array<{
     title: "Go-Phish",
     description: "Browser extension that flags phishing emails with 96% accuracy via a scikit-learn classifier, gamified with a gacha-style fish-collection reward and team leaderboards to make email security engaging.",
     href: "https://devpost.com/software/go-phish-e7qzo3",
-    stack: ["React", "TypeScript", "Django", "Scikit-Learn", "Groq"],
+    stack: ["TypeScript", "Django", "Scikit-Learn", "Groq"],
   },
   {
     title: "ScoutFox",

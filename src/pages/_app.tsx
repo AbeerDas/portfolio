@@ -15,12 +15,12 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <div lang={"en"} className={dmSans.className}>
       <Head>
-        <link rel="icon" type="image/png" href="/AbeerDasNav.png?v=2" />
-        <link rel="shortcut icon" type="image/png" href="/AbeerDasNav.png?v=2" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/AbeerDasNav.png?v=2" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/AbeerDasNav.png?v=2" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/AbeerDasNav.png?v=2" />
-        <link rel="apple-touch-icon" href="/AbeerDasNav.png?v=2" />
+        <link rel="icon" type="image/png" href="/AbeerDas.png?v=3" />
+        <link rel="shortcut icon" type="image/png" href="/AbeerDas.png?v=3" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/AbeerDas.png?v=3" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/AbeerDas.png?v=3" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/AbeerDas.png?v=3" />
+        <link rel="apple-touch-icon" href="/AbeerDas.png?v=3" />
       </Head>
       <Component {...pageProps} />
     </div>

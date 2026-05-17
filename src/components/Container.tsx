@@ -139,12 +139,12 @@ export default function Container(props: ContainerProps) {
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" type="image/png" href="/AbeerDasNav.png?v=2" />
-        <link rel="shortcut icon" type="image/png" href="/AbeerDasNav.png?v=2" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/AbeerDasNav.png?v=2" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/AbeerDasNav.png?v=2" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/AbeerDasNav.png?v=2" />
-        <link rel="apple-touch-icon" href="/AbeerDasNav.png?v=2" />
+        <link rel="icon" type="image/png" href="/AbeerDas.png?v=3" />
+        <link rel="shortcut icon" type="image/png" href="/AbeerDas.png?v=3" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/AbeerDas.png?v=3" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/AbeerDas.png?v=3" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/AbeerDas.png?v=3" />
+        <link rel="apple-touch-icon" href="/AbeerDas.png?v=3" />
       </Head>
       <nav
         className={cn(
