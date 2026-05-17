@@ -42,6 +42,10 @@ const MIRO_URL = "https://miro.com/app/board/uXjVKYtlv9E=/?share_link_id=6419099
 const UwMaps = () => {
   const router = useRouter();
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Head>

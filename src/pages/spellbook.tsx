@@ -56,6 +56,10 @@ const findLink = (short: string) => teamLinks.find((p) => p.short === short)?.hr
 const Spellbook = () => {
   const router = useRouter();
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Head>
