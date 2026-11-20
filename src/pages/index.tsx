@@ -477,7 +477,7 @@ export default function Home() {
             <h2 className="clash-grotesk text-gradient text-2xl font-semibold tracking-tight md:text-3xl">Case studies</h2>
             <p className="text-base text-muted-foreground md:text-lg">Full write-ups of three projects</p>
           </motion.div>
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-x-5 gap-y-10 md:grid-cols-3">
             {featured.map((card, i) => (
               <motion.div key={card.href} {...heroIn(5 + i)} className="h-full">
                 <FeatureCard {...card} />
@@ -566,9 +566,9 @@ function FeatureCard(props: {
   return (
     <Link
       href={props.href}
-      className="group flex h-full flex-col overflow-hidden rounded-xl border border-white/10 bg-background/50 backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:border-white/20"
+      className="group block h-full transition duration-200 ease-out hover:scale-[0.995] active:scale-[0.985]"
     >
-      <div className="relative aspect-video w-full overflow-hidden">
+      <div className="relative aspect-video w-full overflow-hidden rounded-xl">
         <div className="relative h-full w-full opacity-[0.88] transition duration-500 group-hover:scale-[1.03] group-hover:opacity-100">
           {props.visual}
         </div>
@@ -578,10 +578,16 @@ function FeatureCard(props: {
           </span>
         </div>
       </div>
-      <div className="flex flex-1 flex-col p-5">
-        <span className="text-xs uppercase tracking-wider text-muted-foreground">{props.kicker}</span>
-        <h3 className="mt-1 text-xl font-semibold tracking-tight">{props.title}</h3>
-        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{props.blurb}</p>
+      <div className="mt-3.5">
+        <p className="text-xs uppercase tracking-wider text-muted-foreground">{props.kicker}</p>
+        <h3 className="relative mt-0.5 w-fit text-lg font-semibold tracking-tight">
+          {props.title}
+          <span
+            aria-hidden
+            className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-current transition-transform duration-300 group-hover:scale-x-100"
+          />
+        </h3>
+        <p className="mt-1 text-sm leading-snug text-muted-foreground">{props.blurb}</p>
       </div>
     </Link>
   );

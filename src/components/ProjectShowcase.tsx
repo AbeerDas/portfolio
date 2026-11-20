@@ -31,40 +31,43 @@ function ProjectTile({
   wordsY?: MotionValue<number>;
 }) {
   return (
-    <Link href={project.href} target="_blank" passHref className="group block h-full">
-      <div className="flex h-full flex-col overflow-hidden rounded-xl border border-white/10 bg-background/50 backdrop-blur transition duration-200 ease-out hover:scale-[0.99] hover:border-white/20 active:scale-[0.975]">
-        <div className="relative aspect-[4/3] w-full overflow-hidden" style={{ background: project.tint }}>
-          <motion.div className="absolute inset-0" style={{ y: imageY }}>
-            {project.image ? (
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                sizes="(min-width: 1024px) 280px, (min-width: 640px) 50vw, 100vw"
-                className="object-contain"
-              />
-            ) : (
-              <div className="flex h-full w-full flex-col items-center justify-center gap-1 px-4 text-center">
-                <span className="clash-grotesk text-3xl italic tracking-tight text-white">{project.title}</span>
-                {project.badge && (
-                  <span className="text-gradient clash-grotesk text-xs font-semibold tracking-tighter">{project.badge}</span>
-                )}
-              </div>
-            )}
-          </motion.div>
-        </div>
-        <motion.div className="flex flex-1 flex-col p-4" style={{ y: wordsY }}>
-          <h3 className="text-base font-semibold">{project.title}</h3>
-          <p className="mt-1 text-sm leading-relaxed text-gray-400">{project.description}</p>
-          <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
-            {project.stack.map((tech) => (
-              <span key={tech} className="rounded-full border border-[#141521] bg-[#0A0A13] px-2.5 py-0.5 text-[11px] text-gray-300">
-                {tech}
-              </span>
-            ))}
-          </div>
+    <Link
+      href={project.href}
+      target="_blank"
+      passHref
+      className="group block h-full transition duration-200 ease-out hover:scale-[0.995] active:scale-[0.985]"
+    >
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl" style={{ background: project.tint }}>
+        <motion.div className="absolute inset-0" style={{ y: imageY }}>
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              sizes="(min-width: 1024px) 280px, (min-width: 640px) 50vw, 100vw"
+              className="object-contain"
+            />
+          ) : (
+            <div className="flex h-full w-full flex-col items-center justify-center gap-1 px-4 text-center">
+              <span className="clash-grotesk text-3xl italic tracking-tight text-white">{project.title}</span>
+              {project.badge && (
+                <span className="text-gradient clash-grotesk text-xs font-semibold tracking-tighter">{project.badge}</span>
+              )}
+            </div>
+          )}
         </motion.div>
       </div>
+      <motion.div className="mt-3" style={{ y: wordsY }}>
+        <h3 className="relative w-fit text-base font-semibold">
+          {project.title}
+          <span
+            aria-hidden
+            className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-current transition-transform duration-300 group-hover:scale-x-100"
+          />
+        </h3>
+        <p className="mt-0.5 text-sm leading-snug text-gray-400">{project.description}</p>
+        <p className="mt-1.5 text-xs text-gray-500">{project.stack.join(" · ")}</p>
+      </motion.div>
     </Link>
   );
 }
@@ -105,7 +108,7 @@ export default function ProjectShowcase({ projects, children }: { projects: Proj
   return (
     <>
       {reduceMotion ? children : <ParallaxHeading>{children}</ParallaxHeading>}
-      <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-10 grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
         {projects.map((project) =>
           reduceMotion ? (
             <ProjectTile key={project.title} project={project} />
