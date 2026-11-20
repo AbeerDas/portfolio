@@ -143,15 +143,6 @@ const experiences: Experience[] = [
     summary: "Cut time off Visitor Visa applications by auto-checking uploaded documents against government rules.",
   },
   {
-    date: "Sept 2025 - Dec 2025",
-    title: "Software Developer",
-    company: "Industry 4.0",
-    href: "https://uwaterloo.ca/sedra-student-design-centre/catalogs/student-design-teams/industry-40",
-    logo: "/assets/industry.png",
-    framed: true,
-    summary: "Led the rebuild of the case competition website with a team of executives, from design to launch.",
-  },
-  {
     date: "Sept 2024 - Dec 2024",
     title: "Backend Engineering Intern",
     company: "University of Toronto",
@@ -427,29 +418,29 @@ export default function Home() {
             <div className="space-y-5">
               <div className="flex flex-row items-center space-x-1.5">
                 {["Software Engineering", "ML/AI", "UX Design"].map((label, i) => (
-                  <motion.span key={label} className="inline-block" {...blurIn(HERO_DELAY + i * 0.1, "above")}>
+                  <motion.span key={label} className="inline-block" {...blurIn(HERO_DELAY + i * 0.2, "above")}>
                     <Pill onClick={handlePillClick}>{label}</Pill>
                   </motion.span>
                 ))}
               </div>
               <h1 className="text-6xl tracking-tighter text-foreground xl:text-8xl">
                 {"Abeer".split("").map((letter, i) => (
-                  <motion.span key={i} className="inline-block" {...blurIn(HERO_DELAY + 0.25 + i * 0.03)}>
+                  <motion.span key={i} className="inline-block" {...blurIn(HERO_DELAY + 0.5 + i * 0.07)}>
                     {letter}
                   </motion.span>
                 ))}{" "}
                 <motion.span
                   className="clash-grotesk text-shimmer inline-block animate-shimmer motion-reduce:animate-none"
-                  {...blurIn(HERO_DELAY + 0.55)}
+                  {...blurIn(HERO_DELAY + 1.05)}
                 >
                   Das.
                 </motion.span>
               </h1>
-              <motion.p {...blurIn(HERO_DELAY + 0.8)} className="max-w-md text-lg tracking-tight text-muted-foreground xl:text-xl">
+              <motion.p {...blurIn(HERO_DELAY + 1.5)} className="max-w-md text-lg tracking-tight text-muted-foreground xl:text-xl">
                 Product engineer. Currently at a VC firm, previously at two of the fastest-growing legal tech startups.
               </motion.p>
               <div className="flex flex-row items-center space-x-1.5 pt-2">
-                <motion.span className="mr-3 inline-block" {...blurIn(HERO_DELAY + 1)}>
+                <motion.span className="mr-3 inline-block" {...blurIn(HERO_DELAY + 1.9)}>
                   <button
                     type="button"
                     onClick={openModal}
@@ -462,12 +453,12 @@ export default function Home() {
                     />
                   </button>
                 </motion.span>
-                <motion.span className="inline-block" {...blurIn(HERO_DELAY + 1.08)}>
+                <motion.span className="inline-block" {...blurIn(HERO_DELAY + 2.05)}>
                   <SocialLink href="https://github.com/AbeerDas" label="GitHub">
                     <Github className="h-6 w-6" />
                   </SocialLink>
                 </motion.span>
-                <motion.span className="inline-block" {...blurIn(HERO_DELAY + 1.16)}>
+                <motion.span className="inline-block" {...blurIn(HERO_DELAY + 2.2)}>
                   <SocialLink href="https://www.linkedin.com/in/abeerdas/" label="LinkedIn">
                     <Linkedin className="h-6 w-6" />
                   </SocialLink>
@@ -555,15 +546,15 @@ const fadeToLeft = {
 const HERO_DELAY = 2;
 const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const heroIn = (step: number) => ({
-  initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.8, delay: HERO_DELAY + step * 0.08, ease },
+  initial: { opacity: 0, y: 32, filter: "blur(14px)" },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+  transition: { duration: 1.6, delay: HERO_DELAY + 0.4 + step * 0.18, ease },
 });
 // Drifts into place out of a soft blur, from below unless told otherwise, the way the intro arrives.
 const blurIn = (delay: number, from: "below" | "above" = "below") => ({
-  initial: { opacity: 0, y: from === "below" ? 28 : -20, filter: "blur(12px)" },
+  initial: { opacity: 0, y: from === "below" ? 44 : -32, filter: "blur(20px)" },
   animate: { opacity: 1, y: 0, filter: "blur(0px)" },
-  transition: { duration: 1, delay, ease },
+  transition: { duration: 1.8, delay, ease },
 });
 
 function FeatureCard(props: {
