@@ -72,6 +72,8 @@
 
   body {
     @apply bg-background text-foreground cursor-wait;
+    /* The skyline and the soft glows reach past the page's sides without adding a sideways scroll. Clip, unlike hidden, keeps the pinned work history working. */
+    overflow-x: clip;
   }
 
   section {

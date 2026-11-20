@@ -145,6 +145,48 @@ const stateSchema = `class SibylState(BaseModel):
     iteration_count: int                      # capped at 3
     events: list[StreamEvent]                 # streamed to the dashboard`;
 
+// The colours a code editor's dark theme gives each kind of word.
+const codeColours = { keyword: "#569cd6", type: "#4ec9b0", field: "#9cdcfe", comment: "#6a9955" };
+
+// Colours every word in a type annotation such as list[Claim] as a type, leaving the brackets plain.
+function colourTypes(annotation: string) {
+  return annotation.split(/(\w+)/).map((part, i) =>
+    /^\w+$/.test(part) ? (
+      <span key={i} style={{ color: codeColours.type }}>
+        {part}
+      </span>
+    ) : (
+      part
+    ),
+  );
+}
+
+// Colours one line of the schema, either the class line or a field with its type and comment.
+function colourSchemaLine(line: string) {
+  const classLine = /^class (\w+)\((\w+)\):$/.exec(line);
+  if (classLine) {
+    return (
+      <>
+        <span style={{ color: codeColours.keyword }}>class</span> {colourTypes(classLine[1] ?? "")}(
+        {colourTypes(classLine[2] ?? "")}):
+      </>
+    );
+  }
+  const field = /^(\s*)(\w+)(: )(.+?)(\s*)(#.*)?$/.exec(line);
+  if (!field) return line;
+  const [, indent, name, colon, annotation, gap, comment] = field;
+  return (
+    <>
+      {indent}
+      <span style={{ color: codeColours.field }}>{name}</span>
+      {colon}
+      {colourTypes(annotation ?? "")}
+      {gap}
+      {comment && <span style={{ color: codeColours.comment }}>{comment}</span>}
+    </>
+  );
+}
+
 function SectionHeading({ number, title }: { number: string; title: string }) {
   return (
     <Reveal>
@@ -612,7 +654,7 @@ const Sibyl = () => {
 
       <CaseTOC items={tocItems} />
 
-      <main className="mx-auto max-w-3xl px-6 pb-32 pt-32 md:pt-40">
+      <main className="mx-auto max-w-3xl px-6 pb-32 pt-32 md:pt-40 lg:max-w-5xl lg:pl-52 xl:max-w-6xl xl:pl-56">
         {/* Title block */}
         <Reveal className="flex flex-col items-center text-center">
           <h1 className="clash-grotesk text-7xl tracking-tight md:text-8xl">Sibyl</h1>
@@ -734,8 +776,10 @@ const Sibyl = () => {
               each step, so a failed run resumes from the last good node.
             </p>
           </Reveal>
-          <pre className="mt-6 overflow-x-auto rounded-xl border borderColour bg-[#0A0A13] p-6 font-mono text-sm leading-relaxed text-foreground/90">
-            {stateSchema}
+          <pre className="mt-6 overflow-x-auto rounded-xl border borderColour bg-[#0A0A13] p-6 font-mono text-sm leading-relaxed text-[#d4d4d4]">
+            {stateSchema.split("\n").map((line, i) => (
+              <div key={i}>{colourSchemaLine(line)}</div>
+            ))}
           </pre>
         </section>
 

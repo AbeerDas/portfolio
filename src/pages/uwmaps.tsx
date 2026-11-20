@@ -78,7 +78,7 @@ const UwMaps = () => {
 
       <CaseTOC items={tocItems} />
 
-      <main className="mx-auto max-w-3xl px-6 pb-32 pt-32 md:pt-40">
+      <main className="mx-auto max-w-3xl px-6 pb-32 pt-32 md:pt-40 lg:max-w-5xl lg:pl-52 xl:max-w-6xl xl:pl-56">
         {/* Title block */}
         <div className="flex flex-col items-center text-center">
           <h1 className="clash-grotesk text-6xl italic tracking-tight md:text-7xl">

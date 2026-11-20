@@ -1,7 +1,6 @@
 import Container from "@/components/Container";
 import { useEffect, useRef, useState } from "react";
 import styles from "@/styles/Home.module.css";
-import { Button } from "@/components/ui/button";
 // import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
@@ -11,17 +10,17 @@ import AdminModal from '../components/AdminModal';
 
 import {
   ArrowUpRight,
-  ChevronRight,
   Github,
   Linkedin,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { updateResumeUrl, loadResumeUrl } from "@/lib/utils";
+import { cn, updateResumeUrl, loadResumeUrl } from "@/lib/utils";
 import Image from "next/image";
 import PhotoWall, { type Photo } from "@/components/PhotoWall";
-import ExperienceList, { OutboundLink, type Experience } from "@/components/ExperienceList";
-import Reveal from "@/components/Reveal";
+import ExperienceScroller, { OutboundLink, type Experience } from "@/components/ExperienceScroller";
+import Glow from "@/components/Glow";
+import ProjectShowcase, { type Project } from "@/components/ProjectShowcase";
 import SkylineHologram from "@/components/SkylineHologram";
 
 import uwmapsImage from '@/images/uwmaps.png';
@@ -29,16 +28,7 @@ import spellbookLongLogo from '@/images/spellbook/SpellbookLongLogo.svg';
 
 
 
-const projects: Array<{
-  title: string;
-  description: string;
-  image?: string;
-  // The colour at the image's edges, filling the rest of the tile so the whole image shows without visible bands.
-  tint: string;
-  href: string;
-  stack: string[];
-  badge?: string;
-}> = [
+const projects: Project[] = [
   {
     title: "Rosetta",
     badge: "3rd Place · HackHive",
@@ -131,24 +121,6 @@ const experiences: Experience[] = [
     summary: "Solo-shipped an AI agent that runs multi-step legal workflows, helping close a major enterprise contract.",
   },
   {
-    date: "Sept 2025 - Dec 2025",
-    title: "Software Developer",
-    company: "Industry 4.0",
-    href: "https://uwaterloo.ca/sedra-student-design-centre/catalogs/student-design-teams/industry-40",
-    logo: "/assets/industry.png",
-    framed: true,
-    summary: "Led the rebuild of the case competition website with a team of executives, from design to launch.",
-  },
-  {
-    date: "Apr 2025 - Aug 2025",
-    title: "Software Engineer Intern",
-    company: "BorderPass",
-    href: "https://www.borderpass.ai",
-    logo: "/assets/borderpass.png",
-    framed: true,
-    summary: "Cut time off Visitor Visa applications by auto-checking uploaded documents against government rules.",
-  },
-  {
     date: "Mar 2024 - Present",
     title: "Technical Software Lead",
     company: "UW Blueprint",
@@ -160,6 +132,24 @@ const experiences: Experience[] = [
         routes real Toronto addresses and splits bundles, saving volunteers hours every issue.
       </>
     ),
+  },
+  {
+    date: "Apr 2025 - Aug 2025",
+    title: "Software Engineer Intern",
+    company: "BorderPass",
+    href: "https://www.borderpass.ai",
+    logo: "/assets/borderpass.png",
+    framed: true,
+    summary: "Cut time off Visitor Visa applications by auto-checking uploaded documents against government rules.",
+  },
+  {
+    date: "Sept 2025 - Dec 2025",
+    title: "Software Developer",
+    company: "Industry 4.0",
+    href: "https://uwaterloo.ca/sedra-student-design-centre/catalogs/student-design-teams/industry-40",
+    logo: "/assets/industry.png",
+    framed: true,
+    summary: "Led the rebuild of the case competition website with a team of executives, from design to launch.",
   },
   {
     date: "Sept 2024 - Dec 2024",
@@ -177,15 +167,6 @@ const experiences: Experience[] = [
     logo: "/assets/questrade.png",
     summary: "Ran usability tests, card sorts, A/B tests and interviews across Questrade's trading, auto insurance and mortgage products.",
   },
-  {
-    date: "Mar 2023 - Apr 2024",
-    title: "Web Developer",
-    company: "Bangladesh Canada Cultural Society",
-    href: "https://hindumondir.org",
-    logo: "/assets/bchm.png",
-    framed: true,
-    summary: "Redesigned the society's website into a modern, donor-friendly site with an email newsletter for community updates.",
-  },
 ];
 
 // Ordered so mountain shots alternate with city, people and event photos.
@@ -193,7 +174,7 @@ const photos: Photo[] = [
   { src: "/images/gallery/01-yosemite-railing.jpg", alt: "Abeer smiling at a railing in Yosemite", caption: "Yosemite" },
   { src: "/images/gallery/09-friends.jpg", alt: "Abeer with friends on a night out", caption: "Out with friends!" },
   { src: "/images/gallery/03-coast-deer.jpg", alt: "A deer on a hillside above the ocean at Point Reyes", caption: "Point Reyes" },
-  { src: "/images/gallery/04-museum.jpg", alt: "Abeer at the National Museum of Anthropology in Mexico City", caption: "Anthropology Museum" },
+  { src: "/images/gallery/04-museum.jpg", alt: "Abeer at the Museo Nacional de Antropología in Mexico City", caption: "Museo de Antropología" },
   { src: "/images/gallery/06-hike-descent.jpg", alt: "Hikers heading down Mount Tam above the fog", caption: "Mount Tam" },
   { src: "/images/gallery/13-concert.jpg", alt: "The Weeknd in concert at a stadium lit with fire", caption: "The Weeknd" },
   { src: "/images/gallery/11-lake.jpg", alt: "Abeer by a lake in Banff, Alberta", caption: "Banff, Alberta" },
@@ -444,28 +425,54 @@ export default function Home() {
 
           <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
             <div className="space-y-5">
-              <motion.div {...heroIn(0)} className="flex flex-row items-center space-x-1.5">
-                <span className={styles.pill} onClick={handlePillClick} style={{ cursor: 'pointer' }}>Software Engineering</span>
-                <span className={styles.pill} onClick={handlePillClick} style={{ cursor: 'pointer' }}>ML/AI</span>
-                <span className={styles.pill} onClick={handlePillClick} style={{ cursor: 'pointer' }}>UX Design</span>
-              </motion.div>
-              <motion.h1 {...heroIn(1)} className="text-6xl tracking-tighter text-foreground xl:text-8xl">
-                Abeer <span className="clash-grotesk text-shimmer animate-shimmer motion-reduce:animate-none">Das.</span>
-              </motion.h1>
-              <motion.p {...heroIn(2)} className="max-w-md text-lg tracking-tight text-muted-foreground xl:text-xl">
+              <div className="flex flex-row items-center space-x-1.5">
+                {["Software Engineering", "ML/AI", "UX Design"].map((label, i) => (
+                  <motion.span key={label} className="inline-block" {...blurIn(HERO_DELAY + i * 0.1, "above")}>
+                    <Pill onClick={handlePillClick}>{label}</Pill>
+                  </motion.span>
+                ))}
+              </div>
+              <h1 className="text-6xl tracking-tighter text-foreground xl:text-8xl">
+                {"Abeer".split("").map((letter, i) => (
+                  <motion.span key={i} className="inline-block" {...blurIn(HERO_DELAY + 0.25 + i * 0.03)}>
+                    {letter}
+                  </motion.span>
+                ))}{" "}
+                <motion.span
+                  className="clash-grotesk text-shimmer inline-block animate-shimmer motion-reduce:animate-none"
+                  {...blurIn(HERO_DELAY + 0.55)}
+                >
+                  Das.
+                </motion.span>
+              </h1>
+              <motion.p {...blurIn(HERO_DELAY + 0.8)} className="max-w-md text-lg tracking-tight text-muted-foreground xl:text-xl">
                 Product engineer. Currently at a VC firm, previously at two of the fastest-growing legal tech startups.
               </motion.p>
-              <motion.div {...heroIn(3)} className="flex flex-row items-center space-x-1.5 pt-2">
-                <Button onClick={openModal}>
-                  Contact Me <ChevronRight className="ml-1 h-4 w-4" />
-                </Button>
-                <SocialLink href="https://github.com/AbeerDas" label="GitHub">
-                  <Github className="h-6 w-6" />
-                </SocialLink>
-                <SocialLink href="https://www.linkedin.com/in/abeerdas/" label="LinkedIn">
-                  <Linkedin className="h-6 w-6" />
-                </SocialLink>
-              </motion.div>
+              <div className="flex flex-row items-center space-x-1.5 pt-2">
+                <motion.span className="mr-3 inline-block" {...blurIn(HERO_DELAY + 1)}>
+                  <button
+                    type="button"
+                    onClick={openModal}
+                    className="group relative py-1 text-base font-bold text-[#8f97e8] transition-colors duration-300 hover:text-[#c3c9ff]"
+                  >
+                    Contact Me
+                    <span
+                      aria-hidden
+                      className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-[#8f97e8] transition-transform duration-300 group-hover:scale-x-100"
+                    />
+                  </button>
+                </motion.span>
+                <motion.span className="inline-block" {...blurIn(HERO_DELAY + 1.08)}>
+                  <SocialLink href="https://github.com/AbeerDas" label="GitHub">
+                    <Github className="h-6 w-6" />
+                  </SocialLink>
+                </motion.span>
+                <motion.span className="inline-block" {...blurIn(HERO_DELAY + 1.16)}>
+                  <SocialLink href="https://www.linkedin.com/in/abeerdas/" label="LinkedIn">
+                    <Linkedin className="h-6 w-6" />
+                  </SocialLink>
+                </motion.span>
+              </div>
             </div>
             <motion.div {...heroIn(2)}>
               <PhotoWall photos={photos} className="h-72 sm:h-80 lg:-ml-6 lg:-mr-2 lg:h-[30rem] xl:-mr-12 min-[1400px]:-mr-28" />
@@ -474,7 +481,8 @@ export default function Home() {
         </section>
 
         {/* Case studies */}
-        <section id="cases" data-scroll-section className="mx-auto max-w-6xl scroll-mt-24">
+        <section id="cases" data-scroll-section className="relative mx-auto max-w-6xl scroll-mt-24">
+          <Glow className="left-1/2 top-1/2 h-[34rem] w-[64rem] -translate-x-1/2 -translate-y-1/2" />
           <motion.div {...heroIn(4)} className="mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1">
             <h2 className="clash-grotesk text-gradient text-2xl font-semibold tracking-tight md:text-3xl">Case studies</h2>
             <p className="text-base text-muted-foreground md:text-lg">Full write-ups of three projects</p>
@@ -489,8 +497,10 @@ export default function Home() {
         </section>
 
         {/* Projects */}
-        <section id="projects" data-scroll-section className="mx-auto mt-28 max-w-6xl scroll-mt-24">
-          <Reveal>
+        <section id="projects" data-scroll-section className="relative mx-auto mt-28 max-w-6xl scroll-mt-24">
+          <Glow className="-left-80 top-16" />
+          <Glow className="-right-80 bottom-0" />
+          <ProjectShowcase projects={projects}>
             <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
               ✨ Projects
             </span>
@@ -500,59 +510,12 @@ export default function Home() {
             <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
               Hackathon wins, side projects and experiments, most of them with an AI twist.
             </p>
-          </Reveal>
-
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {projects.map((project, i) => (
-              <Reveal key={project.title} delay={(i % 4) * 0.06} className="h-full">
-                <Link href={project.href} target="_blank" passHref className="group block h-full">
-                  <div className="flex h-full flex-col overflow-hidden rounded-xl border border-white/10 bg-background/50 backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-white/20">
-                    <div className="relative aspect-[4/3] w-full overflow-hidden" style={{ background: project.tint }}>
-                      {project.image ? (
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          fill
-                          sizes="(min-width: 1024px) 280px, (min-width: 640px) 50vw, 100vw"
-                          className="object-contain transition duration-500 group-hover:scale-[1.03]"
-                        />
-                      ) : (
-                        <div className="flex h-full w-full flex-col items-center justify-center gap-1 px-4 text-center">
-                          <span className="clash-grotesk text-3xl italic tracking-tight text-white">
-                            {project.title}
-                          </span>
-                          {project.badge && (
-                            <span className="text-gradient clash-grotesk text-xs font-semibold tracking-tighter">
-                              {project.badge}
-                            </span>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                    <div className="flex flex-1 flex-col p-4">
-                      <h3 className="text-base font-semibold">{project.title}</h3>
-                      <p className="mt-1 text-sm leading-relaxed text-gray-400">{project.description}</p>
-                      <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
-                        {project.stack.map((tech) => (
-                          <span
-                            key={tech}
-                            className="rounded-full border border-[#141521] bg-[#0A0A13] px-2.5 py-0.5 text-[11px] text-gray-300"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
+          </ProjectShowcase>
         </section>
 
         {/* Work Experience */}
-        <section id="experience" data-scroll-section className="mx-auto mt-32 max-w-6xl scroll-mt-24">
-          <Reveal>
+        <section id="experience" data-scroll-section className="relative mx-auto mt-32 max-w-6xl scroll-mt-24">
+          <ExperienceScroller experiences={experiences}>
             <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
               ✨ Experience
             </span>
@@ -562,21 +525,19 @@ export default function Home() {
             <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
               From a VC firm to legal tech startups.
             </p>
-          </Reveal>
-          <div className="mt-14">
-            <ExperienceList experiences={experiences} />
-          </div>
+          </ExperienceScroller>
         </section>
 
         {/* Contact */}
-        <section id="contact" data-scroll-section className="mb-8 mt-40">
+        <section id="contact" data-scroll-section className="relative -mb-24 mt-40">
+          <Glow className="left-1/2 top-24 h-[30rem] w-[56rem] -translate-x-1/2" />
           <SkylineHologram>
             <a
               href="mailto:ak5das@uwaterloo.ca"
-              className="group inline-flex items-center gap-2 rounded-full border border-[#a78bfa]/40 bg-primary/10 px-6 py-2.5 text-sm text-white shadow-[0_0_28px_rgba(121,128,254,0.35)] backdrop-blur transition hover:border-[#a78bfa]/70 hover:bg-primary/20"
+              className="-ml-[1.5vw] block w-fit whitespace-nowrap text-[15vw] font-bold leading-none tracking-tighter text-[#2a2e5c] transition-colors duration-500 hover:text-[#5a65a3] sm:text-[10vw]"
+              style={fadeToLeft}
             >
               Get in touch
-              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
           </SkylineHologram>
         </section>
@@ -585,6 +546,12 @@ export default function Home() {
   );
 }
 
+// Lets the big "Get in touch" trail away into the page's left edge.
+const fadeToLeft = {
+  maskImage: "linear-gradient(to right, transparent, black 10%)",
+  WebkitMaskImage: "linear-gradient(to right, transparent, black 10%)",
+};
+
 // The preloader covers the first two seconds, so the intro animates in once it lifts.
 const HERO_DELAY = 2;
 const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -592,6 +559,12 @@ const heroIn = (step: number) => ({
   initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.8, delay: HERO_DELAY + step * 0.08, ease },
+});
+// Drifts into place out of a soft blur, from below unless told otherwise, the way the intro arrives.
+const blurIn = (delay: number, from: "below" | "above" = "below") => ({
+  initial: { opacity: 0, y: from === "below" ? 28 : -20, filter: "blur(12px)" },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+  transition: { duration: 1, delay, ease },
 });
 
 function FeatureCard(props: {
@@ -622,6 +595,26 @@ function FeatureCard(props: {
         <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{props.blurb}</p>
       </div>
     </Link>
+  );
+}
+
+// A small label whose outline lights up by racing once around its edge on hover.
+function Pill({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
+  return (
+    <span className={cn(styles.pill, "group cursor-pointer")} onClick={onClick}>
+      {children}
+      <svg aria-hidden className="pointer-events-none absolute -inset-px h-[calc(100%+2px)] w-[calc(100%+2px)] overflow-visible">
+        <rect
+          x="0.5"
+          y="0.5"
+          width="100%"
+          height="100%"
+          ry="50%"
+          pathLength={1}
+          className="fill-none stroke-[#c7d2fe]/45 transition-[stroke-dashoffset] duration-300 ease-out [stroke-dasharray:1] [stroke-dashoffset:1] group-hover:[stroke-dashoffset:0]"
+        />
+      </svg>
+    </span>
   );
 }
 

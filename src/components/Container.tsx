@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { cn, scrollTo } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
@@ -39,9 +40,11 @@ const variants = {
   hidden: { opacity: 0 },
 };
 
-const navLinks = [
+const navLinks: Array<{ href: string; text: string; external?: boolean }> = [
   { href: "#projects", text: "projects" },
   { href: "#experience", text: "experience" },
+  { href: "https://github.com/AbeerDas", text: "github", external: true },
+  { href: "https://www.linkedin.com/in/abeerdas/", text: "linkedin", external: true },
 ];
 
 function handleClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
@@ -72,13 +75,13 @@ function NavItem(props: NavProps) {
         className={cn(props.i === 0 && "nav-active", "nav-link")}
       >
         {props.text}
+        {props.target === "_blank" && <ArrowUpRight aria-hidden className="ml-0.5 inline-block h-3.5 w-3.5" />}
       </a>
     </motion.li>
   );
 }
 export default function Container(props: ContainerProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const { children, ...customMeta } = props;
@@ -90,19 +93,6 @@ export default function Container(props: ContainerProps) {
     type: "website",
     ...customMeta,
   };
-
-  // handle scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   // preloader effect
   useEffect(() => {
@@ -146,14 +136,7 @@ export default function Container(props: ContainerProps) {
         <link rel="icon" type="image/png" sizes="16x16" href="/AbeerDas.png?v=3" />
         <link rel="apple-touch-icon" href="/AbeerDas.png?v=3" />
       </Head>
-      <nav
-        className={cn(
-          styles.nav,
-          isScrolled
-            ? "bg-gradient-to-br from-background to-transparent shadow-md backdrop-blur transition"
-            : "bg-transparent",
-        )}
-      >
+      <nav className={styles.nav}>
         <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -183,7 +166,15 @@ export default function Container(props: ContainerProps) {
         {/* Desktop menu */}
         <ul className={styles["desktop-nav"]}>
           {navLinks.map((link, i) => (
-            <NavItem key={link.href} href={link.href} text={link.text} i={i} className="text-base" />
+            <NavItem
+              key={link.href}
+              href={link.href}
+              text={link.text}
+              i={i}
+              className="text-base"
+              target={link.external ? "_blank" : undefined}
+              rel={link.external ? "noopener noreferrer" : undefined}
+            />
           ))}
         </ul>
 
@@ -220,6 +211,8 @@ export default function Container(props: ContainerProps) {
                         text={link.text}
                         i={i}
                         className="text-xl"
+                        target={link.external ? "_blank" : undefined}
+                        rel={link.external ? "noopener noreferrer" : undefined}
                       />
                     </button>
                   ))}

@@ -76,7 +76,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="w-full bg-gradient-to-t from-primary/[1%] to-transparent">
+    <footer className="relative z-10 w-full bg-gradient-to-t from-primary/[1%] to-transparent">
       <div className="container mx-auto flex flex-row items-center justify-between gap-4 py-6">
         <span className="flex flex-row items-center space-x-4">
           <p className="text-xs text-muted-foreground">
