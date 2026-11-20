@@ -101,8 +101,7 @@ const experiences: Experience[] = [
     title: "AI Engineering Intern",
     company: "Theory Ventures",
     href: "https://theory.ventures",
-    logo: "/assets/theory.png",
-    framed: true,
+    logo: "/assets/theory.svg",
     summary: (
       <>
         Built entity resolution for the firm&apos;s company records, merging duplicates across Postgres,{" "}

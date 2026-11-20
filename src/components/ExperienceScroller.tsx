@@ -23,7 +23,7 @@ export function OutboundLink({ href, children }: { href: string; children: React
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-secondary transition-colors hover:text-white"
+      className="whitespace-nowrap text-secondary transition-colors hover:text-white"
     >
       {children}
       <ArrowUpRight aria-hidden className="ml-0.5 inline-block h-[0.8em] w-[0.8em] align-baseline" />
@@ -35,6 +35,13 @@ export function OutboundLink({ href, children }: { href: string; children: React
 const SCROLL_PER_ROLE = 0.55;
 
 const pad = (n: number) => String(n).padStart(2, "0");
+
+// The logo sits far back, dark and see-through, so the words over it stay easy to read.
+const LOGO_OPACITY = 0.14;
+const fadedLogo = {
+  maskImage: "radial-gradient(ellipse 70% 70% at 35% 45%, black 20%, transparent 78%)",
+  WebkitMaskImage: "radial-gradient(ellipse 70% 70% at 35% 45%, black 20%, transparent 78%)",
+};
 
 // Holds the screen still while scrolling through the work history, bringing in one role at a time.
 // Scrolling back up steps back through them in reverse, and the page moves on after the last one.
@@ -98,12 +105,43 @@ export default function ExperienceScroller({
           </div>
 
           <div className="relative">
-            <div className="relative min-h-[17rem] md:min-h-[20rem]">
-              <AnimatePresence mode="popLayout" initial={false} custom={view.direction}>
+            {/* A player card: the company's logo large and faint on the left, its name and the work right-aligned at
+                the bottom, overlapping the logo. */}
+            <div className="relative h-[24rem] md:h-[30rem]">
+              <AnimatePresence initial={false} custom={view.direction}>
+                {current && (
+                  <motion.div
+                    key={`logo-${view.index}`}
+                    aria-hidden
+                    custom={view.direction}
+                    className="pointer-events-none absolute inset-y-0 left-0 w-[80%]"
+                    style={fadedLogo}
+                    variants={{
+                      enter: { opacity: 0, x: -80, filter: "blur(8px)" },
+                      shown: { opacity: LOGO_OPACITY, x: 0, filter: "blur(0px)" },
+                      leave: { opacity: 0, x: -40, filter: "blur(8px)" },
+                    }}
+                    initial="enter"
+                    animate="shown"
+                    exit="leave"
+                    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <Image
+                      src={current.logo}
+                      alt=""
+                      fill
+                      sizes="(min-width: 768px) 520px, 80vw"
+                      className={cn("object-contain object-left grayscale-[40%]", current.framed && "rounded-[2.5rem]")}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <AnimatePresence initial={false} custom={view.direction}>
                 {current && (
                   <motion.article
-                    key={view.index}
+                    key={`card-${view.index}`}
                     custom={view.direction}
+                    className="absolute bottom-0 right-0 w-full max-w-xl text-right"
                     variants={{
                       enter: (direction: number) => ({ opacity: 0, y: direction * 48 }),
                       shown: { opacity: 1, y: 0 },
@@ -114,22 +152,9 @@ export default function ExperienceScroller({
                     exit="leave"
                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    <div className="flex items-center gap-4">
-                      <span className="relative h-14 w-14 shrink-0">
-                        <Image
-                          src={current.logo}
-                          alt={`${current.company} logo`}
-                          fill
-                          sizes="56px"
-                          className={current.framed ? "rounded-xl object-cover ring-1 ring-white/10" : "object-contain"}
-                        />
-                      </span>
-                      <div>
-                        <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{current.date}</p>
-                        <p className="mt-1 text-sm text-muted-foreground">{current.title}</p>
-                      </div>
-                    </div>
-                    <h3 className="clash-grotesk mt-6 text-4xl tracking-tight md:text-6xl">
+                    <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">{current.date}</p>
+                    <p className="mt-1.5 text-base text-foreground/70">{current.title}</p>
+                    <h3 className="clash-grotesk mt-3 text-4xl tracking-tight md:text-6xl">
                       <a href={current.href} target="_blank" rel="noopener noreferrer" className="group">
                         <span className="text-gradient">{current.company}</span>
                         <ArrowUpRight
@@ -138,7 +163,10 @@ export default function ExperienceScroller({
                         />
                       </a>
                     </h3>
-                    <p className="mt-5 max-w-xl text-lg leading-relaxed text-foreground/80 md:text-xl">{current.summary}</p>
+                    <div className="ml-auto mt-4 h-px w-24 bg-gradient-to-l from-secondary/70 to-transparent" />
+                    <p className="ml-auto mt-4 max-w-lg text-lg leading-relaxed text-foreground/85 md:text-xl">
+                      {current.summary}
+                    </p>
                   </motion.article>
                 )}
               </AnimatePresence>
