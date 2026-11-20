@@ -4,7 +4,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { cn, scrollTo } from "@/lib/utils";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Footer from "@/components/Footer";
 import { useRouter } from "next/router";
 import Preloader from "@/components/Preloader";
@@ -39,6 +39,11 @@ const variants = {
   }),
   hidden: { opacity: 0 },
 };
+
+// The widest column of page content, and the page's side padding, which decide whether the navigation has room
+// beside the content or sits over it.
+const CONTENT_WIDTH = 1152;
+const PAGE_PADDING = 16;
 
 const navLinks: Array<{ href: string; text: string; external?: boolean }> = [
   { href: "#projects", text: "projects" },
@@ -83,6 +88,10 @@ function NavItem(props: NavProps) {
 export default function Container(props: ContainerProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [navClearsContent, setNavClearsContent] = useState<boolean>(false);
+  const logoRef = useRef<HTMLAnchorElement>(null);
+  const linksRef = useRef<HTMLUListElement>(null);
 
   const { children, ...customMeta } = props;
   const router = useRouter();
@@ -93,6 +102,29 @@ export default function Container(props: ContainerProps) {
     type: "website",
     ...customMeta,
   };
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 0);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // The bar behind the navigation is only needed where the logo or links sit over the page's content. The links are
+  // hidden on phones, which reads as no room beside the content.
+  useEffect(() => {
+    const measure = () => {
+      const contentLeft = Math.max(PAGE_PADDING, (window.innerWidth - CONTENT_WIDTH) / 2);
+      const contentRight = window.innerWidth - contentLeft;
+      const logoRight = logoRef.current?.getBoundingClientRect().right ?? window.innerWidth;
+      const links = linksRef.current?.getBoundingClientRect();
+      const linksLeft = links && links.width > 0 ? links.left : 0;
+      setNavClearsContent(logoRight < contentLeft && linksLeft > contentRight);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
 
   // preloader effect
   useEffect(() => {
@@ -136,7 +168,14 @@ export default function Container(props: ContainerProps) {
         <link rel="icon" type="image/png" sizes="16x16" href="/AbeerDas.png?v=3" />
         <link rel="apple-touch-icon" href="/AbeerDas.png?v=3" />
       </Head>
-      <nav className={styles.nav}>
+      <nav
+        className={cn(
+          styles.nav,
+          isScrolled && !navClearsContent
+            ? "bg-gradient-to-br from-background to-transparent shadow-md backdrop-blur transition"
+            : "bg-transparent",
+        )}
+      >
         <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -152,7 +191,7 @@ export default function Container(props: ContainerProps) {
             <CrossIcon data-hide={!isOpen} />
           </button>
         </div>
-        <Link href="/" className="inline-block">
+        <Link ref={logoRef} href="/" className="inline-block">
           <Image
             src="/AbeerDasNav.png"
             alt="abeer das"
@@ -164,7 +203,7 @@ export default function Container(props: ContainerProps) {
         </Link>
 
         {/* Desktop menu */}
-        <ul className={styles["desktop-nav"]}>
+        <ul ref={linksRef} className={styles["desktop-nav"]}>
           {navLinks.map((link, i) => (
             <NavItem
               key={link.href}

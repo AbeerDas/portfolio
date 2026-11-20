@@ -233,6 +233,15 @@ const arrival = {
   transition: { duration: 1.6, ease: [0.22, 1, 0.36, 1] },
 } as const;
 
+// A wide, dim glow rising from behind the buildings like the light after sunset. Its dome fades out softly toward the
+// top, and its lower part fades straight down into the buildings so no edge shows.
+const sunsetGlow = {
+  background:
+    "radial-gradient(ellipse 60% 92% at 50% 100%, rgba(129,140,248,0.09), rgba(154,112,255,0.045) 40%, transparent 75%)",
+  maskImage: "linear-gradient(to bottom, black 62%, transparent)",
+  WebkitMaskImage: "linear-gradient(to bottom, black 62%, transparent)",
+};
+
 // The scene appears gradually from the top, runs to the page's bottom edge and softens at the sides.
 const fadeEdges = {
   maskImage:
@@ -252,6 +261,7 @@ export default function SkylineHologram({ children }: { children?: React.ReactNo
     reduceMotion ? null : <animate attributeName={attributeName} dur={WAVE_SECONDS} repeatCount="indefinite" values={frames.join(";")} />;
   return (
     <div className="relative ml-[calc(50%-50vw)] h-[380px] w-screen select-none sm:aspect-[1600/720] sm:h-auto sm:max-h-[780px]">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[85%]" style={sunsetGlow} />
       <div aria-hidden className="pointer-events-none absolute inset-0 z-10 overflow-hidden" style={fadeEdges}>
         <motion.div className="absolute inset-0" {...arrival}>
           <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} preserveAspectRatio="xMidYMax slice" className="h-full w-full">

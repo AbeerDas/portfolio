@@ -530,7 +530,6 @@ export default function Home() {
 
         {/* Contact */}
         <section id="contact" data-scroll-section className="relative -mb-24 mt-40">
-          <Glow className="left-1/2 top-24 h-[30rem] w-[56rem] -translate-x-1/2" />
           <SkylineHologram>
             <a
               href="mailto:ak5das@uwaterloo.ca"
