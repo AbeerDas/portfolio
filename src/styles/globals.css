@@ -68,6 +68,9 @@
 
   html {
     @apply antialiased;
+    /* Set here as well as on the body, so the body clips its own content. On the body alone, the browser moves the
+       rule to the window, and phones still widen the page to fit the overflow, pushing the menu button off screen. */
+    overflow-x: clip;
   }
 
   body {
