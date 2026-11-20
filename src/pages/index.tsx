@@ -1,5 +1,5 @@
 import Container from "@/components/Container";
-import { useEffect, useRef, Suspense, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "@/styles/Home.module.css";
 import { Button } from "@/components/ui/button";
 // import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -10,19 +10,21 @@ import AdminModal from '../components/AdminModal';
 
 
 import {
+  ArrowUpRight,
   ChevronRight,
   Github,
   Linkedin,
 } from "lucide-react";
-import { TriangleDownIcon } from "@radix-ui/react-icons";
-import Spline from "@splinetool/react-spline";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import { cn, CONFIG, updateResumeUrl, loadResumeUrl } from "@/lib/utils";
+import { updateResumeUrl, loadResumeUrl } from "@/lib/utils";
 import Image from "next/image";
+import PhotoWall, { type Photo } from "@/components/PhotoWall";
+import ExperienceList, { OutboundLink, type Experience } from "@/components/ExperienceList";
+import Reveal from "@/components/Reveal";
+import SkylineHologram from "@/components/SkylineHologram";
 
 import uwmapsImage from '@/images/uwmaps.png';
-import rooted from '@/images/rooted.png';
-import bchm from '@/images/bchm.png';
 import spellbookLongLogo from '@/images/spellbook/SpellbookLongLogo.svg';
 
 
@@ -31,223 +33,206 @@ const projects: Array<{
   title: string;
   description: string;
   image?: string;
+  // The colour at the image's edges, filling the rest of the tile so the whole image shows without visible bands.
+  tint: string;
   href: string;
   stack: string[];
   badge?: string;
 }> = [
   {
-    title: "Sibyl",
-    badge: "1st Place · Hack for Humanity",
-    description: "Multi-agent LangGraph pipeline routing evidence gaps with a RAG stack over climate compliance reports, paired with a real-time SSE dashboard and a grounded RAG chatbot.",
-    image: "/assets/sibyl.jpg",
-    href: "https://devpost.com/software/sibyl-x8gpor",
-    stack: ["Python", "LangGraph", "pgvector", "PostgreSQL"],
-  },
-  {
     title: "Rosetta",
     badge: "3rd Place · HackHive",
-    description: "Real-time lecture translation and transcription platform that injects RAG citations from student-uploaded notes and PDFs as professors speak.",
+    description: "Live lecture translation that cites students' own notes as the professor speaks.",
     image: "/assets/rosetta.jpg",
+    tint: "#038382",
     href: "https://devpost.com/software/rosetta-hq6aby",
     stack: ["TypeScript", "RAG", "OpenRouter", "ElevenLabs"],
   },
   {
     title: "Go-Phish",
-    description: "Browser extension that flags phishing emails with 96% accuracy via a scikit-learn classifier, gamified with a gacha-style fish-collection reward and team leaderboards to make email security engaging.",
+    description: "Browser extension that flags phishing emails with 96% accuracy, gamified with fish to collect.",
+    tint: "#13171A",
     href: "https://devpost.com/software/go-phish-e7qzo3",
     stack: ["TypeScript", "Django", "Scikit-Learn", "Groq"],
   },
   {
     title: "ScoutFox",
-    description: "Chrome extension (261 installs) that surfaces YouTube review videos directly on Amazon listings, using serverless APIs and LLM-driven query normalization.",
+    description: "Chrome extension with 261 installs that puts YouTube reviews on Amazon listings.",
     image: "/assets/scoutfox.jpg",
+    tint: "#fe6b35",
     href: "https://github.com/AbeerDas/ScoutFox",
     stack: ["TypeScript", "MV3", "React", "Vercel", "LLMs"],
   },
   {
     title: "Estia",
-    description: "Publicly hosted platform with 100+ coding projects, AI-powered project generation, RAG retrieval, and user profiles (auth, comments, etc.)",
+    description: "A library of 100+ coding projects with AI-generated project ideas.",
     image: "/assets/estia.png",
+    tint: "#0e1011",
     href: "https://estiafrontend.vercel.app/",
     stack: ["React", "Node.js", "PostgreSQL", "Groq", "Vercel"],
   },
   {
     title: "Statsanity",
-    description: "Full-stack application with login database to predict NBA games and MVP with linear regression AI model",
+    description: "Predicts NBA games and the MVP with a linear regression model.",
     image: "/assets/statsanity.png",
+    tint: "linear-gradient(#1d1300, #0e0e0e)",
     href: "https://github.com/achow111/Statsanity",
     stack: ["React", "Tensorflow", "Python (BeautifulSoup)", "Flask"],
   },
   {
     title: "OnePass",
-    description: "Password Manager CRUD app featuring strong password generation, a password checker, and a password storage system",
+    description: "Password manager that generates, checks and stores strong passwords.",
     image: "/assets/onepassv2.png",
+    tint: "#070707",
     href: "#",
     stack: ["Next.js", "Firebase", "Node.js"],
   },
   {
     title: "StockAI",
-    description: "Built an LSTM AI model to predict next-day stock prices using candlestick data on varying training configs to explore optimization",
+    description: "LSTM model that predicts next-day stock prices from candlestick data.",
     image: "/assets/stockai.png",
+    tint: "#0e1117",
     href: "https://github.com/AbeerDas/StockMarketPrediction",
     stack: ["Python", "Keras", "Pandas", "NumPy"],
   },
   {
     title: "Dungeon Map Generator",
-    description: "Won WEC 2024 building a dynamic tile-based map generator with pathfinding using Dijkstra's algorithm",
+    description: "Won WEC 2024 with tile-based dungeon maps and Dijkstra pathfinding.",
     image: "/assets/wecv4.png",
+    tint: "#031e0f",
     href: "https://github.com/tawsifrm/WEC-2024",
     stack: ["Python", "Turtle Graphics"],
   },
-  {
-    title: "Movie Land",
-    description: "Search tool for finding movies and TV shows, offering concise descriptions and release dates for each title",
-    image: "/assets/movieland.png",
-    href: "https://github.com/AbeerDas/MovieLand",
-    stack: ["React", "OMDb API", "TailwindCSS"],
-  },
 ];
 
-const workExperiences = [
+const experiences: Experience[] = [
   {
-    id: 1,
-    date: "Jan 2026 - May 2026",
-    title: "Software Engineer Intern",
-    company: "Spellbook (Khosla Ventures)",
-    image: "/assets/spellbook.svg",
-    description: (
-      <ul className="list-disc pl-5">
-        <li>
-          Solo-shipped a <span className="font-bold text-lightblue">legal workflow agent builder</span> using Vercel AI SDK, leading to closure of a <span className="font-bold text-lightblue">$100k+ enterprise contract</span>.
-        </li>
-        <li>
-          Slashed AI agent failures by <span className="font-bold text-lightblue">~50%</span> by replacing unpredictable tool calls with configurable, structured execution steps.
-        </li>
-        <li>
-          Conceived Personalization Settings and shipped <span className="font-bold text-lightblue">Company Profiles</span>, anchoring startup&apos;s push into in-house legal teams.
-        </li>
-        <li>
-          Instrumented <span className="font-bold text-lightblue">35 Datadog</span> UX/error analytic events across all features, catching <span className="font-bold text-lightblue">3 critical drop-offs</span> before reaching users.
-        </li>
-      </ul>
+    date: "Sept 2026 - Present",
+    title: "AI Engineering Intern",
+    company: "Theory Ventures",
+    href: "https://theory.ventures",
+    logo: "/assets/theory.png",
+    framed: true,
+    summary: (
+      <>
+        Built entity resolution for the firm&apos;s company records, merging duplicates across Postgres,{" "}
+        <OutboundLink href="https://attio.com">Attio</OutboundLink> and{" "}
+        <OutboundLink href="https://www.notion.com">Notion</OutboundLink> with long-horizon Python agents on{" "}
+        <OutboundLink href="https://sailresearch.com">Sail</OutboundLink>.
+      </>
     ),
   },
   {
-    id: 2,
+    date: "Jan 2026 - May 2026",
+    title: "Software Engineer Intern",
+    company: "Spellbook",
+    href: "https://www.spellbook.legal",
+    logo: "/assets/spellbook.svg",
+    summary: "Solo-shipped an AI agent that runs multi-step legal workflows, helping close a major enterprise contract.",
+  },
+  {
     date: "Sept 2025 - Dec 2025",
     title: "Software Developer",
     company: "Industry 4.0",
-    image: "/assets/industry.png",
-    description: (
-      <ul className="list-disc pl-5">
-        <li>
-          Drove <span className="font-bold text-lightblue">350+ case competition signups</span> by leading a website rebuild with a team of <span className="font-bold text-lightblue">20+ executives</span>, owning the project from design through release.
-        </li>
-        <li>
-          Ran agile delivery end-to-end, coordinating scope and timeline across cross-functional teams while keeping a high product quality bar.
-        </li>
-      </ul>
-    ),
+    href: "https://uwaterloo.ca/sedra-student-design-centre/catalogs/student-design-teams/industry-40",
+    logo: "/assets/industry.png",
+    framed: true,
+    summary: "Led the rebuild of the case competition website with a team of executives, from design to launch.",
   },
   {
-    id: 3,
     date: "Apr 2025 - Aug 2025",
     title: "Software Engineer Intern",
     company: "BorderPass",
-    image: "/assets/borderpass.png",
-    description: (
-      <ul className="list-disc pl-5">
-        <li>
-          Propelled a <span className="font-bold text-lightblue">35% increase in paying customers</span> by redesigning the Visitor Visa flow in React/TypeScript, eliminating manual entry by parsing uploaded documents to validate against the latest scraped IRCC requirements.
-        </li>
-        <li>
-          Automated document generation, scaling to <span className="font-bold text-lightblue">105k+ PDFs</span> processed via a serverless AWS Lambda pipeline with S3 triggers.
-        </li>
-        <li>
-          Drove <span className="font-bold text-lightblue">12+ university partnerships</span> by building an AWS Redshift data warehouse with a real-time finances pipeline.
-        </li>
-        <li>
-          Owned weekly zero-downtime prod releases, managing the full CI/CD pipeline across AWS backend services and Vercel.
-        </li>
-      </ul>
-    ),
+    href: "https://www.borderpass.ai",
+    logo: "/assets/borderpass.png",
+    framed: true,
+    summary: "Cut time off Visitor Visa applications by auto-checking uploaded documents against government rules.",
   },
   {
-    id: 4,
     date: "Mar 2024 - Present",
-    title: "Software Engineering Lead",
+    title: "Technical Software Lead",
     company: "UW Blueprint",
-    image: "/assets/blueprint.png",
-    description: (
-      <ul className="list-disc pl-5">
-        <li>
-          Led a cross-functional team of <span className="font-bold text-lightblue">12</span> to build a full-stack financial literacy platform for disabled children for a nonprofit (Extend-a-Family).
-        </li>
-        <li>
-          Engineered a React/TypeScript PDF viewer and bookmarking dashboard using component memoization and lazy loading.
-        </li>
-        <li>
-          Architected a JWT auth system using Express, MongoDB, and Firebase, implementing role-based access and token refresh.
-        </li>
-      </ul>
+    href: "https://uwblueprint.org",
+    logo: "/assets/blueprint.png",
+    summary: (
+      <>
+        Leading a delivery platform for <OutboundLink href="https://beachmetro.com">Beach Metro</OutboundLink> that
+        routes real Toronto addresses and splits bundles, saving volunteers hours every issue.
+      </>
     ),
   },
   {
-    id: 5,
     date: "Sept 2024 - Dec 2024",
-    title: "Software Engineer Intern",
+    title: "Backend Engineering Intern",
     company: "University of Toronto",
-    image: "/assets/uoft.png",
-    description: (
-      <ul className="list-disc pl-5">
-        <li>
-          Migrated a monolithic student records API into <span className="font-bold text-lightblue">Node.js microservices</span>, improving modularity using the sidecar pattern.
-        </li>
-        <li>
-          Delivered data access for <span className="font-bold text-lightblue">60,000+ students</span> by integrating OIDC and OAuth 2.0 for authorization over financial records.
-        </li>
-      </ul>
-    ),
+    href: "https://www.utoronto.ca",
+    logo: "/assets/uoft.png",
+    summary: "Split a monolithic student financial records API into independent services behind university single sign-on.",
   },
   {
-    id: 6,
     date: "Jan 2024 - Apr 2024",
     title: "UX Research Intern",
     company: "Questrade",
-    image: "/assets/questrade.png",
-    description: (
-      <ul className="list-disc pl-5">
-        <li>
-          Conducted <span className="font-bold text-lightblue">6 UX research studies</span> across Questrade&apos;s investment platform, uncovering insights that boosted customer satisfaction by up to <span className="font-bold text-lightblue">40%</span>.
-        </li>
-      </ul>
-    ),
+    href: "https://www.questrade.com",
+    logo: "/assets/questrade.png",
+    summary: "Ran usability tests, card sorts, A/B tests and interviews across Questrade's trading, auto insurance and mortgage products.",
   },
   {
-    id: 7,
     date: "Mar 2023 - Apr 2024",
     title: "Web Developer",
     company: "Bangladesh Canada Cultural Society",
-    image: "/assets/bchm.png",
-    description: (
-      <ul className="list-disc pl-5">
-        <li>
-          Led a complete website redesign covering <span className="font-bold text-lightblue">29 new pages</span>, taking the org from an outdated brochure site to a modern donor-facing presence.
-        </li>
-        <li>
-          Drove a <span className="font-bold text-lightblue">35% increase in donations</span> through the redesign by improving navigation, accessibility, and trust signals across the site.
-        </li>
-        <li>
-          Shipped an email marketing system that captured <span className="font-bold text-lightblue">2,500+ subscribers</span> in the first month, enabling targeted community communications.
-        </li>
-      </ul>
+    href: "https://hindumondir.org",
+    logo: "/assets/bchm.png",
+    framed: true,
+    summary: "Redesigned the society's website into a modern, donor-friendly site with an email newsletter for community updates.",
+  },
+];
+
+// Ordered so mountain shots alternate with city, people and event photos.
+const photos: Photo[] = [
+  { src: "/images/gallery/01-yosemite-railing.jpg", alt: "Abeer smiling at a railing in Yosemite", caption: "Yosemite" },
+  { src: "/images/gallery/09-friends.jpg", alt: "Abeer with friends on a night out", caption: "Out with friends!" },
+  { src: "/images/gallery/03-coast-deer.jpg", alt: "A deer on a hillside above the ocean at Point Reyes", caption: "Point Reyes" },
+  { src: "/images/gallery/04-museum.jpg", alt: "Abeer at the National Museum of Anthropology in Mexico City", caption: "Anthropology Museum" },
+  { src: "/images/gallery/06-hike-descent.jpg", alt: "Hikers heading down Mount Tam above the fog", caption: "Mount Tam" },
+  { src: "/images/gallery/13-concert.jpg", alt: "The Weeknd in concert at a stadium lit with fire", caption: "The Weeknd" },
+  { src: "/images/gallery/11-lake.jpg", alt: "Abeer by a lake in Banff, Alberta", caption: "Banff, Alberta" },
+  { src: "/images/gallery/12-library.jpg", alt: "Abeer among the hanging shelves of Biblioteca Vasconcelos", caption: "Biblioteca Vasconcelos" },
+  { src: "/images/gallery/05-yosemite-overlook.jpg", alt: "Abeer giving a thumbs up at a Yosemite overlook", caption: "Yosemite" },
+  { src: "/images/gallery/10-parade.jpg", alt: "A crowd cheering at a WNBA championship parade", caption: "WNBA Parade" },
+];
+
+const featured: Array<{ href: string; kicker: string; title: string; blurb: string; visual: React.ReactNode }> = [
+  {
+    href: "/spellbook",
+    kicker: "Software case",
+    title: "Spellbook",
+    blurb: "Owning an AI legal workflow agent from idea to enterprise launch.",
+    visual: (
+      <div style={{ backgroundColor: "#13171A" }} className="flex h-full w-full items-center justify-center">
+        <Image alt="Spellbook" src={spellbookLongLogo as string} className="h-auto w-44" />
+      </div>
     ),
+  },
+  {
+    href: "/uwmaps",
+    kicker: "Design case",
+    title: "UW Maps",
+    blurb: "Redesigning how students find their way around Waterloo's campus.",
+    visual: <Image src={uwmapsImage} alt="UW Maps design case" fill sizes="(min-width: 768px) 380px, 100vw" className="object-cover" />,
+  },
+  {
+    href: "/sibyl",
+    kicker: "Software case",
+    title: "Sibyl",
+    blurb: "Eight AI agents that check sustainability reports against real-world evidence. 1st place at Hack for Humanity.",
+    // Its pale title card would outshine the darker cards beside it.
+    visual: <Image src="/assets/sibyl.jpg" alt="Sibyl" fill sizes="(min-width: 768px) 380px, 100vw" className="object-cover opacity-80" />,
   },
 ];
 
 export default function Home() {
   const refScrollContainer = useRef(null);
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
   // const [expandAll, setExpandAll] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
@@ -320,7 +305,6 @@ export default function Home() {
 
     function handleScroll() {
       let current = "";
-      setIsScrolled(window.scrollY > 0);
 
       sections.forEach((section) => {
         const sectionTop = section.offsetTop;
@@ -329,17 +313,11 @@ export default function Home() {
         }
       });
 
-      const projectsSubIds = ["software-cases", "software-projects", "design-cases"];
-
       navLinks.forEach((li) => {
         li.classList.remove("nav-active");
 
         const href = li.getAttribute("href");
         if (href === `#${current}`) {
-          li.classList.add("nav-active");
-        }
-        // Keep the top-level "projects" link active whenever any of its subsections is current.
-        if (href === "#projects" && projectsSubIds.includes(current)) {
           li.classList.add("nav-active");
         }
       });
@@ -459,447 +437,209 @@ export default function Home() {
         <section
           id="home"
           data-scroll-section
-          className="mt-40 flex w-full flex-col items-center xl:mt-0 xl:min-h-screen xl:flex-row xl:justify-between"
+          className="relative flex min-h-[calc(100vh-9rem)] w-full flex-col justify-center pb-10 pt-24"
         >
           {isModalOpen && <Modal onClose={closeModal} />}
           {isAdminModalOpen && <AdminModal onClose={() => setIsAdminModalOpen(false)} onUpdateResume={handleResumeUpdate} />}
-          <div className={styles.intro}>
-            <div
-              data-scroll
-              data-scroll-direction="horizontal"
-              data-scroll-speed=".09"
-              className="flex flex-row items-center space-x-1.5"
-            >
-              <span className={styles.pill} onClick={handlePillClick} style={{ cursor: 'pointer' }}>Software Engineering</span>
-              <span className={styles.pill} onClick={handlePillClick} style={{ cursor: 'pointer' }}>UX Design</span>
-              <span className={styles.pill} onClick={handlePillClick} style={{ cursor: 'pointer' }}>ML/AI</span>
+
+          <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+            <div className="space-y-5">
+              <motion.div {...heroIn(0)} className="flex flex-row items-center space-x-1.5">
+                <span className={styles.pill} onClick={handlePillClick} style={{ cursor: 'pointer' }}>Software Engineering</span>
+                <span className={styles.pill} onClick={handlePillClick} style={{ cursor: 'pointer' }}>ML/AI</span>
+                <span className={styles.pill} onClick={handlePillClick} style={{ cursor: 'pointer' }}>UX Design</span>
+              </motion.div>
+              <motion.h1 {...heroIn(1)} className="text-6xl tracking-tighter text-foreground xl:text-8xl">
+                Abeer <span className="clash-grotesk text-shimmer animate-shimmer motion-reduce:animate-none">Das.</span>
+              </motion.h1>
+              <motion.p {...heroIn(2)} className="max-w-md text-lg tracking-tight text-muted-foreground xl:text-xl">
+                Product engineer. Currently at a VC firm, previously at two of the fastest-growing legal tech startups.
+              </motion.p>
+              <motion.div {...heroIn(3)} className="flex flex-row items-center space-x-1.5 pt-2">
+                <Button onClick={openModal}>
+                  Contact Me <ChevronRight className="ml-1 h-4 w-4" />
+                </Button>
+                <SocialLink href="https://github.com/AbeerDas" label="GitHub">
+                  <Github className="h-6 w-6" />
+                </SocialLink>
+                <SocialLink href="https://www.linkedin.com/in/abeerdas/" label="LinkedIn">
+                  <Linkedin className="h-6 w-6" />
+                </SocialLink>
+              </motion.div>
             </div>
-            <div>
-              <h1
-                data-scroll
-                data-scroll-enable-touch-speed
-                data-scroll-speed=".06"
-                data-scroll-direction="horizontal"
-              >
-                <span className="text-6xl tracking-tighter text-foreground 2xl:text-8xl">
-                  Hey, I&apos;m
-                  <br />
-                </span>
-                <span className="clash-grotesk text-gradient text-6xl 2xl:text-8xl">
-                  Abeer.
-                </span>
-              </h1>
-              <p
-                data-scroll
-                data-scroll-enable-touch-speed
-                data-scroll-speed=".06"
-                className="mt-1 max-w-lg tracking-tight text-muted-foreground 2xl:text-xl"
-              >
-                SYDE @ Waterloo · Product Engineering at two VC-backed startups.
-              </p>
-            </div>
-            <span
-              data-scroll
-              data-scroll-enable-touch-speed
-              data-scroll-speed=".06"
-              className="flex flex-row items-center space-x-1.5 pt-6 items-center"
-            >
-              <Button onClick={openModal}>
-                Contact Me <ChevronRight className="ml-1 h-4 w-4" />
-              </Button>
-              <Button
-                variant="outline"
-                onClick={() => {
-                  const projectsSection = document.querySelector("#projects");
-                  if (projectsSection) {
-                    projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }
-                }}
-              >
-                Projects
-              </Button>
-              <div className="inline-flex">
-                <a
-                  href="https://github.com/AbeerDas"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block transition-transform duration-300 transform hover:scale-150"
-                >
-                  <Github className="h-6 w-6 ml-4 mr-4" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/abeerdas/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block transition-transform duration-300 transform hover:scale-150"
-                >
-                  <Linkedin className="h-6 w-6 md:mr-2 mx-2" />
-                </a>
-              </div>
-            </span>
-            <div
-              className={cn(
-                styles.scroll,
-                isScrolled && styles["scroll--hidden"],
-              )}
-            >
-              See my work{" "}
-              <TriangleDownIcon className="mt-1 animate-bounce" />
-            </div>
+            <motion.div {...heroIn(2)}>
+              <PhotoWall photos={photos} className="h-72 sm:h-80 lg:-ml-6 lg:-mr-2 lg:h-[30rem] xl:-mr-12 min-[1400px]:-mr-28" />
+            </motion.div>
           </div>
-          <div
-            data-scroll
-            data-scroll-speed="-.01"
-            id={styles["canvas-container"]}
-            className="mt-14 h-full w-full xl:mt-0"
-          >
-            <Suspense fallback={<span>Loading...</span>}>
-              <Spline scene="/assets/scene.splinecode" />
-            </Suspense>
+        </section>
+
+        {/* Case studies */}
+        <section id="cases" data-scroll-section className="mx-auto max-w-6xl scroll-mt-24">
+          <motion.div {...heroIn(4)} className="mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            <h2 className="clash-grotesk text-gradient text-2xl font-semibold tracking-tight md:text-3xl">Case studies</h2>
+            <p className="text-base text-muted-foreground md:text-lg">Full write-ups of three projects</p>
+          </motion.div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {featured.map((card, i) => (
+              <motion.div key={card.href} {...heroIn(5 + i)} className="h-full">
+                <FeatureCard {...card} />
+              </motion.div>
+            ))}
           </div>
         </section>
 
         {/* Projects */}
-        <section id="projects" className="flex justify-center" data-scroll-section>
-          <div
-            className="my-1 flex max-w-6xl flex-col justify-start space-y-10"
-          >
-            {/* Gradient */}
-            <div className="relative isolate -z-10">
-              <div
-                className="absolute inset-x-0 -top-40 transform-gpu overflow-hidden blur-[100px] sm:-top-80 lg:-top-60"
-                aria-hidden="true"
-              >
-                <div
-                  className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-primary via-primary to-secondary opacity-10 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-                  style={{
-                    clipPath:
-                      "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-                  }}
-                />
-              </div>
-            </div>
-            <div data-scroll data-scroll-speed=".4" className="mt-[-10.0rem]">
-              {/* Software Cases (first up) */}
-              <section id="software-cases">
-              <div className="mt-[90px]">
-                <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
-                  ✨ Cases
-                </span>
-                <h2 className="mt-3 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
-                  Software Cases
-                </h2>
-                <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
-                  Deep dives into the software work I&apos;m most proud of,
-                  written for product engineers and recruiters who want to
-                  understand the impact.
-                </p>
-              </div>
+        <section id="projects" data-scroll-section className="mx-auto mt-28 max-w-6xl scroll-mt-24">
+          <Reveal>
+            <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
+              ✨ Projects
+            </span>
+            <h2 className="mt-3 text-4xl font-semibold tracking-tighter xl:text-6xl">
+              Things I&apos;ve built
+            </h2>
+            <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
+              Hackathon wins, side projects and experiments, most of them with an AI twist.
+            </p>
+          </Reveal>
 
-              <div className="max-w-6xl mx-auto">
-                <Link href='/spellbook'>
-                  <div className="group mt-14 rounded-2xl scale-up relative overflow-hidden">
-                    {/* Smooth darkening overlay on hover */}
-                    <div className="pointer-events-none absolute inset-0 z-10 bg-black/80 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" />
-                    {/* "View Full Case Study" label */}
-                    <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100">
-                      <p className="text-5xl text-white">View Full Case Study</p>
-                    </div>
-                    <div className="border bg-card/10 text-card-foreground shadow-sm rounded-2xl overflow-hidden">
-                      <div className='flex relative'>
-                        <div
-                          style={{ backgroundColor: '#13171A' }}
-                          className="aspect-video w-full flex items-center justify-center"
-                        >
-                          <Image
-                            alt="Spellbook"
-                            src={spellbookLongLogo as string}
-                            className="h-auto w-60 md:w-96"
-                          />
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {projects.map((project, i) => (
+              <Reveal key={project.title} delay={(i % 4) * 0.06} className="h-full">
+                <Link href={project.href} target="_blank" passHref className="group block h-full">
+                  <div className="flex h-full flex-col overflow-hidden rounded-xl border border-white/10 bg-background/50 backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-white/20">
+                    <div className="relative aspect-[4/3] w-full overflow-hidden" style={{ background: project.tint }}>
+                      {project.image ? (
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          sizes="(min-width: 1024px) 280px, (min-width: 640px) 50vw, 100vw"
+                          className="object-contain transition duration-500 group-hover:scale-[1.03]"
+                        />
+                      ) : (
+                        <div className="flex h-full w-full flex-col items-center justify-center gap-1 px-4 text-center">
+                          <span className="clash-grotesk text-3xl italic tracking-tight text-white">
+                            {project.title}
+                          </span>
+                          {project.badge && (
+                            <span className="text-gradient clash-grotesk text-xs font-semibold tracking-tighter">
+                              {project.badge}
+                            </span>
+                          )}
                         </div>
-
-                        <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
-                          <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
-                            <div className={styles.d_pill_container}>
-                              <span className={styles.d_pill}>Spellbook</span>
-                              <span className={styles.d_pill}>Software Engineering</span>
-                              <span className={styles.d_pill}>Product Ownership</span>
-                              <span className={styles.d_pill}>AI / LLMs</span>
-                            </div>
-                          </h3>
-                        </div>
-                      </div>
+                      )}
                     </div>
-                  </div>
-                </Link>
-              </div>
-
-              </section>
-
-              {/* Software Projects */}
-              <section id="software-projects">
-              <h2 className="mt-32 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
-                Software Projects
-              </h2>
-              <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
-                I&apos;ve worked on a variety of projects, from small websites to
-                large-scale web applications. Here are some of my favorites:
-              </p>
-
-              <div className="mt-14 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2">
-                {projects.map((project) => (
-                  <Link  key={project.title} href={project.href} target="_blank" passHref>
-                    <div
-                      key={project.title}
-                      className="flex flex-col items-start rounded-md bg-white/5 shadow-md backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:bg-white/10 hover:shadow-md overflow-hidden"
-                    >
-                      <div className="relative w-full h-64 overflow-hidden rounded-t-md">
-                        {project.image ? (
-                          <Image
-                            src={project.image}
-                            alt={project.title}
-                            layout="fill"
-                            quality={100}
-                            className="object-cover transition-transform duration-300 hover:scale-110"
-                          />
-                        ) : (
-                          <div
-                            style={{ backgroundColor: '#13171A' }}
-                            className="flex h-full w-full flex-col items-center justify-center gap-2 text-center px-6"
+                    <div className="flex flex-1 flex-col p-4">
+                      <h3 className="text-base font-semibold">{project.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-gray-400">{project.description}</p>
+                      <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
+                        {project.stack.map((tech) => (
+                          <span
+                            key={tech}
+                            className="rounded-full border border-[#141521] bg-[#0A0A13] px-2.5 py-0.5 text-[11px] text-gray-300"
                           >
-                            <span className="clash-grotesk text-5xl italic tracking-tight text-white">
-                              {project.title}
-                            </span>
-                            {project.badge && (
-                              <span className="text-gradient clash-grotesk text-xs font-semibold tracking-tighter">
-                                {project.badge}
-                              </span>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                      <div className="p-4">
-                        <div className="flex items-center">
-                          <h3 className="text-lg font-semibold mb-2">{project.title}</h3>
-                        </div>
-                        <p className="text-base text-gray-400">{project.description}</p>
-                        <div className="flex flex-wrap gap-2 mt-8">
-                          {project.stack.map((tech, index) => (
-                            <span
-                              key={index}
-                              className="bg-[#0A0A13] border border-[#141521] text-sm text-gray-200 py-1 px-6 rounded-full"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-
-
-              </section>
-
-              <section id="design-cases">
-                <div className="mt-32">
-                  <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
-                    ✨ Projects
-                  </span>
-                  <h2 className="mt-3 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
-                    UX Design Cases
-                  </h2>
-                  <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
-                    All my designs prioritize user experience,
-                    ensuring that every aspect is well-crafted to enhance
-                    usability, accessibility, and overall enjoyment.
-                  </p>
-                </div>
-
-
-                <div className="max-w-6xl mx-auto">
-                  <Link href='/uwmaps'>
-                    <div className="group mt-14 rounded-2xl scale-up relative overflow-hidden">
-                      {/* Smooth darkening overlay on hover */}
-                      <div className="pointer-events-none absolute inset-0 z-10 bg-black/80 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" />
-                      {/* "View Full Design Case" label */}
-                      <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100">
-                        <p className="text-5xl text-white">View Full Design Case</p>
-                      </div>
-                      <div className="border bg-card/10 text-card-foreground shadow-sm rounded-2xl overflow-hidden">
-                        <div className='flex relative'>
-                          <Image alt="waterloo maps main image"
-                            src={uwmapsImage} className="aspect-video w-full h-full bg-primary object-cover" />
-
-                          <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
-                            <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
-                              <div className={styles.d_pill_container}>
-                                <span className={styles.d_pill}>User Research</span>
-                                <span className={styles.d_pill}>Low/High Fidelity Prototypes</span>
-                                <span className={styles.d_pill}>Iterative Designing</span>
-                              </div>
-                            </h3>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-
-                </div>
-                <Link href='/uwmaps'>
-                  <div className="hidden mt-14 gray-overlay scale-up">
-                    <div className="border rounded-2xl bg-card/10 text-card-foreground shadow-sm">
-                      <div className='flex'>
-                        <Image alt="rooted second design case"
-                          src={rooted} className="aspect-video rounded-2xl h-full w-full  bg-primary object-cover" />
-                        <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
-                          <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
-                            <div className={styles.d_pill_container}>
-                              <span className={styles.d_pill}>Designathon</span>
-                              <span className={styles.d_pill}>Low/High Fidelity Prototypes</span>
-                              <span className={styles.d_pill}>User Research</span>
-                              <span className={styles.d_pill}>Iterative Designing</span>
-                            </div>
-                          </h3>
-                        </div>
+                            {tech}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
                 </Link>
-
-
-                <Link href='/uwmaps'>
-                  <div className="hidden mt-14 gray-overlay scale-up">
-
-                    <div className=" border rounded-2xl bg-card/10 text-card-foreground shadow-sm">
-                      <div className='flex flex-col'>
-                        <Image alt="temple design case"
-                          src={bchm} className="aspect-video rounded-2xl w-full h-full  bg-primary object-cover" />
-                        <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
-                          <h3 className="border-t border-white/5 p-4 text-base font-normal tracking-tighter truncate">
-                            <div className={styles.d_pill_container}>
-                              <span className={styles.d_pill2}>Reesponsive Design</span>
-                              <span className={styles.d_pill2}>Non-Profit Organization</span>
-                              <span className={styles.d_pill2}>User Research</span>
-                            </div>
-                          </h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-
-              </section>
-
-
-              <div className="relative isolate -z-10">
-                <div
-                  className="absolute inset-x-0 -top-40 transform-gpu overflow-hidden blur-[100px] sm:-top-80 lg:-top-60"
-                  aria-hidden="true"
-                >
-                  <div
-                    className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-primary via-primary to-secondary opacity-10 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-                    style={{
-                      clipPath:
-                        "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
+              </Reveal>
+            ))}
           </div>
         </section>
 
         {/* Work Experience */}
-        <section id="experience" data-scroll-section>
-          <div data-scroll data-scroll-speed=".4" data-scroll-position="top" className="mt-12 flex max-w-6xl flex-col justify-start space-y-10">
-            <div className="mb-10">
-              <h2 className="mb-[0.5rem] text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
-                Work Experience
-              </h2>
-              <Gradient />
-              <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
-                Experience is the greatest teacher, and I&apos;ve embraced diverse opportunities to learn and grow.
-              </p>
-            </div>
-
-            <div id="timeline" className="timeline">
-              {workExperiences.map((experience) => (
-                <div key={experience.id} className="timeline__item">
-                  <div className="timeline__item-header">
-                    <button className="timeline__arrow" type="button" aria-hidden="true">
-                      <svg className="timeline__arrow-icon" viewBox="0 0 24 24" width="24px" height="24px">
-                        <use href="#arrow" />
-                      </svg>
-                    </button>
-                    <span className="timeline__dot"></span>
-                    <span id={`item${experience.id}-name`} className="mb-[0.5rem] timeline__meta">
-                      <span>{experience.date}</span>
-                      <br /><br />
-                      <div className="flex items-center">
-                        {/* Logo image on the left */}
-                        <Image src={experience.image} alt={`${experience.company} logo`} className="w-16 h-16 mr-4 rounded-lg" width={64} height={64} />
-                        {/* Title and company name container */}
-                        <div>
-                          <h3 className="mt-1 text-gradient clash-grotesk font-medium tracking-tighter timeline__title">
-                            {experience.title}
-                          </h3>
-                          <h3 className="text-3xl mt-1 mb-[0.5rem]">{experience.company}</h3>
-                        </div>
-                      </div>
-                    </span>
-                  </div>
-                  <div className="timeline__item-body" role="region" aria-labelledby={`item${experience.id}`}>
-                    <div className="timeline__item-body-content ml-28 z-[9999]">
-                      <div className="text-xlsm:text-md timeline__item-p">
-                        {experience.description}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+        <section id="experience" data-scroll-section className="mx-auto mt-32 max-w-6xl scroll-mt-24">
+          <Reveal>
+            <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
+              ✨ Experience
+            </span>
+            <h2 className="mt-3 text-4xl font-semibold tracking-tighter xl:text-6xl">
+              Where I&apos;ve worked
+            </h2>
+            <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
+              From a VC firm to legal tech startups.
+            </p>
+          </Reveal>
+          <div className="mt-14">
+            <ExperienceList experiences={experiences} />
           </div>
         </section>
 
-
         {/* Contact */}
-        <section id="contact" data-scroll-section className="my-64">
-          <div className="relative isolate -z-10">
-            <div
-              className="absolute inset-x-0 -top-40 transform-gpu overflow-hidden blur-[100px] sm:-top-80 lg:-top-60"
-              aria-hidden="true"
+        <section id="contact" data-scroll-section className="mb-8 mt-40">
+          <SkylineHologram>
+            <a
+              href="mailto:ak5das@uwaterloo.ca"
+              className="group inline-flex items-center gap-2 rounded-full border border-[#a78bfa]/40 bg-primary/10 px-6 py-2.5 text-sm text-white shadow-[0_0_28px_rgba(121,128,254,0.35)] backdrop-blur transition hover:border-[#a78bfa]/70 hover:bg-primary/20"
             >
-              <div
-                className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-primary via-primary to-secondary opacity-10 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-                style={{
-                  clipPath:
-                    "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-                }}
-              />
-            </div>
-          </div>
-          <div
-            data-scroll
-            data-scroll-speed=".4"
-            data-scroll-position="top"
-            className="flex flex-col items-center justify-center rounded-lg bg-gradient-to-br from-primary/[6.5%] to-white/5 px-8 py-16 text-center xl:py-24"
-          >
-            <h2 className="text-4xl font-medium tracking-tighter xl:text-6xl">
-              Like what you {" "}
-              <span className="text-gradient clash-grotesk">see?</span>
-            </h2>
-            <p className="mt-1.5 text-base tracking-tight text-muted-foreground xl:text-lg">
-              I&apos;m currently looking for Summer 2026 opportunities.
-            </p>
-            <Link href="mailto:ak5das@uwaterloo.ca" passHref>
-              <Button className="mt-6">Get in touch</Button>
-            </Link>
-          </div>
+              Get in touch
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+          </SkylineHologram>
         </section>
       </div>
     </Container>
+  );
+}
+
+// The preloader covers the first two seconds, so the intro animates in once it lifts.
+const HERO_DELAY = 2;
+const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const heroIn = (step: number) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.8, delay: HERO_DELAY + step * 0.08, ease },
+});
+
+function FeatureCard(props: {
+  href: string;
+  kicker: string;
+  title: string;
+  blurb: string;
+  visual: React.ReactNode;
+}) {
+  return (
+    <Link
+      href={props.href}
+      className="group flex h-full flex-col overflow-hidden rounded-xl border border-white/10 bg-background/50 backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:border-white/20"
+    >
+      <div className="relative aspect-video w-full overflow-hidden">
+        <div className="relative h-full w-full opacity-[0.88] transition duration-500 group-hover:scale-[1.03] group-hover:opacity-100">
+          {props.visual}
+        </div>
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/85 opacity-0 transition duration-300 group-hover:opacity-100">
+          <span className="flex items-center gap-2 text-base font-medium text-white">
+            Read the case study <ArrowUpRight className="h-4 w-4" />
+          </span>
+        </div>
+      </div>
+      <div className="flex flex-1 flex-col p-5">
+        <span className="text-xs uppercase tracking-wider text-muted-foreground">{props.kicker}</span>
+        <h3 className="mt-1 text-xl font-semibold tracking-tight">{props.title}</h3>
+        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{props.blurb}</p>
+      </div>
+    </Link>
+  );
+}
+
+function SocialLink({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="group relative inline-block px-2 py-1 text-foreground/80 transition-colors hover:text-white"
+    >
+      {children}
+      <span
+        aria-hidden
+        className="absolute inset-x-2 -bottom-0.5 h-px origin-left scale-x-0 bg-[#a78bfa] transition-transform duration-300 group-hover:scale-x-100"
+      />
+    </a>
   );
 }
 

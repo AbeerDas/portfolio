@@ -76,11 +76,30 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "marquee-up": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(-50%)" },
+        },
+        "marquee-down": {
+          from: { transform: "translateY(-50%)" },
+          to: { transform: "translateY(0)" },
+        },
+        shimmer: {
+          from: { backgroundPosition: "0% 50%" },
+          to: { backgroundPosition: "-200% 50%" },
+        },
+        "dash-flow": {
+          to: { strokeDashoffset: "-20" },
+        },
       },
 
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "marquee-up": "marquee-up 70s linear infinite",
+        "marquee-down": "marquee-down 70s linear infinite",
+        shimmer: "shimmer 8s linear infinite",
+        "dash-flow": "dash-flow 1.2s linear infinite",
       },
     },
   },

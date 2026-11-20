@@ -176,71 +176,15 @@ export default function Container(props: ContainerProps) {
             width={236}
             height={60}
             priority
-            className="h-8 w-auto md:h-9"
+            className="h-7 w-auto"
           />
         </Link>
 
         {/* Desktop menu */}
         <ul className={styles["desktop-nav"]}>
-          <motion.li
-            variants={variants}
-            custom={0}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            className="flex items-center gap-5"
-          >
-            <a
-              href="#projects"
-              onClick={handleClick}
-              className="nav-link text-base"
-            >
-              projects
-            </a>
-            {router.pathname === "/" && (
-              <span className="hidden lg:flex items-center gap-4">
-                <a
-                  href="#software-cases"
-                  onClick={handleClick}
-                  className="nav-sub-link flex items-center gap-1.5 text-sm tracking-tight text-slate-500 transition-colors hover:text-slate-200"
-                >
-                  <span aria-hidden className="text-slate-600">─</span>
-                  Software Cases
-                </a>
-                <a
-                  href="#software-projects"
-                  onClick={handleClick}
-                  className="nav-sub-link flex items-center gap-1.5 text-sm tracking-tight text-slate-500 transition-colors hover:text-slate-200"
-                >
-                  <span aria-hidden className="text-slate-600">─</span>
-                  Software Projects
-                </a>
-                <a
-                  href="#design-cases"
-                  onClick={handleClick}
-                  className="nav-sub-link flex items-center gap-1.5 text-sm tracking-tight text-slate-500 transition-colors hover:text-slate-200"
-                >
-                  <span aria-hidden className="text-slate-600">─</span>
-                  Design Cases
-                </a>
-              </span>
-            )}
-          </motion.li>
-          <motion.li
-            variants={variants}
-            custom={1}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-          >
-            <a
-              href="#experience"
-              onClick={handleClick}
-              className="nav-link text-base"
-            >
-              experience
-            </a>
-          </motion.li>
+          {navLinks.map((link, i) => (
+            <NavItem key={link.href} href={link.href} text={link.text} i={i} className="text-base" />
+          ))}
         </ul>
 
         {/* Mobile menu */}

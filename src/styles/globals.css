@@ -43,11 +43,9 @@
     --trans-dur_t: 0.3s;
     --trans-timing_t: cubic-bezier(0.65, 0, 0.35, 1);
 
-
     --scaling-factor: 1.8;
     --mobile-scale: 1.0;
     /* Adjust the scaling factor as needed */
-
 
   }
 }
@@ -150,7 +148,6 @@
     transform: scale(1.02);
   }
 
-
   .scale-up-more {
     transition: transform 0.3s ease;
     /* Smooth transition */
@@ -228,129 +225,10 @@
     margin-bottom: calc(1.5em * var(--scaling-factor));
   }
 
-  .timeline {
-    padding: 0 calc(1.5em * var(--scaling-factor));
-    width: 100%;
-    max-width: calc(36em * var(--scaling-factor));
-  }
-
-  .timeline__arrow {
-    background-color: transparent;
-    border-radius: calc(0.25em * var(--scaling-factor));
-    cursor: pointer;
-    flex-shrink: 0;
-    margin-inline-end: calc(0.25em * var(--scaling-factor));
-    outline: transparent;
-    width: calc(2em * var(--scaling-factor));
-    height: calc(2em * var(--scaling-factor));
-    transition:
-      background-color calc(var(--trans-dur_t) / 2) linear,
-      color var(--trans-dur_t);
-    -webkit-appearance: none;
-    appearance: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-
-
-  .timeline__arrow-icon {
-    display: block;
-    pointer-events: none;
-    transform: rotate(-90deg);
-    transition: transform var(--trans-dur_t) var(--trans-timing_t);
-    width: 100%;
-    height: auto;
-  }
-
-  .timeline__date {
-    font-size: calc(0.833em * var(--scaling-factor));
-    line-height: calc(2.4 * var(--scaling-factor));
-  }
-
-  .timeline__dot {
-    background-color: currentColor;
-    border-radius: 50%;
-    display: inline-block;
-    flex-shrink: 0;
-    margin: calc(0.625em * var(--scaling-factor)) 0;
-    margin-inline-end: calc(1em * var(--scaling-factor));
-    position: relative;
-    width: calc(0.75em * var(--scaling-factor));
-    height: calc(0.75em * var(--scaling-factor));
-  }
-
-  .timeline__item {
-    position: relative;
-    padding-bottom: calc(2.25em * var(--scaling-factor));
-  }
-
-  .timeline__item:not(:last-child):before {
-    background-color: currentColor;
-    content: "";
-    display: block;
-    position: absolute;
-    top: calc(1em * var(--scaling-factor));
-    left: calc(2.625em * var(--scaling-factor));
-    width: calc(0.125em * var(--scaling-factor));
-    height: 100%;
-    transform: translateX(-50%);
-  
-  }
-
-  [dir="rtl"] .timeline__arrow-icon {
-    transform: rotate(90deg);
-  }
-
-  [dir="rtl"] .timeline__item:not(:last-child):before {
-    right: calc(2.625em * var(--scaling-factor));
-    left: auto;
-    transform: translateX(50%);
-  }
-
-  .timeline__item-header {
-    display: flex;
-  }
-
   .list-disc li {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 
-  }
-
-  .timeline__item-body-content {
-    background-color: hsla(var(--hue_t), 10%, 50%, 0.2);
-    opacity: 1;
-    padding: 0.5em 0.75em;
-    visibility: visible;
-
-    z-index: 9999;
-
-  }
-
-  .timeline__meta {
-    width: 100%;
-    
-  }
-
-  .timeline__title {
-    font-size: calc(1.5em * var(--scaling-factor));
-    line-height: calc(0.6 * var(--scaling-factor));
-  }
-
-  /* Expanded state */
-  .timeline__item-body--expanded {
-    height: auto;
-  }
-
-  .timeline__item-body--expanded .timeline__item-body-content {
-    opacity: 1;
-    visibility: visible;
-    transition-delay: var(--trans-dur_t), 0s;
-    z-index: 9999;
-  }
-
-  .timeline__arrow[aria-expanded="true"] .timeline__arrow-icon {
-    transform: rotate(0);
   }
 
 }
@@ -370,7 +248,6 @@
   animation: blink 1s infinite;
 }
 
-
 @media screen and (max-width: 639px) {
   /* CSS rules specific to small screens */
  
@@ -383,156 +260,13 @@
     gap: calc(0.375em * var(--scaling-factor));
     margin-bottom: calc(1.5em * var(--scaling-factor));
   }
-
-  .timeline {
-    padding: 0 calc(1.5em * var(--scaling-factor));
-    width: 100%;
-    max-width: calc(36em * var(--scaling-factor));
-  }
-
-  .timeline__arrow {
-    background-color: transparent;
-    border-radius: calc(0.25em * var(--scaling-factor));
-    cursor: pointer;
-    flex-shrink: 0;
-    margin-inline-end: calc(0.25em * var(--scaling-factor));
-    outline: transparent;
-    width: calc(2em * var(--scaling-factor));
-    height: calc(2em * var(--scaling-factor));
-    transition:
-      background-color calc(var(--trans-dur_t) / 2) linear,
-      color var(--trans-dur_t);
-    -webkit-appearance: none;
-    appearance: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .timeline__arrow-icon {
-    display: block;
-    pointer-events: none;
-    transform: rotate(-90deg);
-    transition: transform var(--trans-dur_t) var(--trans-timing_t);
-    width: 100%;
-    height: auto;
-  }
-
-  .timeline__date {
-    font-size: calc(0.833em * var(--scaling-factor));
-    line-height: calc(2.4 * var(--scaling-factor));
-  }
-
-  .timeline__dot {
-    background-color: currentColor;
-    border-radius: 50%;
-    display: inline-block;
-    flex-shrink: 0;
-    margin: calc(0.625em * var(--scaling-factor)) 0;
-    margin-inline-end: calc(1em * var(--scaling-factor));
-    position: relative;
-    width: calc(0.75em * var(--scaling-factor));
-    height: calc(0.75em * var(--scaling-factor));
-  }
-
-  .timeline__item {
-    position: relative;
-    padding-bottom: calc(2.25em * var(--scaling-factor));
-  }
-
-  .timeline__item:not(:last-child):before {
-    background-color: currentColor;
-    content: "";
-    display: block;
-    position: absolute;
-    top: calc(1em * var(--scaling-factor));
-    left: calc(2.625em * var(--scaling-factor));
-    width: calc(0.125em * var(--scaling-factor));
-    height: 100%;
-    transform: translateX(-50%);
-    z-index: -1; 
-  }
-
-  [dir="rtl"] .timeline__arrow-icon {
-    transform: rotate(90deg);
-  }
-
-  [dir="rtl"] .timeline__item:not(:last-child):before {
-    right: calc(2.625em * var(--scaling-factor));
-    left: auto;
-    transform: translateX(50%);
-  }
-
-  .timeline__item-header {
-    display: flex;
-  }
-
-  .timeline__item-body {
-    border-radius: calc(0.375em * var(--mobile-factor));
-    overflow: hidden;
-    margin-top: calc(0.2em * var(--mobile-factor));
-    margin-inline-start: calc(4em * var(--mobile-factor));
-    height: 0;
-  }
-
-  .timeline__item-body-content {
-    background-color: hsla(var(--hue_t), 10%, 50%, 0.2);
-    opacity: 0;
-    margin-left: 6em;
-    padding: 0.5em 0.75em;
-    visibility: hidden;
-    transition:
-      opacity var(--trans-dur_t) var(--trans-timing_t),
-      visibility var(--trans-dur_t) steps(1, end);
-    z-index: 9999;
-  }
-
-  .timeline__meta {
-    width: 100%;
-  }
-
-  .timeline__title {
-    font-size: calc(1.5em * 1);
-    line-height: calc(0.6 * var(--mobile-factor));
-  }
-
-  .timeline__body {
-    font-size: calc(1.5em * 1);
-    line-height: calc(0.6 * var(--mobile-factor));
-  }
-
-  /* Expanded state */
-  .timeline__item-body--expanded {
-    height: auto;
-  }
-
-  .timeline__item-body--expanded .timeline__item-body-content {
-    opacity: 1;
-    visibility: visible;
-    transition-delay: var(--trans-dur_t), 0s;
-    z-index: 9999;
-
-  }
-
-  .timeline__arrow[aria-expanded="true"] .timeline__arrow-icon {
-    transform: rotate(0);
-  }
 }
 
-
-@media screen and (max-width: 639px) {
-  /* Mobile Styles - hiding the timeline elements */
-  .timeline__dot,
-  .timeline__item:not(:last-child):before,
-  .timeline__arrow {
-    display: none !important; /* Hide these elements on mobile */
-  }
-
-  /* Ensure the timeline content still shows */
-  .timeline__item-body-content {
-    margin-left: 0 !important;
-    padding: 1em !important;
-  }
-
-  .timeline__item-body {
-    margin-inline-start: 0 !important;
-  }
+/* A slow light sweep across gradient text. Both ends hold the same colour long enough for the tiles to meet without a seam, so the loop never jumps. */
+.text-shimmer {
+  background-image: linear-gradient(110deg, hsl(var(--primary)) 0%, hsl(var(--primary)) 10%, hsl(var(--secondary)) 30%, #f3e8ff 50%, hsl(var(--secondary)) 70%, hsl(var(--primary)) 90%, hsl(var(--primary)) 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
